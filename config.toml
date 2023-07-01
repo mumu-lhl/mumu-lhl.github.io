@@ -2,7 +2,6 @@ baseURL = 'https://mumulhl.eu.org/'
 theme = 'hugo-bearblog'
 title = "Mumulhl's Blog"
 author = "Mumulhl"
-copyright = "Copyright © 2023 Mumulhl"
 languageCode = 'zh-CN'
 hasCJKLanguage = true
 
