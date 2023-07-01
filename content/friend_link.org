@@ -1,0 +1,11 @@
+#+TITLE: Friend Link
+#+MENU: main
+
+#+BEGIN_EXPORT html
+<div>
+<a href="https://randomwaves.space/"><img src="https://randomwaves.space/img/sound-waves-s_hu31a3b89a9690ac019409521babc652cd_16454_300x0_resize_box_3.png" width="100px" height="100px" style="border-radius: 100%"><div>波澜随心起</div></a>
+
+<div>有风有雨有晴天</div>
+
+</div>
+#+END_EXPORT

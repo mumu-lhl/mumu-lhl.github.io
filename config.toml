@@ -1,0 +1,28 @@
+baseURL = 'https://mumulhl.eu.org/'
+theme = 'hugo-bearblog'
+title = "Mumulhl's Blog"
+author = "Mumulhl"
+copyright = "Copyright © 2023 Mumulhl"
+languageCode = 'zh-CN'
+hasCJKLanguage = true
+
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+[frontmatter]
+  date = [":filename", ":default", ":fileModTime"]
+
+[permalinks]
+  blog = "/blog/:year/:month/:day/:slug/"
+
+[params]
+  description = "tech, life, thinking"
+
+enableRobotsTXT = true
+
+[outputFormats]
+[outputFormats.RSS]
+mediatype = "application/rss"
+baseName = "atom"
