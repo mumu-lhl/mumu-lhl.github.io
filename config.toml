@@ -17,7 +17,7 @@ hasCJKLanguage = true
   blog = "/blog/:year/:month/:day/:slug/"
 
 [params]
-  description = "tech, life, thinking"
+  description = "life, technology, think and more"
 
 enableRobotsTXT = true
 

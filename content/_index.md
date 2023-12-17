@@ -2,9 +2,8 @@
 
 本博客的作者是 Mumulhl， 以下是他的各种链接：
 
-- [[https://github.com/mumu-lhl][Github]]
-- [[https://codeberg.org/mumulhl][Codeberg]]
+- [Github](https://github.com/mumu-lhl)
 - Mastodon: @Mumulhl@o3o.ca
 - mumulhl{at]duck(dot}com
 
-本博客所有文章以 [[https://creativecommons.org/licenses/by-sa/4.0/deed.zh][CC BY-SA 4.0]] 发布。
+本博客所有文章以 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 发布。
