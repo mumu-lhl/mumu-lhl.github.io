@@ -1,5 +1,6 @@
 ---
-title: 过去一年
+title: '过去一年'
+slug: 'first-post'
 date: 2023-06-30T20:17:32+08:00
 lastmod: 2023-07-01T20:04:47+0800
 tags: 

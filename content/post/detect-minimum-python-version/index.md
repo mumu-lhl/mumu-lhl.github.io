@@ -1,5 +1,6 @@
 +++
 title = '检测 Python 代码所需的最低版本'
+slug = 'detect-minimum-python-version'
 date = 2024-07-22T14:56:53+08:00
 description = '用 Vermin 检测 Python 代码所需的最低版本'
 keywords = ['Python', '工具']

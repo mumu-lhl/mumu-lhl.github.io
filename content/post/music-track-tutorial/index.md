@@ -1,5 +1,6 @@
 +++
 title = '追踪音乐播放记录'
+slug = 'music-track-tutorial'
 description = '用音乐社区平台追踪音乐播放记录'
 date = 2024-07-21T21:57:29+08:00
 tags = ['教程']
