@@ -1,5 +1,6 @@
 +++
 title = ''
+slug = '{{ .Name }}'
 date = {{ .Date }}
 description = ''
 keywords = ['']
