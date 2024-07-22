@@ -22,3 +22,11 @@ url = "https://o3o.ca/@Mumulhl"
 
 [social.params]
 icon = "brand-mastodon"
+
+[[social]]
+identifier = "Email"
+name = "Email"
+url = "mailto:mumulhl.666@gmail.com"
+
+[social.params]
+icon = "mail"
