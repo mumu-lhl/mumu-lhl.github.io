@@ -30,3 +30,11 @@ url = "mailto:mumulhl.666@gmail.com"
 
 [social.params]
 icon = "mail"
+
+[[social]]
+identifier = "RSS"
+name = "RSS"
+url = "/p/rss-for-my-website/"
+
+[social.params]
+icon = "rss"
