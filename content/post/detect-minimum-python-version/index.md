@@ -17,20 +17,20 @@ categories = ['Tech']
 
 ```sh
 # pip
-$ pip install vermin
+pip install vermin
 
 # pipx
-$ pipx install vermin
+pipx install vermin
 
 # AUR
-$ yay -S python-vermin
+yay -S python-vermin
 # or
-$ paru -S python-vermin
+paru -S python-vermin
 ```
 
 ## 使用
 
 ```sh
 # 检测目录下的所有 Python 代码，这条命令可以满足大部分需求，不需要怎样配置
-$ vermin .
+vermin .
 ```

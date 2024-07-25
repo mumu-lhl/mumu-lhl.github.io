@@ -25,7 +25,7 @@ PKGBUILD 文件采用 Bash 语法，用于 Archlinux 及其衍生发行版构建
 * updpkgsums - 自动下载软件压缩文件，计算 hash 填入 PKGBUILD（不用另外安装）
 
 ```sh
-$ sudo pacman -S devtools nvchecker namcap
+sudo pacman -S devtools nvchecker namcap
 ```
 
 这些工具你可能需要（不要的话关系也不大），使用自行看其文档：
@@ -90,7 +90,7 @@ package() {
 
 ## 自动填写 hash
 ```sh
-$ updpkgsums
+updpkgsums
 ```
 
 ## 示例
@@ -126,20 +126,20 @@ pkgver {
 写完 PKGBUILD 最好测试一下能否正常构建软件。
 
 ```sh
-$ makepkg
+makepkg
 ```
 
 这是最简单的测试方法，但有个问题，因为安装了很多包，系统是不“干净”的，如果 PKGBUILD 中有依赖没写上去，也会正常构建，为了避免这种情况，可以用 pkgctl 构建。
 
 ```sh
-$ pkgctl build
+pkgctl build
 ```
 
 pkgctl 会自动在一个“干净”的 chroot 里下载安装依赖并构建软件。而且还会生成 `.SRCINFO` 文件，这是发布至 AUR 必须要有的文件。
 
 ### 安装
 ```sh
-$ makepkg --install
+makepkg --install
 ```
 
 ## 发布
@@ -149,7 +149,7 @@ $ makepkg --install
 创建 AUR 专用的 SSH 密钥。
 
 ```sh
-$ ssh-keygen -f ~/.ssh/aur
+ssh-keygen -f ~/.ssh/aur
 ```
 
 在 `~/.ssh/config` 中加入这些内容：
@@ -175,12 +175,12 @@ AUR 只接受 master 分支的推送。
 
 ```sh
 # 如果还没有 git 仓库
-$ git -c init.defaultbranch=master clone ssh://aur@aur.archlinux.org/pkgbase.git
+git -c init.defaultbranch=master clone ssh://aur@aur.archlinux.org/pkgbase.git
 
 # 如果已有 git 仓库
-$ git switch -c master
+git switch -c master
 ## 如果有了提交
-$ git branch -d 
+git branch -d 
 ```
 
 ### 推送
@@ -190,13 +190,13 @@ $ git branch -d
 根据 PKGBUILD 生成自动更新的配置 `.nvchecker.toml`：
 
 ```sh
-$ pkgctl version setup
+pkgctl version setup
 ```
 
 更新 PKGBUILD 中的 pkgver：
 
 ```sh
-$ pkgctl version upgrade
+pkgctl version upgrade
 ```
 
 再用 updpkgsums 自动填写 hash，非常的完美！
