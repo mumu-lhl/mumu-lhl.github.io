@@ -22,7 +22,7 @@ PKGBUILD 文件采用 Bash 语法，用于 Archlinux 及其衍生发行版构建
 * devtools - 包含的 pkgctl
 * nvchecker - 为 pkgctl 提供版本检测
 * namcap - 检测 PKGBUILD 常见的错误
-* updpkgsums - 自动下载软件压缩文件，计算 hash 填入 PKGBUILD（不用另外安装）
+* updpkgsums - 自动下载软件来源，计算 hash 填入 PKGBUILD（不用另外安装）
 
 ```sh
 sudo pacman -S devtools nvchecker namcap
@@ -32,6 +32,8 @@ sudo pacman -S devtools nvchecker namcap
 * [termux-language-server](https://github.com/termux/termux-language-server) - 为 PKGBUILD 提供语言服务器（Language Server）
 
 ## 基本格式
+你可以在 `/usr/share/pacman` 目录下找到三个没有注释的 PKGBUILD 示例文件，其中 PKGBUILD.pro 应该是最有用的。
+
 ```sh
 # https://wiki.archlinux.org/title/Arch_package_guidelines
 # Maintainer: Your Name <youremail@domain.com>
@@ -46,7 +48,8 @@ license=("GPL") # 许可证
 groups=()       # 归属的软件包组，基本用不到
 depends=()      # 软件运行所需的依赖
 makedepends=()  # 构建软件所需的依赖
-optdepends=()   # 软件运行可选的依赖
+optdepends=("package_name: description")
+                # 软件运行可选的依赖
 provides=()     # 提供的功能
 conflicts=()    # 与什么功能冲突，通常与 provides 的值相同
 replaces=()     # 该包安装时替换什么包，基本用不到
@@ -59,18 +62,18 @@ options=()      # makepkg 选项，具体参数在
                 # https://man.archlinux.org/man/PKGBUILD.5#OPTIONS_AND_DIRECTIVES
 changelog=      # 软件更新日志，基本都不写的
 source=(FILENAME::URL)
-                # 不定构架，软件压缩文件（也可以是 git 仓库地址，写法见下面的 git 示例），
+                # 不定构架，软件来源（可以是压缩文件，也可以是 git 仓库地址，写法见下面的 git 示例），
                 # FILENAME 用于将下载到的文件命名为它，
                 # 可以用上面定义的变量组成，如 $pkgname-$pkgver.tar.gz
                 # makepkg 会自动解压，解压后的目录存于变量 srcdir
                 # URL 则是指向文件的链接
 #source=(URL)   # FILENAME 也可以省略
-#source_x86_64  # 相应架构的软件压缩文件
-noextract=()    # 需要其他解压工具时，不解压的软件压缩文件，填写这一项需要在 prepare 函数中解压文件
+#source_x86_64  # 相应架构的软件来源
+noextract=()    # 需要其他解压工具时，不解压的软件来源，填写这一项需要在 prepare 函数中解压文件
                 # 还要在 makedepends 填写解压工具
-sha256sums=()   # 不定架构的软件压缩文件的 hash，下文将介绍用 updpkgsums 自动填写，也可以用其他的 hash，如 sha512
+sha256sums=()   # 不定架构的软件来源的 hash，下文将介绍用 updpkgsums 自动填写，也可以用其他的 hash，如 sha512
 #sha256sums_x86_64
-                # 特定架构的软件压缩文件的 hash
+                # 特定架构的软件来源的 hash
 
 # pkgver 函数用于获取软件版本，替代 pkgver 变量，通常用于打包直接用 git 拉取仓库进行构建的软件包
 #pkgver() {}
@@ -87,7 +90,7 @@ package() {
   # 工作步骤：
   # 1. 将一个文件复制到另一个文件
   # 2. 赋予复制后的文件可执行权限
-  install -Dm755 ${srcdir}/binary ${pkgdir}/usr/bin/binary # srcdir 变量是软件压缩文件解压后的目录
+  install -Dm755 ${srcdir}/binary ${pkgdir}/usr/bin/binary # srcdir 变量是软件来源解压后的目录
                                                            # pkgdir 变量是一个存放被打包的文件的目录
 }
 ```
@@ -123,7 +126,7 @@ pkgver {
 ```
 
 ### 其他
-如 pip、npm、cargo 等软件的打包我会另外写一篇文件，这些软件的打包是不需要手写 PKGBUILD 的，用脚本生成就可以了。
+如 pip、npm、cargo 等编程语言的软件包的打包是不需要手写 PKGBUILD 的，用脚本生成就可以了，见 [Arch Wiki](https://wiki.archlinux.org/title/Creating_packages#PKGBUILD_generators)。
 
 ## 测试
 ### 构建
