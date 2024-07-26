@@ -59,14 +59,18 @@ options=()      # makepkg 选项，具体参数在
                 # https://man.archlinux.org/man/PKGBUILD.5#OPTIONS_AND_DIRECTIVES
 changelog=      # 软件更新日志，基本都不写的
 source=(FILENAME::URL)
-                # 软件压缩文件，FILENAME 用于将下载到的 URL 命名为它，
+                # 不定构架，软件压缩文件（也可以是 git 仓库地址，写法见下面的 git 示例），
+                # FILENAME 用于将下载到的文件命名为它，
                 # 可以用上面定义的变量组成，如 $pkgname-$pkgver.tar.gz
                 # makepkg 会自动解压，解压后的目录存于变量 srcdir
                 # URL 则是指向文件的链接
 #source=(URL)   # FILENAME 也可以省略
+#source_x86_64  # 相应架构的软件压缩文件
 noextract=()    # 需要其他解压工具时，不解压的软件压缩文件，填写这一项需要在 prepare 函数中解压文件
                 # 还要在 makedepends 填写解压工具
-sha256sums=()   # 软件压缩文件的 hash，下文将介绍用 updpkgsums 自动填写，也可以用其他的 hash，如 sha512
+sha256sums=()   # 不定架构的软件压缩文件的 hash，下文将介绍用 updpkgsums 自动填写，也可以用其他的 hash，如 sha512
+#sha256sums_x86_64
+                # 特定架构的软件压缩文件的 hash
 
 # pkgver 函数用于获取软件版本，替代 pkgver 变量，通常用于打包直接用 git 拉取仓库进行构建的软件包
 #pkgver() {}
