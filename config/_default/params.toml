@@ -6,7 +6,7 @@ favicon = "/favicon.png"
 
 [footer]
 since = 2023
-customText = ""
+customText = "<a href='https://www.boyouquan.com/home'>博友圈</a>"
 
 [dateFormat]
 published = "Jan 02, 2006"
@@ -56,7 +56,7 @@ limit = 10
 type = "toc"
 
 [opengraph.twitter]
-site = ""
+site = "https://mumulhl.eu.org"
 card = "summary_large_image"
 
 [defaultImage.opengraph]
