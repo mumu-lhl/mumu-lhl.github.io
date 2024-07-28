@@ -13,6 +13,6 @@ menu:
         weight: 4
         params:
             icon: link
-
-comments: false
 ---
+
+你可以 email/comment 我加友链，也可以等我 email/comment 你加友链 :)

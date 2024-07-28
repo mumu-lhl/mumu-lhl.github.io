@@ -5,7 +5,7 @@ date = 2024-07-27T22:02:28+08:00
 description = '用 yt-music-archive 存档 Youtube Music ID 批量下载音乐'
 keywords = ['工具']
 tags = ['工具']
-categories = ['技巧']
+categories = ['Skill']
 +++
 
 [yt-music-archive](https://github.com/mumu-lhl/yt-music-archive) 是我写的一个小脚本，用于将 Youtube Music 上的音乐下载到本地，并将其 ID 存入一个存档文件中，也可以从存档文件中还原出音乐。
