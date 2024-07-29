@@ -1,5 +1,5 @@
 ---
-title: "友情链接"
+title: "友链"
 slug: "links"
 layout: "links"
 links:
@@ -9,7 +9,7 @@ links:
     image: https://hugo-blog-chi-three.vercel.app/img/sound-waves-s_hu31a3b89a9690ac019409521babc652cd_16454_300x0_resize_box_3.png
 menu:
     main: 
-        name: 友情链接
+        name: 友链
         weight: 4
         params:
             icon: link

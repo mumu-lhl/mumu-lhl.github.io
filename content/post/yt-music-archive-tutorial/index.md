@@ -1,5 +1,5 @@
 +++
-title = '存档Youtube Music ID 批量下载音乐'
+title = '存档 Youtube Music ID 批量下载音乐'
 slug = 'yt-music-archive-tutorial'
 date = 2024-07-27T22:02:28+08:00
 description = '用 yt-music-archive 存档 Youtube Music ID 批量下载音乐'
