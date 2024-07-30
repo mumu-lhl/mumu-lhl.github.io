@@ -9,4 +9,4 @@ menu:
             icon: heart-handshake
 ---
 
-<iframe src="https://mumulhl.eu.org/friend-circle/" width="100%" height="600rem" style="border:none;"></iframe>
+<iframe src="https://mumulhl.eu.org/friend-circle?v=1" width="100%" height="600rem" style="border:none;"></iframe>
