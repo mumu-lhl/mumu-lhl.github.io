@@ -12,7 +12,7 @@ categories = ['Tech']
 
 ## 搭建
 
-Fork 这个项目，在 Actions 中开启 workflows，然后开启叫作 Friend Circle 的 workflow，之后在 Settings 的 Pages 中将 Branch 选为 gh-pages。
+Fork 这个项目，在 Actions 中开启 workflows，然后开启叫作 Friend Circle 的 workflow，关闭叫作 Lint Commit Messages 的 workflow，之后在 Settings 的 Pages 中将 Branch 选为 gh-pages。
 
 （是不是很简单？:)）
 
