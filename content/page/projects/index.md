@@ -9,7 +9,17 @@ menu:
             icon: brand-git
 ---
 
-[EAF PyQterminal](https://github.com/mumu-lhl/eaf-pyqterminal) - 基于 EAF 框架运行于 Emacs 内的终端
+## 库 Cool
+
+* [duckduckgo-ai-chat](https://github.com/mumu-lhl/duckduckgo-ai-chat) - 为 JavaScript/TypeScript 提供 Duckduckgo AI Chat API，可以免费使用 gpt-4o-mini。
+
+## 自部署
+
+* [duckduckgo-ai-chat-service](https://github.com/mumu-lhl/duckduckgo-ai-chat-service) - 为 Duckduckgo AI Chat 提供兼容 OpenAI 的 API，可以免费使用 gpt-4o-mini。
+
+## Emacs
+
+* [EAF PyQterminal](https://github.com/mumu-lhl/eaf-pyqterminal) - 基于 EAF 框架运行于 Emacs 内的终端
 
 ## 🤡
 
