@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on Mumulhl's Blog</title><link>https://mumulhl.eu.org/page/</link><description>Recent content in Pages on Mumulhl's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Mumulhl</copyright><lastBuildDate>Sun, 06 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://mumulhl.eu.org/page/index.xml" rel="self" type="application/rss+xml"/><item><title>归档</title><link>https://mumulhl.eu.org/archives/</link><pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate><guid>https://mumulhl.eu.org/archives/</guid><description/></item><item><title>搜索</title><link>https://mumulhl.eu.org/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mumulhl.eu.org/search/</guid><description/></item><item><title>项目</title><link>https://mumulhl.eu.org/projects/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mumulhl.eu.org/projects/</guid><description>&lt;h2 id="库-cool">库 Cool
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://github.com/mumu-lhl/duckduckgo-ai-chat" target="_blank" rel="noopener"
+>duckduckgo-ai-chat&lt;/a> - 为 JavaScript/TypeScript 提供 Duckduckgo AI Chat API，可以免费使用 gpt-4o-mini。&lt;/li>
+&lt;/ul>
+&lt;h2 id="自部署">自部署
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://github.com/mumu-lhl/duckduckgo-ai-chat-service" target="_blank" rel="noopener"
+>duckduckgo-ai-chat-service&lt;/a> - 为 Duckduckgo AI Chat 提供兼容 OpenAI 的 API，可以免费使用 gpt-4o-mini。&lt;/li>
+&lt;/ul>
+&lt;h2 id="emacs">Emacs
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://github.com/mumu-lhl/eaf-pyqterminal" target="_blank" rel="noopener"
+>EAF PyQterminal&lt;/a> - 基于 EAF 框架运行于 Emacs 内的终端&lt;/li>
+&lt;/ul>
+&lt;h2 id="heading">🤡
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://github.com/mumu-lhl/yt-music-archive?tab=readme-ov-file" target="_blank" rel="noopener"
+>Youtube Music 存档 (yt-music-archive)&lt;/a> - 将 Youtube Music 上的音乐下载到本地，并将其 ID 存入一个存档文件中。也可以从存档文件中还原出音乐。&lt;/li>
+&lt;/ul></description></item><item><title>友链</title><link>https://mumulhl.eu.org/links/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mumulhl.eu.org/links/</guid><description>&lt;p>你可以 email/comment 我加友链，也可以等我 email/comment 你加友链 :)&lt;/p></description></item><item><title>友链朋友圈</title><link>https://mumulhl.eu.org/circle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mumulhl.eu.org/circle/</guid><description>&lt;iframe src="https://mumulhl.eu.org/friend-circle?v=1" width="100%" height="600rem" style="border:none;">&lt;/iframe></description></item></channel></rss>

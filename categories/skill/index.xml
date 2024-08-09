@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>技巧 on Mumulhl's Blog</title><link>https://mumulhl.eu.org/categories/skill/</link><description>Recent content in 技巧 on Mumulhl's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Mumulhl</copyright><atom:link href="https://mumulhl.eu.org/categories/skill/index.xml" rel="self" type="application/rss+xml"/><item><title>存档 Youtube Music ID 批量下载音乐</title><link>https://mumulhl.eu.org/p/yt-music-archive-tutorial/</link><pubDate>Sat, 27 Jul 2024 22:02:28 +0800</pubDate><guid>https://mumulhl.eu.org/p/yt-music-archive-tutorial/</guid><description>&lt;p>&lt;a class="link" href="https://github.com/mumu-lhl/yt-music-archive" target="_blank" rel="noopener"
+>yt-music-archive&lt;/a> 是我写的一个小脚本，用于将 Youtube Music 上的音乐下载到本地，并将其 ID 存入一个存档文件中，也可以从存档文件中还原出音乐。&lt;/p>
+&lt;p>（我在花了几个小时写完后，才想起用 yt-dlp 下载播放列表也可以做到同样的功能，算了，写了都写了，就&lt;del>水&lt;/del>写篇教程吧&amp;hellip;）&lt;/p>
+&lt;h2 id="安装">安装
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">git clone https://github.com/mumu-lhl/yt-music-archive
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> yt-music-archive
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo make
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>或者从 AUR 安装：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">yay -S yt-music-archive
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># or&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">paru -S yt-music-archive
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="使用">使用
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">yt-music-archive save &amp;lt;ID&amp;gt; &lt;span class="c1"># 下载音乐并将 ID 存入存档文件，默认音乐保存在 ~/Music&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">yt-music-archive save &amp;lt;ID&amp;gt; -p &amp;lt;PATH&amp;gt; &lt;span class="c1"># 指定音乐保存到哪个路径下&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">yt-music-archive fetch &lt;span class="c1"># 根据存档的 ID 拉取音乐，默认音乐保存在 ~/Music&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">yt-music-archive fetch -p &amp;lt;PATH&amp;gt; &lt;span class="c1"># 指定音乐保存到哪个路径下&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="配置">配置
+&lt;/h2>&lt;p>目前可配置的选项不多，可以编辑 &lt;code>/etc/yt-music-archive/yt-music-archive.conf&lt;/code> 或 &lt;code>~/.config/yt-music-archive/yt-music-archive.conf&lt;/code>：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">archive_file&lt;/span>&lt;span class="o">=&lt;/span>~/.local/share/yt-music-archive/archive
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># 存储 id 的存档文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#default_path=~/Music # 默认保存音乐的路径&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="结语">结语
+&lt;/h2>&lt;p>I&amp;rsquo;m a 🤡.&lt;/p></description></item><item><title>用 RSS 订阅本站的所有文章或按标签、分类订阅文章</title><link>https://mumulhl.eu.org/p/rss-for-my-website/</link><pubDate>Tue, 23 Jul 2024 09:57:30 +0800</pubDate><guid>https://mumulhl.eu.org/p/rss-for-my-website/</guid><description>&lt;p>本站所用的主题没有直接把 RSS 链接显示在网页上，而是放在了 HTML &lt;code>&amp;lt;link&amp;gt;&lt;/code> 标签里，但是要怎么订阅本站的所有或部分文章呢？&lt;/p>
+&lt;h2 id="howto">HowTo
+&lt;/h2>&lt;p>如果要订阅本站所有文章，在 RSS 阅读器里直接订阅 &lt;code>https://mumulhl.eu.org&lt;/code>。如果要根据标签、分类订阅，直接订阅相应的链接就可以了，如 &lt;code>https://mumulhl.eu.org/categories/skill/&lt;/code>。&lt;/p>
+&lt;p>（RSS 还能这样订阅以前都不知道，最近才意外知道）&lt;/p>
+&lt;h1 id="如何实现">如何实现？
+&lt;/h1>&lt;p>HTML &lt;code>&amp;lt;link&amp;gt;&lt;/code> 最常见的用法就是为网页引入 CSS 文件，它的作用是标志网页和外部资源的关系。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">link&lt;/span> &lt;span class="na">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;main.css&amp;#34;&lt;/span> &lt;span class="na">rel&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;stylesheet&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>href&lt;/code> 属性的值是文件路径，&lt;code>rel&lt;/code> 则是 &lt;em>relationship&lt;/em> 的缩写，表示网页和外部资源的关系。&lt;code>rel&lt;/code> 是 &lt;code>stylesheet&lt;/code>，就表示 main.css 是该网页的 CSS。&lt;/p>
+&lt;p>引入 RSS 的 &lt;code>&amp;lt;link&amp;gt;&lt;/code> 是长这样的：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">link&lt;/span> &lt;span class="na">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;index.xml&amp;#34;&lt;/span> &lt;span class="na">rel&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;alternate&amp;#34;&lt;/span> &lt;span class="na">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;application/rss+xml&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>type&lt;/code> 的值为 &lt;code>application/rss+xml&lt;/code> 标志了 index.xml 的类型是 RSS，&lt;code>rel&lt;/code> 的值为 &lt;code>alternate&lt;/code> 根据 &lt;a class="link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel" target="_blank" rel="noopener"
+>MDN&lt;/a> 意思是当前网页的替代。&lt;/p>
+&lt;p>RSS 阅读器通常支持这种方式订阅，以前我只知道输入 RSS 文件的链接订阅&amp;hellip;&lt;/p></description></item><item><title>追踪音乐播放记录</title><link>https://mumulhl.eu.org/p/music-track-tutorial/</link><pubDate>Sun, 21 Jul 2024 21:57:29 +0800</pubDate><guid>https://mumulhl.eu.org/p/music-track-tutorial/</guid><description>&lt;p>&lt;del>上次写博客还是在上次&lt;/del>呸，上次写博客在一年前了&amp;hellip;&lt;/p>
+&lt;h2 id="概念">概念
+&lt;/h2>&lt;h3 id="scrobbler">Scrobbler
+&lt;/h3>&lt;p>Scrobbler 的意思是是向音乐社区平台提交音乐播放记录的程序。&lt;/p>
+&lt;h3 id="音乐社区平台">音乐社区平台
+&lt;/h3>&lt;p>音乐社区平台，往往不直接提供音乐，允许用户&lt;strong>评论音乐&lt;/strong>，记录 Scrobbler 向其提交的 &lt;strong>不同音乐播放器&lt;/strong> 上音乐播放记录，根据记录的数据&lt;strong>推荐音乐&lt;/strong>， &lt;strong>总结听歌报告&lt;/strong>。&lt;/p>
+&lt;h2 id="选择音乐社区平台">选择音乐社区平台
+&lt;/h2>&lt;p>&lt;a class="link" href="https://last.fm" target="_blank" rel="noopener"
+>Last.fm&lt;/a> 是一个音乐社区平台用户量应该是最多的，部分功能收费。&lt;/p>
+&lt;p>&lt;a class="link" href="https://listenbrainz.org" target="_blank" rel="noopener"
+>ListenBrainz&lt;/a> 是我目前正在使用的音乐社区平台，是开源项目，可以自行部署，完全免费。&lt;/p>
+&lt;p>为了节省打字时间，还有一些可以自行部署的音乐社区平台就自行去找啦~&lt;/p>
+&lt;h2 id="选择-scrobbler">选择 Scrobbler
+&lt;/h2>&lt;p>搜一下一大把的。&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/kawaiiDango/pano-scrobbler?tab=readme-ov-file" target="_blank" rel="noopener"
+>Pano Scrobbler&lt;/a> 是自由软件，支持多种音乐社区平台，界面采用 Material You。鉴于我只在 Android 上听歌，所以只能推荐在 Android 上的 Scrobbler 了。&lt;/p>
+&lt;h2 id="下一步">下一步
+&lt;/h2>&lt;p>搞好音乐社区平台和 Scrobbler，然后正常听音乐就可以了。&lt;/p></description></item></channel></rss>
