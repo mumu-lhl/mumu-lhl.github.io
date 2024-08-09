@@ -106,6 +106,12 @@ void main() async {
 }
 ```
 
+然后生成 database.g.dart 文件：
+
+```sh
+dart run build_runner build
+```
+
 这个示例不适合直接放到生产环境中，稍微改一下就可以了。
 
 ## 结语
