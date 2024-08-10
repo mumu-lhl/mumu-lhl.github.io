@@ -5,7 +5,7 @@ date = 2024-08-04T15:36:46+08:00
 description = ''
 keywords = ['doggo', 'DNS', '教程']
 tags = ['教程']
-categories = ['Tech']
+categories = ['Skill']
 +++
 
 dig 是用来查询 DNS 的工具，[doggo](https://github.com/mr-karan/doggo) 则是它现代的增强品。

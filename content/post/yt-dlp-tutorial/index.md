@@ -3,8 +3,8 @@ title = 'yt-dlp 教程'
 slug = 'yt-dlp-tutorial'
 date = 2024-08-10T20:59:35+08:00
 description = '介绍 yt-dlp 下载指定品质的视频、嵌入元数据、分离音频等功能'
-keywords = ['yt-dlp', '下载']
-tags = ['yt-dlp']
+keywords = ['yt-dlp', '下载', '教程']
+tags = ['yt-dlp', '教程']
 categories = ['Skill']
 +++
 
