@@ -38,6 +38,12 @@ yt-dlp "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 yt-dlp "https://www.youtube.com/playlist?list=PLp8YAQVH95dwCMvzkxUhFy4KWRAtp_awf"
 ```
 
+还可以下载 m3u8。
+
+```sh
+yt-dlp "https://example.com/index.m3u8"
+```
+
 列出视频可以下载的格式，也列出了传输协议、格式、分辨率、帧率、大小等信息。
 
 ```sh
