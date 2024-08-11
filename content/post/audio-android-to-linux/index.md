@@ -35,7 +35,7 @@ categories = ['Skill']
 curl -O https://raw.githubusercontent.com/gdzx/audiosource/master/audiosource && chmod +x audiosource
 ```
 
-用 USB 数据线连接手机和电脑，在 *开发者选项* 里开启 **USB 侦错**。
+用 USB 数据线连接手机和电脑，在 *开发者选项* 里开启 **USB 调试模式**。
 
 用 adb 查看一下连接的 Android 设备，这时手机会弹出授权窗口，点授权就完事了。授权完再运行一下这个命令，看看是否正常。
 
