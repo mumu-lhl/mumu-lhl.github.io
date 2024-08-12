@@ -1,9 +1,9 @@
 ---
-title: "友链朋友圈"
+title: "朋友圈"
 slug: "circle"
 menu:
     main:
-        name: 友链朋友圈
+        name: 朋友圈
         weight: 6
         params: 
             icon: heart-handshake

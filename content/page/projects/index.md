@@ -11,11 +11,13 @@ menu:
 
 ## 库 Cool
 
+* [dict_reader] - 用于读取 mdict 文件的 Dart 库，支持 MDX/MDD 格式。
 * [duckduckgo-ai-chat](https://github.com/mumu-lhl/duckduckgo-ai-chat) - 为 JavaScript/TypeScript 提供 Duckduckgo AI Chat API，可以免费使用 gpt-4o-mini。
 
 ## 自部署
 
 * [duckduckgo-ai-chat-service](https://github.com/mumu-lhl/duckduckgo-ai-chat-service) - 为 Duckduckgo AI Chat 提供兼容 OpenAI 的 API，可以免费使用 gpt-4o-mini。
+* [simple-friend-circle](https://github.com/Simple-Friend-Circle/simple-friend-circle) - 简易友链朋友圈
 
 ## Emacs
 
