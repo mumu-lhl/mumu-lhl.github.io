@@ -9,9 +9,13 @@ menu:
             icon: brand-git
 ---
 
+## App
+
+* [词悦](https://github.com/mumu-lhl/Ciyue) -  支持 Android 的简洁 mdict 词典。
+
 ## 库 Cool
 
-* [dict_reader] - 用于读取 mdict 文件的 Dart 库，支持 MDX/MDD 格式。
+* [dict_reader](https://github.com/mumu-lhl/dict_reader) - 用于读取 mdict 文件的 Dart 库，支持 MDX/MDD 格式。
 * [duckduckgo-ai-chat](https://github.com/mumu-lhl/duckduckgo-ai-chat) - 为 JavaScript/TypeScript 提供 Duckduckgo AI Chat API，可以免费使用 gpt-4o-mini。
 
 ## 自部署
