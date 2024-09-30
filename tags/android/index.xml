@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Android on Mumulhl's Blog</title><link>https://mumulhl.eu.org/tags/android/</link><description>Recent content in Android on Mumulhl's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Mumulhl</copyright><lastBuildDate>Thu, 15 Aug 2024 15:25:12 +0800</lastBuildDate><atom:link href="https://mumulhl.eu.org/tags/android/index.xml" rel="self" type="application/rss+xml"/><item><title>给 Android 换个配色</title><link>https://mumulhl.eu.org/p/android-dynamic-color-tutorial/</link><pubDate>Thu, 15 Aug 2024 15:25:12 +0800</pubDate><guid>https://mumulhl.eu.org/p/android-dynamic-color-tutorial/</guid><description>&lt;h2 id="介绍">介绍
+&lt;/h2>&lt;p>Material You 加入到 Android 12 中，其中包括了动态配色。&lt;/p>
+&lt;p>用户可以直接在系统层面上很方便地改变系统配色和支持动态配色的软件的配色。开发者也不需要再开发配色功能。&lt;/p>
+&lt;h2 id="设置">设置
+&lt;/h2>&lt;p>（因为不同厂商把选项名改得不一样，所以很难明确写出选项的名称）&lt;/p>
+&lt;ol>
+&lt;li>打开设置&lt;/li>
+&lt;li>点击一个名称大致包含了 &lt;strong>桌面&lt;/strong>、&lt;strong>壁纸&lt;/strong> 的选项&lt;/li>
+&lt;li>点击名称像 &lt;strong>系统风格&lt;/strong> 的选项，就可以选择颜色了。&lt;/li>
+&lt;/ol>
+&lt;p>可以单独选择配色，也可以从壁纸上提取出颜色。&lt;/p>
+&lt;h2 id="结语">结语
+&lt;/h2>&lt;p>用了 Android 13 一整年了，都不知道有这个功能 😂 最近用 Flutter 开发词典的时候才了解到。&lt;/p></description></item><item><title>将 Android 作为 Linux 的麦克风</title><link>https://mumulhl.eu.org/p/audio-android-to-linux/</link><pubDate>Sun, 11 Aug 2024 12:40:00 +0800</pubDate><guid>https://mumulhl.eu.org/p/audio-android-to-linux/</guid><description>&lt;p>你的电脑可能没有麦克风，需要的时候，又不想买一个麦克风，这时候就可以把你的 Android 当作麦克风来用。&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/gdzx/audiosource" target="_blank" rel="noopener"
+>Audio Source&lt;/a> 是一个用 ADB 将 Android 麦克风的输入转发到 PulseAudio 进程的工具。&lt;/p>
+&lt;h2 id="准备">准备
+&lt;/h2>&lt;ul>
+&lt;li>一只手&lt;/li>
+&lt;li>Android 4.0 及以上&lt;/li>
+&lt;li>一条 USB 数据线，充电线也没问题&lt;/li>
+&lt;li>PATH 中包含 python3、pactl、adb（Archlinux 如果没有 adb，用 &lt;code>sudo pacman -S android-tools&lt;/code> 安装，安装后需重启）&lt;/li>
+&lt;/ul>
+&lt;h2 id="使用">使用
+&lt;/h2>&lt;h3 id="android-端">Android 端
+&lt;/h3>&lt;p>可在 &lt;a class="link" href="https://github.com/gdzx/audiosource/releases" target="_blank" rel="noopener"
+>Releases&lt;/a> 页面下载，或在 &lt;a class="link" href="https://apt.izzysoft.de/fdroid/index/apk/fr.dzx.audiosource" target="_blank" rel="noopener"
+>IzzyOnDroid F-Droid Repository&lt;/a> 下载。&lt;/p>
+&lt;p>安装后，点开软件，如果没看到 UI 很正常，这个软件就是没有 UI 的&amp;hellip; 然后要授权软件麦克风和通知权限，如果授权权限的弹窗闪退，可以在 &lt;em>设置&lt;/em> 里面授权软件权限。&lt;/p>
+&lt;h3 id="linux-端">Linux 端
+&lt;/h3>&lt;p>下载 audiosource 脚本并授权可执行权限。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">curl -O https://raw.githubusercontent.com/gdzx/audiosource/master/audiosource &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> chmod +x audiosource
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>用 USB 数据线连接手机和电脑，在 &lt;em>开发者选项&lt;/em> 里开启 &lt;strong>USB 调试模式&lt;/strong>。&lt;/p>
+&lt;p>用 adb 查看一下连接的 Android 设备，这时手机会弹出授权窗口，点授权就完事了。授权完再运行一下这个命令，看看是否正常。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">adb devices
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>运行 audiosource 脚本，你的 Linux 就有麦克风啦 :)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">./audiosource run
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="结语">结语
+&lt;/h2>&lt;p>Audio Source 是我意外在 F-Droid 找到的，F-Droid 上的宝藏很多 :)&lt;/p></description></item></channel></rss>
