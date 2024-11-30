@@ -47,7 +47,7 @@ cd example
 <!-- 新增的部分 -->
 <activity
     android:name=".ProcessTextActivity"
-    android:label="@string/appName"
+    android:label="${applicationName}"
     android:exported="true">
     <intent-filter>
         <action android:name="android.intent.action.PROCESS_TEXT" />
