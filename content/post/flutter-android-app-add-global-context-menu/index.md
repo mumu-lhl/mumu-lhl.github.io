@@ -1,9 +1,8 @@
 ---
 title: 给Flutter Android App支持全局上下文菜单
 description: 某些情况下需要给Flutter Android App支持全局上下文菜单，本文将简洁地告诉你该怎么做
-date: 2024-11-30T14:18:25.744Z
+date: 2024-11-30T15:16:10.308Z
 preview: ""
-draft: false
 tags:
     - Android
     - Flutter
