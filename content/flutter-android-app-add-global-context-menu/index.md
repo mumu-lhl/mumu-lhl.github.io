@@ -45,9 +45,10 @@ cd example
     </intent-filter>
 </activity>
 <!-- 新增的部分 -->
+<!-- android:label 是上下文菜单中显示的名称 -->
 <activity
     android:name=".ProcessTextActivity"
-    android:label="${applicationName}"
+    android:label="example"
     android:exported="true">
     <intent-filter>
         <action android:name="android.intent.action.PROCESS_TEXT" />
@@ -129,6 +130,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   platform.setMethodCallHandler((call) async {
     if (call.method == "processText") {
       final text = call.arguments as String; // call.arguments 里就是选中的文本了
