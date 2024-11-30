@@ -1,9 +1,9 @@
 ---
 title: 给Flutter Android App支持全局上下文菜单
 description: 某些情况下需要给Flutter Android App支持全局上下文菜单，本文将简洁地告诉你该怎么做
-date: 2024-11-30T13:49:12.899Z
+date: 2024-11-30T14:18:25.744Z
 preview: ""
-draft: true
+draft: false
 tags:
     - Android
     - Flutter
@@ -18,7 +18,7 @@ keywords:
 
 最近在开发词悦（一个 mdict 词典）的时候，需要支持全局上下文菜单，查了很多资料都没有找到合适的方法，问了下 cursor，得到了初步方案，经过稍微的改动就有了这篇教程。
 
-本文开发环境在 Archlinux 下。
+本文开发环境在 Linux 下。
 
 ## 初始化项目
 
