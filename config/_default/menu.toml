@@ -16,12 +16,12 @@ url = "https://github.com/mumu-lhl"
 icon = "brand-github"
 
 [[social]]
-identifier = "Mastodon"
-name = "Mastodon"
-url = "https://o3o.ca/@Mumulhl"
+identifier = "twitter"
+name = "X"
+url = "https://x.com/mumulhl"
 
 [social.params]
-icon = "brand-mastodon"
+icon = "brand-twitter"
 
 [[social]]
 identifier = "Email"
