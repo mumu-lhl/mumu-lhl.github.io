@@ -43,6 +43,21 @@
           "title": "Categories",
           "name": "categories",
           "type": "categories"
+        },
+        {
+          "title": "image",
+          "name": "image",
+          "type": "image"
+        },
+        {
+          "title": "keywords",
+          "name": "keywords",
+          "type": "choice",
+          "choices": [
+            "AI",
+            "开源",
+            "2024"
+          ]
         }
       ]
     }
