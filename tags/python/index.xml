@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on Mumulhl's Blog</title><link>https://mumulhl.eu.org/tags/python/</link><description>Recent content in Python on Mumulhl's Blog feedId:60457641080979461+userId:41411918034016256</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Mumulhl</copyright><lastBuildDate>Mon, 22 Jul 2024 14:56:53 +0800</lastBuildDate><atom:link href="https://mumulhl.eu.org/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>检测 Python 代码所需的最低版本</title><link>https://mumulhl.eu.org/p/detect-minimum-python-version/</link><pubDate>Mon, 22 Jul 2024 14:56:53 +0800</pubDate><guid>https://mumulhl.eu.org/p/detect-minimum-python-version/</guid><description>&lt;p>以后也会写像这样的工具类文章，写得特快&amp;hellip;不会写得很啰唆，简单利落。&lt;/p>
+&lt;h2 id="vermin">Vermin
+&lt;/h2>&lt;p>&lt;a class="link" href="https://github.com/netromdk/vermin" target="_blank" rel="noopener"
+>Vermin&lt;/a> 是一个检测 Python 代码所需的最低版本的工具，在本文写时已经有一段时间没有更新了。&lt;/p>
+&lt;h2 id="安装">安装
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># pip&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pip install vermin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># pipx&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pipx install vermin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># AUR&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">yay -S python-vermin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># or&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">paru -S python-vermin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="使用">使用
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 检测目录下的所有 Python 代码，这条命令可以满足大部分需求，不需要怎样配置&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">vermin .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>
