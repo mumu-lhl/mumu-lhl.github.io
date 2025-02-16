@@ -1,9 +1,8 @@
 ---
 title: "Imagen 3: 免费文生图工具保持人物一致性"
-description: "Imagen 3 是 Google DeepMind 最新的文生图模型，可免费使用，本文介绍如何让其生成的人物保持一致性，理论上其他模型也可以这么做"
-date: 2025-02-16T02:14:16.768Z
+description: Imagen 3 是 Google DeepMind 最新的文生图模型，可免费使用，本文介绍如何让其生成的人物保持一致性，理论上其他模型也可以这么做
+date: 2025-02-16T03:08:28.183Z
 preview: ""
-draft: true
 tags:
     - AI
     - 免费
