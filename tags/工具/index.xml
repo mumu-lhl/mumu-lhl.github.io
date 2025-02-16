@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>工具 on Mumulhl's Blog</title><link>https://mumulhl.eu.org/tags/%E5%B7%A5%E5%85%B7/</link><description>Recent content in 工具 on Mumulhl's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Mumulhl</copyright><lastBuildDate>Sun, 16 Feb 2025 03:08:28 +0000</lastBuildDate><atom:link href="https://mumulhl.eu.org/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml"/><item><title>Imagen 3: 免费文生图工具保持人物一致性</title><link>https://mumulhl.eu.org/p/imagen-3-tutorial/</link><pubDate>Sun, 16 Feb 2025 03:08:28 +0000</pubDate><guid>https://mumulhl.eu.org/p/imagen-3-tutorial/</guid><description>&lt;img src="https://mumulhl.eu.org/p/imagen-3-tutorial/cover.webp" alt="Featured image of post Imagen 3: 免费文生图工具保持人物一致性" />&lt;h2 id="imagen-3">Imagen 3
+&lt;/h2>&lt;p>Imagen 3 是 Google DeepMind 最新的文生图模型，可以在 &lt;a class="link" href="https://labs.google/fx/tools/image-fx" target="_blank" rel="noopener"
+>ImageFx&lt;/a> 免费使用。Imagen 3 在 Gemini 内也是可以使用的，Gemini 生成图片有时会不听话，不生成图片，所以本文采用 ImageFx。&lt;/p>
+&lt;h2 id="如何实现人物一致性">如何实现人物一致性？
+&lt;/h2>&lt;p>主要有两种方式：&lt;/p>
+&lt;ol>
+&lt;li>对现有的人物图像进行“引用”，如 Midjourney&lt;/li>
+&lt;li>对人物描述相当详细的 Prompt，基本适用于各种文生图模型&lt;/li>
+&lt;/ol>
+&lt;p>第一种方式 Imagen 3 不支持，本文就采用第二种。&lt;/p>
+&lt;h2 id="创造人物形象">创造人物形象
+&lt;/h2>&lt;p>想要有一个对人物描述相当详细的 Prompt，由人来写就太繁琐了，可以提供一些人物的特征让大语言模型帮我们写，这里采用 Gemini 2.0 Flash Thinking 模型。给出的特征越详细越能生成符合自己想要的人物。&lt;/p>
+&lt;p>示范 Prompt：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">你是一名文生图prompt专家，请写一个英文prompt去生成一个人物，将prompt放入代码块中。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">prompt要求：
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">1. 无背景
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2. 全身图
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">人物：
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">1. 白色头发
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2. 穿白里带红的和服
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">3. 20岁左右的女性
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">4. 日本动漫风格
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>注：不要想着生成loli什么的，生成图片时会被判定为“儿童”而无法生成！&lt;/strong>&lt;/p>
+&lt;p>先用大语言模型写的 Prompt 生成一下，如果效果不错，把种子锁定下，最好把种子保存下，方便以后生成尽可能相似的人物。&lt;/p>
+&lt;p>&lt;img src="https://mumulhl.eu.org/p/imagen-3-tutorial/1.webp"
+width="1373"
+height="789"
+loading="lazy"
+alt="Example 1"
+class="gallery-image"
+data-flex-grow="174"
+data-flex-basis="417px"
+>&lt;/p>
+&lt;h2 id="根据人物创造详细的-prompt">根据人物创造详细的 Prompt
+&lt;/h2>&lt;p>下载一张图片，发给支持图像的大语言模型，并让它根据图像创造出详细的 Prompt。&lt;/p>
+&lt;p>示范 Prompt：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">你是一名文生图prompt专家，请写一个英文prompt去描述图像人物，将prompt放入代码块中。
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="把人物嵌入图像中">把人物嵌入图像中
+&lt;/h2>&lt;p>首先先生成一个生成人物坐在桌前写作业的图片的Prompt。&lt;/p>
+&lt;p>示范 Prompt：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">你是一名文生图prompt专家，请写一个英文prompt去生成一张图片，将prompt放入代码块中。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">要求：
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">1. 用 [CHARACTER] 代替人物
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2. 人物坐在一张桌子前写作业
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">3. 氛围温馨
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>我们将使用 &lt;code>[CHARACTER]&lt;/code> 代指人物，然后把上一个步骤生成的 Prompt 拼接进去，如：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[CHARACTER] sitting at a wooden desk, writing homework in a softly lit room, warm atmosphere, cozy, desk lamp, books, study, home, peaceful, detailed, realistic.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[CHARACTER]: 1girl, full body, Tomoe Gozen, white hair, long hair, white kimono, red and gold floral pattern, standing, arms outstretched, black background
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://mumulhl.eu.org/p/imagen-3-tutorial/2.webp"
+width="1428"
+height="792"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="180"
+data-flex-basis="432px"
+>&lt;/p>
+&lt;p>最终效果图：&lt;/p>
+&lt;p>&lt;img src="https://mumulhl.eu.org/p/imagen-3-tutorial/cover.webp"
+width="1372"
+height="720"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="190"
+data-flex-basis="457px"
+>&lt;/p></description></item><item><title>存档 Youtube Music ID 批量下载音乐</title><link>https://mumulhl.eu.org/p/yt-music-archive-tutorial/</link><pubDate>Sat, 27 Jul 2024 22:02:28 +0800</pubDate><guid>https://mumulhl.eu.org/p/yt-music-archive-tutorial/</guid><description>&lt;p>&lt;a class="link" href="https://github.com/mumu-lhl/yt-music-archive" target="_blank" rel="noopener"
+>yt-music-archive&lt;/a> 是我写的一个小脚本，用于将 Youtube Music 上的音乐下载到本地，并将其 ID 存入一个存档文件中，也可以从存档文件中还原出音乐。&lt;/p>
+&lt;p>（我在花了几个小时写完后，才想起用 yt-dlp 下载播放列表也可以做到同样的功能，算了，写了都写了，就&lt;del>水&lt;/del>写篇教程吧&amp;hellip;）&lt;/p>
+&lt;h2 id="安装">安装
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">git clone https://github.com/mumu-lhl/yt-music-archive
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> yt-music-archive
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo make
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>或者从 AUR 安装：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">yay -S yt-music-archive
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># or&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">paru -S yt-music-archive
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="使用">使用
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">yt-music-archive save &amp;lt;ID&amp;gt; &lt;span class="c1"># 下载音乐并将 ID 存入存档文件，默认音乐保存在 ~/Music&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">yt-music-archive save &amp;lt;ID&amp;gt; -p &amp;lt;PATH&amp;gt; &lt;span class="c1"># 指定音乐保存到哪个路径下&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">yt-music-archive fetch &lt;span class="c1"># 根据存档的 ID 拉取音乐，默认音乐保存在 ~/Music&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">yt-music-archive fetch -p &amp;lt;PATH&amp;gt; &lt;span class="c1"># 指定音乐保存到哪个路径下&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="配置">配置
+&lt;/h2>&lt;p>目前可配置的选项不多，可以编辑 &lt;code>/etc/yt-music-archive/yt-music-archive.conf&lt;/code> 或 &lt;code>~/.config/yt-music-archive/yt-music-archive.conf&lt;/code>：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">archive_file&lt;/span>&lt;span class="o">=&lt;/span>~/.local/share/yt-music-archive/archive
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># 存储 id 的存档文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#default_path=~/Music # 默认保存音乐的路径&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="结语">结语
+&lt;/h2>&lt;p>I&amp;rsquo;m a 🤡.&lt;/p></description></item><item><title>检测 Python 代码所需的最低版本</title><link>https://mumulhl.eu.org/p/detect-minimum-python-version/</link><pubDate>Mon, 22 Jul 2024 14:56:53 +0800</pubDate><guid>https://mumulhl.eu.org/p/detect-minimum-python-version/</guid><description>&lt;p>以后也会写像这样的工具类文章，写得特快&amp;hellip;不会写得很啰唆，简单利落。&lt;/p>
+&lt;h2 id="vermin">Vermin
+&lt;/h2>&lt;p>&lt;a class="link" href="https://github.com/netromdk/vermin" target="_blank" rel="noopener"
+>Vermin&lt;/a> 是一个检测 Python 代码所需的最低版本的工具，在本文写时已经有一段时间没有更新了。&lt;/p>
+&lt;h2 id="安装">安装
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># pip&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pip install vermin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># pipx&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pipx install vermin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># AUR&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">yay -S python-vermin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># or&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">paru -S python-vermin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="使用">使用
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 检测目录下的所有 Python 代码，这条命令可以满足大部分需求，不需要怎样配置&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">vermin .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>
