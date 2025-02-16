@@ -9,7 +9,7 @@ tags:
     - 工具
     - 教程
 categories:
-    - Tech
+    - Skill
 image: cover.webp
 keywords:
     - 人物一致性
