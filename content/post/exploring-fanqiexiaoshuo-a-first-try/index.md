@@ -3,7 +3,7 @@ title: 番茄小说写作试水
 description: 之前在番茄小说上写了一些小说，具体说说一些前提须知吧，关于小说推荐、签约等
 date: 2025-06-09T11:50:11.331Z
 preview: ""
-draft: true
+draft: false
 tags:
     - 小说
     - 试水
