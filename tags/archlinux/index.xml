@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Archlinux on Mumulhl's Blog</title><link>https://mumulhl.eu.org/tags/archlinux/</link><description>Recent content in Archlinux on Mumulhl's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Mumulhl</copyright><lastBuildDate>Thu, 25 Jul 2024 19:54:02 +0800</lastBuildDate><atom:link href="https://mumulhl.eu.org/tags/archlinux/index.xml" rel="self" type="application/rss+xml"/><item><title>PKGBUILD 编写、发布、自动更新教程</title><link>https://mumulhl.eu.org/p/pkgbuild-tutorial/</link><pubDate>Thu, 25 Jul 2024 19:54:02 +0800</pubDate><guid>https://mumulhl.eu.org/p/pkgbuild-tutorial/</guid><description>&lt;h2 id="概念"&gt;概念
+&lt;/h2&gt;&lt;h3 id="pkgbuild"&gt;PKGBUILD
+&lt;/h3&gt;&lt;p&gt;PKGBUILD 文件采用 Bash 语法，用于 Archlinux 及其衍生发行版构建软件包，用户可以将自己编写的 PKGBUILD 发布到 &lt;a class="link" href="https://aur.archlinux.org" target="_blank" rel="noopener"
+&gt;AUR(Arch User Repository)&lt;/a&gt;，让其他用户构建并安装软件包（通常由工具完成，如 yay、paru）。&lt;/p&gt;
+&lt;p&gt;编写 PKGBUILD 只需要 Bash 的 &lt;strong&gt;创建变量&lt;/strong&gt;、&lt;strong&gt;读取变量&lt;/strong&gt;、&lt;strong&gt;声明函数&lt;/strong&gt;、&lt;strong&gt;创建数组&lt;/strong&gt; 等少量知识即可，可以到 &lt;a class="link" href="https://wangdoc.com/bash/" target="_blank" rel="noopener"
+&gt;网道 WangDoc&lt;/a&gt; 学习。&lt;/p&gt;
+&lt;h3 id="makepkg"&gt;makepkg
+&lt;/h3&gt;&lt;p&gt;读取 PKGBUILD 构建软件包的工具。&lt;/p&gt;
+&lt;h2 id="辅助工具"&gt;辅助工具
+&lt;/h2&gt;&lt;p&gt;这些工具在后文会介绍具体，请先用 pacman 安装，可以简化 PKGBUILD 的维护：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;devtools - 包含的 pkgctl&lt;/li&gt;
+&lt;li&gt;nvchecker - 为 pkgctl 提供版本检测&lt;/li&gt;
+&lt;li&gt;namcap - 检测 PKGBUILD 常见的错误&lt;/li&gt;
+&lt;li&gt;updpkgsums - 自动下载软件来源，计算 hash 填入 PKGBUILD（不用另外安装）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo pacman -S devtools nvchecker namcap
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这些工具你可能需要（不要的话关系也不大），使用自行看其文档：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/termux/termux-language-server" target="_blank" rel="noopener"
+&gt;termux-language-server&lt;/a&gt; - 为 PKGBUILD 提供语言服务器（Language Server）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="基本格式"&gt;基本格式
+&lt;/h2&gt;&lt;p&gt;你可以在 &lt;code&gt;/usr/share/pacman&lt;/code&gt; 目录下找到三个没有注释的 PKGBUILD 示例文件，其中 PKGBUILD.pro 应该是最有用的。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;span class="lnt"&gt;24
+&lt;/span&gt;&lt;span class="lnt"&gt;25
+&lt;/span&gt;&lt;span class="lnt"&gt;26
+&lt;/span&gt;&lt;span class="lnt"&gt;27
+&lt;/span&gt;&lt;span class="lnt"&gt;28
+&lt;/span&gt;&lt;span class="lnt"&gt;29
+&lt;/span&gt;&lt;span class="lnt"&gt;30
+&lt;/span&gt;&lt;span class="lnt"&gt;31
+&lt;/span&gt;&lt;span class="lnt"&gt;32
+&lt;/span&gt;&lt;span class="lnt"&gt;33
+&lt;/span&gt;&lt;span class="lnt"&gt;34
+&lt;/span&gt;&lt;span class="lnt"&gt;35
+&lt;/span&gt;&lt;span class="lnt"&gt;36
+&lt;/span&gt;&lt;span class="lnt"&gt;37
+&lt;/span&gt;&lt;span class="lnt"&gt;38
+&lt;/span&gt;&lt;span class="lnt"&gt;39
+&lt;/span&gt;&lt;span class="lnt"&gt;40
+&lt;/span&gt;&lt;span class="lnt"&gt;41
+&lt;/span&gt;&lt;span class="lnt"&gt;42
+&lt;/span&gt;&lt;span class="lnt"&gt;43
+&lt;/span&gt;&lt;span class="lnt"&gt;44
+&lt;/span&gt;&lt;span class="lnt"&gt;45
+&lt;/span&gt;&lt;span class="lnt"&gt;46
+&lt;/span&gt;&lt;span class="lnt"&gt;47
+&lt;/span&gt;&lt;span class="lnt"&gt;48
+&lt;/span&gt;&lt;span class="lnt"&gt;49
+&lt;/span&gt;&lt;span class="lnt"&gt;50
+&lt;/span&gt;&lt;span class="lnt"&gt;51
+&lt;/span&gt;&lt;span class="lnt"&gt;52
+&lt;/span&gt;&lt;span class="lnt"&gt;53
+&lt;/span&gt;&lt;span class="lnt"&gt;54
+&lt;/span&gt;&lt;span class="lnt"&gt;55
+&lt;/span&gt;&lt;span class="lnt"&gt;56
+&lt;/span&gt;&lt;span class="lnt"&gt;57
+&lt;/span&gt;&lt;span class="lnt"&gt;58
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# https://wiki.archlinux.org/title/Arch_package_guidelines&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Maintainer: Your Name &amp;lt;youremail@domain.com&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;pkgname&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;NAME &lt;span class="c1"&gt;# 名称&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;pkgver&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;VERSION &lt;span class="c1"&gt;# 版本&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;pkgrel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="c1"&gt;# 通常为 1，不需要更改，当版本不变需要让用户重新安装软件包时&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;#（如 PKGBUILD 增加补丁、修复 bug），需要加 1。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;pkgdesc&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span class="c1"&gt;# 介绍&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;arch&lt;/span&gt;&lt;span class="o"&gt;=()&lt;/span&gt; &lt;span class="c1"&gt;# 适用的架构，如 x86_64、aarch64、i386，也可以是 any，表示软件不受架构限制&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;url&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span class="c1"&gt;# 软件主页链接&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;license&lt;/span&gt;&lt;span class="o"&gt;=(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;GPL&amp;#34;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# 许可证&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;groups&lt;/span&gt;&lt;span class="o"&gt;=()&lt;/span&gt; &lt;span class="c1"&gt;# 归属的软件包组，基本用不到&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;depends&lt;/span&gt;&lt;span class="o"&gt;=()&lt;/span&gt; &lt;span class="c1"&gt;# 软件运行所需的依赖&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;makedepends&lt;/span&gt;&lt;span class="o"&gt;=()&lt;/span&gt; &lt;span class="c1"&gt;# 构建软件所需的依赖&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;optdepends&lt;/span&gt;&lt;span class="o"&gt;=(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;package_name: description&amp;#34;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 软件运行可选的依赖&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;provides&lt;/span&gt;&lt;span class="o"&gt;=()&lt;/span&gt; &lt;span class="c1"&gt;# 提供的功能&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;conflicts&lt;/span&gt;&lt;span class="o"&gt;=()&lt;/span&gt; &lt;span class="c1"&gt;# 与什么功能冲突，通常与 provides 的值相同&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;replaces&lt;/span&gt;&lt;span class="o"&gt;=()&lt;/span&gt; &lt;span class="c1"&gt;# 该包安装时替换什么包，基本用不到&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;backup&lt;/span&gt;&lt;span class="o"&gt;=()&lt;/span&gt; &lt;span class="c1"&gt;# 该包安装或卸载时，要备份的文件的路径，&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 使用相对路径（如 etc/pacman.conf），通常是配置文件。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 小知识：&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 升级时包自带的要备份的文件将会以 .pacnew 后缀保存，不覆盖本地的；&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 卸载时本地的要备份的文件会以 .pacsave 后缀重新命名&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;options&lt;/span&gt;&lt;span class="o"&gt;=()&lt;/span&gt; &lt;span class="c1"&gt;# makepkg 选项，具体参数在&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# https://man.archlinux.org/man/PKGBUILD.5#OPTIONS_AND_DIRECTIVES&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;changelog&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="c1"&gt;# 软件更新日志，基本都不写的&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;source&lt;/span&gt;&lt;span class="o"&gt;=(&lt;/span&gt;FILENAME::URL&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 不定构架，软件来源（可以是压缩文件，也可以是 git 仓库地址，写法见下面的 git 示例），&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# FILENAME 用于将下载到的文件命名为它，&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 可以用上面定义的变量组成，如 $pkgname-$pkgver.tar.gz&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# makepkg 会自动解压，解压后的目录存于变量 srcdir&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# URL 则是指向文件的链接&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#source=(URL) # FILENAME 也可以省略&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#source_x86_64 # 相应架构的软件来源&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;noextract&lt;/span&gt;&lt;span class="o"&gt;=()&lt;/span&gt; &lt;span class="c1"&gt;# 需要其他解压工具时，不解压的软件来源，填写这一项需要在 prepare 函数中解压文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 还要在 makedepends 填写解压工具&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;sha256sums&lt;/span&gt;&lt;span class="o"&gt;=()&lt;/span&gt; &lt;span class="c1"&gt;# 不定架构的软件来源的 hash，下文将介绍用 updpkgsums 自动填写，也可以用其他的 hash，如 sha512&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#sha256sums_x86_64&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 特定架构的软件来源的 hash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# pkgver 函数用于获取软件版本，替代 pkgver 变量，通常用于打包直接用 git 拉取仓库进行构建的软件包&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#pkgver() {}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# prepare 函数准备软件构建，在 build 函数前执行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#prepare() {}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# build 函数构建软件，在 package 函数前执行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#build() {}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# package 函数安装软件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;package&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 安装二进制文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 工作步骤：&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 1. 将一个文件复制到另一个文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 2. 赋予复制后的文件可执行权限&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; install -Dm755 &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;srcdir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/binary &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;pkgdir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/usr/bin/binary &lt;span class="c1"&gt;# srcdir 变量是软件来源解压后的目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# pkgdir 变量是一个存放被打包的文件的目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="自动填写-hash"&gt;自动填写 hash
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;updpkgsums
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="示例"&gt;示例
+&lt;/h2&gt;&lt;p&gt;请根据自己要打包的软件选择示例，也可以直接跳到 &lt;a class="link" href="#%e5%8f%91%e5%b8%83" &gt;如何发布&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id="二进制"&gt;二进制
+&lt;/h3&gt;&lt;p&gt;见 &lt;a class="link" href="#%e5%9f%ba%e6%9c%ac%e6%a0%bc%e5%bc%8f" &gt;基本格式&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="git-从仓库拉取构建"&gt;git 从仓库拉取构建
+&lt;/h3&gt;&lt;p&gt;只写出一些与打包二进制的不同的地方。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;pkgname&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;NAME-git &lt;span class="c1"&gt;# 名称应该以 -git 结尾&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;pkgver&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="c1"&gt;# 先随便填个版本进去，等下构建时 makepkg 会自动填写 pkgver 函数生成的版本&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;sha256sums&lt;/span&gt;&lt;span class="o"&gt;=(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;SKIP&amp;#34;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# 因为拉取最新的仓库所以无法指定 hash，直接跳过检查 hash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;source&lt;/span&gt;&lt;span class="o"&gt;=(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;git+https://URL&amp;#34;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pkgver &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 从 git 仓库生成软件版本&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 其他实现见: https://wiki.archlinux.org/title/VCS_package_guidelines#Git&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;cd&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$pkgname&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;(&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt; -o pipefail
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; git describe --long --abbrev&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;7&lt;/span&gt; 2&amp;gt;/dev/null &lt;span class="p"&gt;|&lt;/span&gt; sed &lt;span class="s1"&gt;&amp;#39;s/\([^-]*-g\)/r\1/;s/-/./g&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;printf&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;r%s.%s&amp;#34;&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;git rev-list --count HEAD&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;git rev-parse --short&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;7&lt;/span&gt; HEAD&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="其他"&gt;其他
+&lt;/h3&gt;&lt;p&gt;如 pip、npm、cargo 等编程语言的软件包的打包是不需要手写 PKGBUILD 的，用脚本生成就可以了，见 &lt;a class="link" href="https://wiki.archlinux.org/title/Creating_packages#PKGBUILD_generators" target="_blank" rel="noopener"
+&gt;Arch Wiki&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id="测试"&gt;测试
+&lt;/h2&gt;&lt;h3 id="构建"&gt;构建
+&lt;/h3&gt;&lt;p&gt;写完 PKGBUILD 最好测试一下能否正常构建软件。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;makepkg
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这是最简单的测试方法，但有个问题，因为安装了很多包，系统是不“干净”的，如果 PKGBUILD 中有依赖没写上去，也会正常构建，为了避免这种情况，可以用 pkgctl 构建。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pkgctl build
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;pkgctl 会自动在一个“干净”的 chroot 里下载安装依赖并构建软件。而且还会生成 &lt;code&gt;.SRCINFO&lt;/code&gt; 文件，这是发布至 AUR 必须要有的文件。&lt;/p&gt;
+&lt;h3 id="安装"&gt;安装
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;makepkg --install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="发布"&gt;发布
+&lt;/h2&gt;&lt;p&gt;如果测试没问题的话就可以发布了。首先的首先，你需要一个 AUR 账号，这个步骤很简单，就不写了。&lt;/p&gt;
+&lt;h3 id="验证"&gt;验证
+&lt;/h3&gt;&lt;p&gt;创建 AUR 专用的 SSH 密钥。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssh-keygen -f ~/.ssh/aur
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在 &lt;code&gt;~/.ssh/config&lt;/code&gt; 中加入这些内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Host aur.archlinux.org
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; IdentityFile ~/.ssh/aur
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; User aur
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;最后在 AUR 账号的设置页面加入 &lt;code&gt;~/.ssh/aur.pub&lt;/code&gt; 里的公钥就好了。&lt;/p&gt;
+&lt;h3 id="生成-srcinfo-文件"&gt;生成 &lt;code&gt;.SRCINFO&lt;/code&gt; 文件
+&lt;/h3&gt;&lt;p&gt;如果不是用 pkgctl 测试构建软件包，那么需要这条命令生成 &lt;code&gt;.SRCINFO&lt;/code&gt; 文件：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;makepkg --printsrcinfo &amp;gt; .SRCINFO
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="创建包仓库"&gt;创建包仓库
+&lt;/h3&gt;&lt;p&gt;AUR 只接受 master 分支的推送。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 如果还没有 git 仓库&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git -c init.defaultbranch&lt;span class="o"&gt;=&lt;/span&gt;master clone ssh://aur@aur.archlinux.org/pkgbase.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 如果已有 git 仓库&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git switch -c master
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;## 如果有了提交&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git branch -d
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="推送"&gt;推送
+&lt;/h3&gt;&lt;p&gt;这一步不用我多说吧 :)&lt;/p&gt;
+&lt;h2 id="自动更新"&gt;自动更新
+&lt;/h2&gt;&lt;p&gt;根据 PKGBUILD 生成自动更新的配置 &lt;code&gt;.nvchecker.toml&lt;/code&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pkgctl version setup
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;更新 PKGBUILD 中的 pkgver：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pkgctl version upgrade
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;再用 updpkgsums 自动填写 hash，非常的完美！&lt;/p&gt;
+&lt;h2 id="日常维护"&gt;日常维护
+&lt;/h2&gt;&lt;p&gt;当你维护一大堆包的时候，显然一个个去更新太慢了。可以把所有包的仓库放在一个目录下，再在这个目录下执行这条命令一次性更新所有包：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pkgctl version &lt;span class="k"&gt;$(&lt;/span&gt;ls&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果哪个包被更新了，要手动去构建一下，然后提交推送，避免出问题。这个任务不算很难，毕竟一下子也不会有很多包更新。&lt;/p&gt;
+&lt;h2 id="结语"&gt;结语
+&lt;/h2&gt;&lt;p&gt;这篇文章写起来超费时间，比写三篇小短文的总时间还要多 :(&lt;/p&gt;
+&lt;p&gt;因为找不到 PKGBUILD 编写、发布、自动更新一体化的教程，所以就自己写啰。&lt;/p&gt;
+&lt;p&gt;这篇文章介绍编写的 PKGBUILD 比较简单，不是很完整，剩下就是下一篇文章的事了 :)&lt;/p&gt;</description></item></channel></rss>

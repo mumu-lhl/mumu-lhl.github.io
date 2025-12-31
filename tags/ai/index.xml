@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI on Mumulhl's Blog</title><link>https://mumulhl.eu.org/tags/ai/</link><description>Recent content in AI on Mumulhl's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Mumulhl</copyright><lastBuildDate>Sun, 16 Feb 2025 03:08:28 +0000</lastBuildDate><atom:link href="https://mumulhl.eu.org/tags/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>Imagen 3: 免费文生图工具保持人物一致性</title><link>https://mumulhl.eu.org/p/imagen-3-tutorial/</link><pubDate>Sun, 16 Feb 2025 03:08:28 +0000</pubDate><guid>https://mumulhl.eu.org/p/imagen-3-tutorial/</guid><description>&lt;img src="https://mumulhl.eu.org/p/imagen-3-tutorial/cover.webp" alt="Featured image of post Imagen 3: 免费文生图工具保持人物一致性" /&gt;&lt;h2 id="imagen-3"&gt;Imagen 3
+&lt;/h2&gt;&lt;p&gt;Imagen 3 是 Google DeepMind 最新的文生图模型，可以在 &lt;a class="link" href="https://labs.google/fx/tools/image-fx" target="_blank" rel="noopener"
+&gt;ImageFx&lt;/a&gt; 免费使用。Imagen 3 在 Gemini 内也是可以使用的，Gemini 生成图片有时会不听话，不生成图片，所以本文采用 ImageFx。&lt;/p&gt;
+&lt;h2 id="如何实现人物一致性"&gt;如何实现人物一致性？
+&lt;/h2&gt;&lt;p&gt;主要有两种方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对现有的人物图像进行“引用”，如 Midjourney&lt;/li&gt;
+&lt;li&gt;对人物描述相当详细的 Prompt，基本适用于各种文生图模型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;第一种方式 Imagen 3 不支持，本文就采用第二种。&lt;/p&gt;
+&lt;h2 id="创造人物形象"&gt;创造人物形象
+&lt;/h2&gt;&lt;p&gt;想要有一个对人物描述相当详细的 Prompt，由人来写就太繁琐了，可以提供一些人物的特征让大语言模型帮我们写，这里采用 Gemini 2.0 Flash Thinking 模型。给出的特征越详细越能生成符合自己想要的人物。&lt;/p&gt;
+&lt;p&gt;示范 Prompt：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;你是一名文生图prompt专家，请写一个英文prompt去生成一个人物，将prompt放入代码块中。
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;prompt要求：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;1. 无背景
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;2. 全身图
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;人物：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;1. 白色头发
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;2. 穿白里带红的和服
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;3. 20岁左右的女性
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;4. 日本动漫风格
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;注：不要想着生成loli什么的，生成图片时会被判定为“儿童”而无法生成！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;先用大语言模型写的 Prompt 生成一下，如果效果不错，把种子锁定下，最好把种子保存下，方便以后生成尽可能相似的人物。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://mumulhl.eu.org/p/imagen-3-tutorial/1.webp"
+width="1373"
+height="789"
+loading="lazy"
+alt="Example 1"
+class="gallery-image"
+data-flex-grow="174"
+data-flex-basis="417px"
+&gt;&lt;/p&gt;
+&lt;h2 id="根据人物创造详细的-prompt"&gt;根据人物创造详细的 Prompt
+&lt;/h2&gt;&lt;p&gt;下载一张图片，发给支持图像的大语言模型，并让它根据图像创造出详细的 Prompt。&lt;/p&gt;
+&lt;p&gt;示范 Prompt：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;你是一名文生图prompt专家，请写一个英文prompt去描述图像人物，将prompt放入代码块中。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="把人物嵌入图像中"&gt;把人物嵌入图像中
+&lt;/h2&gt;&lt;p&gt;首先先生成一个生成人物坐在桌前写作业的图片的Prompt。&lt;/p&gt;
+&lt;p&gt;示范 Prompt：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;你是一名文生图prompt专家，请写一个英文prompt去生成一张图片，将prompt放入代码块中。
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;要求：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;1. 用 [CHARACTER] 代替人物
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;2. 人物坐在一张桌子前写作业
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;3. 氛围温馨
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;我们将使用 &lt;code&gt;[CHARACTER]&lt;/code&gt; 代指人物，然后把上一个步骤生成的 Prompt 拼接进去，如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[CHARACTER] sitting at a wooden desk, writing homework in a softly lit room, warm atmosphere, cozy, desk lamp, books, study, home, peaceful, detailed, realistic.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[CHARACTER]: 1girl, full body, Tomoe Gozen, white hair, long hair, white kimono, red and gold floral pattern, standing, arms outstretched, black background
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://mumulhl.eu.org/p/imagen-3-tutorial/2.webp"
+width="1428"
+height="792"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="180"
+data-flex-basis="432px"
+&gt;&lt;/p&gt;
+&lt;p&gt;最终效果图：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://mumulhl.eu.org/p/imagen-3-tutorial/cover.webp"
+width="1372"
+height="720"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="190"
+data-flex-basis="457px"
+&gt;&lt;/p&gt;</description></item><item><title>2024年度总结：AI原来能这么好用</title><link>https://mumulhl.eu.org/p/2024-year-in-review/</link><pubDate>Wed, 01 Jan 2025 02:07:26 +0000</pubDate><guid>https://mumulhl.eu.org/p/2024-year-in-review/</guid><description>&lt;img src="https://mumulhl.eu.org/p/2024-year-in-review/2024.jpg" alt="Featured image of post 2024年度总结：AI原来能这么好用" /&gt;&lt;p&gt;（封面来自 Unsplash，作者 BoliviaInteligente）&lt;/p&gt;
+&lt;p&gt;2024年结束了，2025年来了，转眼又是一年了。2024给我最大的震撼就是AI的辅助带来的便捷，过去稍有接触AI，但是没有太深入地使用，导致也用不好。&lt;/p&gt;
+&lt;h2 id="真正对-ai-的接触"&gt;真正对 AI 的接触
+&lt;/h2&gt;&lt;p&gt;看到 X 上有很多大佬用 Cursor 开发出了一些项目，就有点手痒痒了。过去我使用的编辑器是 Helix，一个全键盘编辑器，感觉效率会高一些。如果要用 Cursor 这样的 AI 编辑器就要脱离全键盘的操作了，但是 AI 能提高我的开发效率的话，没有了全键盘操作也不算亏。于是 Cursor 就取代 Helix 在我的电脑上的地位。&lt;/p&gt;
+&lt;p&gt;Cursor 让我震撼的是，在编辑一块代码的时候，居然可以按 Tab 键去补全其他部分相关的代码，以前我以为 AI 代码补全就只能像补全变量名、函数名那样补全，这完全打破了我的认知啊！&lt;/p&gt;
+&lt;p&gt;最早使用 AI 我都倾向于想用一句话让 AI 完成我想要做的有点复杂的事，但在理论上是不可行的，事实上也是不行的。只用一句话去表述一件较为复杂的事，信息量很少，难以去描述细节，AI 自然无法做到和自己所想的相符。和人说件事，说话只说一句，得让对方多疯狂，更别说是 AI 了。在我的使用体验来说，AI 更适合去做小任务，而非是复杂的大任务，如果要让 AI 去做大任务，将它分解为多个小任务效果会更好。&lt;/p&gt;
+&lt;p&gt;AI 的使用体验总结起来就是一个字——“爽”，每周最多一天的时间里我可以开发得更高效。&lt;/p&gt;
+&lt;h2 id="开源让我学到了很多"&gt;开源让我学到了很多
+&lt;/h2&gt;&lt;p&gt;2024年新开发的项目主要实在暑假里开发的，好几个我都觉得不太行，所以只挑出我最经常维护的词悦来说吧。&lt;/p&gt;
+&lt;p&gt;词悦是一个开源的支持 mdict 格式的词典，是我觉得 Android 上没有简洁、好用的开源的 mdict 词典而开发的。虽然最初发布的时候很简陋，不过现在经过几个月的开发，已经完善了许多了。&lt;/p&gt;
+&lt;p&gt;最初词悦用 git-cliff 生成版本发布时的更新日志，后来我才慢慢在词悦中把 Github 的 label、milestones 功能好好用上，现在词悦的版本更新日志是由 Github 生成的，这样可以把这个版本贡献者直接显示在更新日志中。&lt;/p&gt;
+&lt;p&gt;词悦还提交到了 F-Droid 上，我还提交过几个 MR，但是水平不太够，没办法，犯了很多低级错误，都由 linsui 大佬纠正了，感谢 linsui 大佬不知疲倦地修改我的 MR！&lt;/p&gt;
+&lt;p&gt;在开源中，我学会了许多以前不知道的技巧、技术，开源不仅利他，还能利己。&lt;/p&gt;
+&lt;h2 id="重启博客"&gt;重启博客
+&lt;/h2&gt;&lt;p&gt;2024，我重启了我的博客，&lt;del&gt;一年的文章就是2023的十几倍了（2023只有一篇文章）&lt;/del&gt;。2024我写了15篇博文，其中大部分都是在暑假写的。暑假闲来无事重启了博客，还把博客主题换成了 Stack。我还把博客提交到 V2EX VXNA、博友圈等平台上，&lt;del&gt;我的博客也终于不再是我自娱自乐的地方了&lt;/del&gt;。&lt;/p&gt;
+&lt;h2 id="对2025的展望"&gt;对2025的展望
+&lt;/h2&gt;&lt;p&gt;希望我可以在2025把 AI 使用得更加得心应手吧；希望我能在2025凭借自己的能力去赚到人生第一桶金，哪怕没几块也行哪。&lt;/p&gt;</description></item><item><title>JavaScript/TypeScript 免费调用 gpt-4o-mini</title><link>https://mumulhl.eu.org/p/duckduckgo-ai-chat-api/</link><pubDate>Thu, 01 Aug 2024 16:12:35 +0800</pubDate><guid>https://mumulhl.eu.org/p/duckduckgo-ai-chat-api/</guid><description>&lt;p&gt;&lt;a class="link" href="https://duckduckgo.com/aichat" target="_blank" rel="noopener"
+&gt;Duckduckgo AI Chat&lt;/a&gt; 提供了免费的 gpt-4o-mini，我开发了一个小库 &lt;a class="link" href="https://jsr.io/@mumulhl/duckduckgo-ai-chat" target="_blank" rel="noopener"
+&gt;duckduckgo-ai-chat&lt;/a&gt; 用来调用 Duckduckgo AI Chat 的 API。&lt;/p&gt;
+&lt;h2 id="注意事项"&gt;注意事项
+&lt;/h2&gt;&lt;p&gt;Duckduckgo AI Chat 是有针对 IP 的额度限制的，&lt;strong&gt;不要滥用&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id="小故事"&gt;小故事
+&lt;/h2&gt;&lt;p&gt;在 jsr.io 上的 duckduckgo-ai-chat 之所以第一个版本是 2.0.0，是因为 1.0.0 基于 Bun 编写发布在 npm 上，发完才发现 bun 不符合我的 all-in-one 需求，所以就换 Deno 了&amp;hellip;&lt;/p&gt;
+&lt;p&gt;顺便发到了 Deno 团队新搞的 jsr.io 上，不仅支持用不同包管理器安装，而且还支持在任何运行时上跑。&lt;/p&gt;
+&lt;h2 id="兼容性"&gt;兼容性
+&lt;/h2&gt;&lt;p&gt;除了 Bun，其他运行时都没问题。&lt;/p&gt;
+&lt;h2 id="安装"&gt;安装
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;npx jsr add @mumulhl/duckduckgo-ai-chat
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# or&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pnpm dlx jsr add @mumulhl/duckduckgo-ai-chat
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# or&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yarn dlx jsr add @mumulhl/duckduckgo-ai-chat
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# or&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;deno add @mumulhl/duckduckgo-ai-chat
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="使用示例"&gt;使用示例
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-ts" data-lang="ts"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;initChat&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;@mumulhl/duckduckgo-ai-chat&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 初始化，可选模型有 gpt-4o-mini, claude-3-haiku-20240307, meta-llama/Llama-3-70b-chat-hf, mistralai/Mixtral-8x7B-Instruct-v0.1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;chat&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;initChat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;gpt-4o-mini&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 一次性获取完整的回复
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;let&lt;/span&gt; &lt;span class="nx"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;chat&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;fetchFull&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;Hello&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 重新回复
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;chat&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;redo&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;chat&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;fetchFull&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;Hello&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 获取流式回复
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;stream&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;chat&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;fetchStream&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;Hello&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;let&lt;/span&gt; &lt;span class="nx"&gt;data&lt;/span&gt; &lt;span class="k"&gt;of&lt;/span&gt; &lt;span class="nx"&gt;stream&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description></item></channel></rss>
