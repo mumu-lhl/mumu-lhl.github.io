@@ -1,0 +1,39 @@
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+[[cascade]]
+  [cascade.sitemap]
+    changefreq = "daily"
+    priority = 1.0
+  [cascade._target]
+    kind = "home"
+
+[[cascade]]
+  [cascade.sitemap]
+    changefreq = "monthly"
+    priority = 0.8
+  [cascade._target]
+    kind = "page"
+
+[[cascade]]
+  [cascade.sitemap]
+    changefreq = "weekly"
+    priority = 0.6
+  [cascade._target]
+    kind = "section"
+
+[[cascade]]
+  [cascade.sitemap]
+    changefreq = "weekly"
+    priority = 0.4
+  [cascade._target]
+    kind = "term"
+
+[[cascade]]
+  [cascade.sitemap]
+    changefreq = "monthly"
+    priority = 0.2
+  [cascade._target]
+    kind = "taxonomy"
