@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>工具 on Mumulhl's Blog</title><link>https://mumulhl.eu.org/tags/%E5%B7%A5%E5%85%B7/</link><description>Recent content in 工具 on Mumulhl's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Mumulhl</copyright><lastBuildDate>Wed, 30 Apr 2025 14:31:56 +0000</lastBuildDate><atom:link href="https://mumulhl.eu.org/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml"/><item><title>没麦怎么办，把手机当作麦克风！（Scrcpy 篇）</title><link>https://mumulhl.eu.org/p/%E6%B2%A1%E9%BA%A6%E6%80%8E%E4%B9%88%E5%8A%9E%E6%8A%8A%E6%89%8B%E6%9C%BA%E5%BD%93%E4%BD%9C%E9%BA%A6%E5%85%8B%E9%A3%8Escrcpy-%E7%AF%87/</link><pubDate>Wed, 30 Apr 2025 14:31:56 +0000</pubDate><guid>https://mumulhl.eu.org/p/%E6%B2%A1%E9%BA%A6%E6%80%8E%E4%B9%88%E5%8A%9E%E6%8A%8A%E6%89%8B%E6%9C%BA%E5%BD%93%E4%BD%9C%E9%BA%A6%E5%85%8B%E9%A3%8Escrcpy-%E7%AF%87/</guid><description>&lt;p&gt;很久很久之前写了一篇在 Linux 上如何把 Android 作为麦克风的&lt;a class="link" href="./../audio-android-to-linux/" &gt;教程&lt;/a&gt;，不久前因为要用 Windows 上的一些软件，装上了 Windows，顺便折腾个在 Windows 上的把 Android作为麦克风的方案。&lt;/p&gt;
+&lt;p&gt;找了很久，没有找到既方便又开源的方案，一些免费的方案（如 WO Mic）音质不太行，自己摸索了一方，最后用 &lt;a class="link" href="https://github.com/Genymobile/scrcpy" target="_blank" rel="noopener"
+&gt;Scrcpy&lt;/a&gt; 和 &lt;a class="link" href="https://vb-audio.com/Cable/" target="_blank" rel="noopener"
+&gt;VB-CABLE&lt;/a&gt; 实现了。关键是 &lt;strong&gt;不需要在 Android 上安装任何软件！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用 Scrcpy 把 Android 作为麦克风理论上在 Linux 和 macOS 上也可以，在音频驱动那里会有点不同。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;确保 Android 版本 &amp;gt;= 11&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="安装"&gt;安装
+&lt;/h2&gt;&lt;h3 id="scrcpy"&gt;Scrcpy
+&lt;/h3&gt;&lt;p&gt;首先是 Scrcpy，它将用于从 Android 转发音频，可以在 &lt;a class="link" href="https://github.com/Genymobile/scrcpy/releases" target="_blank" rel="noopener"
+&gt;Github Release 页面&lt;/a&gt; 下载对应的压缩包再解压，32 位下载 &lt;code&gt;scrcpy-win32-vX.X.zip&lt;/code&gt;，64 位下载 &lt;code&gt;scrcpy-win64-vX.X.zip&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;最好的办法是直接通过 Windows 的包管理器 winget 安装：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;winget install --id&lt;span class="o"&gt;=&lt;/span&gt;Genymobile.scrcpy
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="vb-cable"&gt;VB-CABLE
+&lt;/h3&gt;&lt;p&gt;VB-CABLE 的用途是将音频由输出转到输入。&lt;/p&gt;
+&lt;p&gt;前往 &lt;a class="link" href="https://vb-audio.com/Cable/" target="_blank" rel="noopener"
+&gt;VB-CABLE官网&lt;/a&gt;，点击 &lt;code&gt;VBCABLE_Driver_Pack45.zip&lt;/code&gt; 下载压缩包，解压后，双击执行 &lt;code&gt;VBCABLE_Setup_x64.exe&lt;/code&gt;（64 位）或 &lt;code&gt;VBCABLE_Setup.exe&lt;/code&gt;（32 位）安装。然后就好了很么都不用动。&lt;em&gt;系统 &amp;gt; 声音 &amp;gt; 输入&lt;/em&gt; 应该会自己变成 CABLE Output。&lt;/p&gt;
+&lt;h2 id="正式步骤"&gt;正式步骤
+&lt;/h2&gt;&lt;h3 id="android-上开启-usb-调试"&gt;Android 上开启 USB 调试
+&lt;/h3&gt;&lt;p&gt;具体步骤见 &lt;a class="link" href="https://developer.android.com/studio/debug/dev-options#Enable-debugging" target="_blank" rel="noopener"
+&gt;Android Developer 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id="运行-scrcpy-命令"&gt;运行 Scrcpy 命令
+&lt;/h3&gt;&lt;p&gt;如果通过压缩包获取 Scrcpy 点击解压后目录里的 &lt;code&gt;open_a_terminal_here.bat&lt;/code&gt; 在该目录下打开终端。通过 winget 安装 Scrcpy 直接打开终端即可。&lt;/p&gt;
+&lt;p&gt;接着运行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;scrcpy --no-video --no-control --audio-source&lt;span class="o"&gt;=&lt;/span&gt;mic-unprocessed
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;第一次运行 Android 上会要求授权，授权即可。&lt;/p&gt;
+&lt;p&gt;参数解释：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--no-video&lt;/code&gt; 不要画面&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--no-control&lt;/code&gt; 不要控制&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--audio-source=mic-unprocessed&lt;/code&gt; 将声音源指定为未处理的麦克风音频&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;声音源还有很多选项，完整选项见 &lt;a class="link" href="https://github.com/Genymobile/scrcpy/blob/master/doc/audio.md#source" target="_blank" rel="noopener"
+&gt;Audio 文档&lt;/a&gt;，我觉得 &lt;code&gt;mic-unprocessed&lt;/code&gt; 音质是最好的，也可以试试别的，简单列举几个：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;mic&lt;/code&gt;: 捕获麦克风&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mic-unprocessed&lt;/code&gt;: 捕获未处理（原始）的麦克风声音&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mic-camcorder&lt;/code&gt;: 捕获为录制视频调优的麦克风声音，如果可用，其方向与摄像头相同&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mic-voice-recognition&lt;/code&gt;: 捕获为语音识别调优的麦克风声音&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mic-voice-communication&lt;/code&gt;: 捕获为语音通信调优的麦克风声音（例如，如果可用，它会利用回声消除或自动增益控制）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="改变音谱输出设备"&gt;改变音谱输出设备
+&lt;/h3&gt;&lt;p&gt;在 &lt;em&gt;系统 &amp;gt; 声音 &amp;gt; 音量合成器 &amp;gt; 应用&lt;/em&gt; 将 Scrcpy 创建的窗口的 &lt;em&gt;输出设备&lt;/em&gt; 更改为 &lt;em&gt;CABLE Input&lt;/em&gt;，现在通过 Android 麦克风输入的音频就不会从扬声器里输出了，会从输入设备 &lt;em&gt;CABLE Output&lt;/em&gt; 里输出。&lt;/p&gt;</description></item><item><title>Imagen 3: 免费文生图工具保持人物一致性</title><link>https://mumulhl.eu.org/p/imagen-3-tutorial/</link><pubDate>Sun, 16 Feb 2025 03:08:28 +0000</pubDate><guid>https://mumulhl.eu.org/p/imagen-3-tutorial/</guid><description>&lt;img src="https://mumulhl.eu.org/p/imagen-3-tutorial/cover.webp" alt="Featured image of post Imagen 3: 免费文生图工具保持人物一致性" /&gt;&lt;h2 id="imagen-3"&gt;Imagen 3
+&lt;/h2&gt;&lt;p&gt;Imagen 3 是 Google DeepMind 最新的文生图模型，可以在 &lt;a class="link" href="https://labs.google/fx/tools/image-fx" target="_blank" rel="noopener"
+&gt;ImageFx&lt;/a&gt; 免费使用。Imagen 3 在 Gemini 内也是可以使用的，Gemini 生成图片有时会不听话，不生成图片，所以本文采用 ImageFx。&lt;/p&gt;
+&lt;h2 id="如何实现人物一致性"&gt;如何实现人物一致性？
+&lt;/h2&gt;&lt;p&gt;主要有两种方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对现有的人物图像进行“引用”，如 Midjourney&lt;/li&gt;
+&lt;li&gt;对人物描述相当详细的 Prompt，基本适用于各种文生图模型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;第一种方式 Imagen 3 不支持，本文就采用第二种。&lt;/p&gt;
+&lt;h2 id="创造人物形象"&gt;创造人物形象
+&lt;/h2&gt;&lt;p&gt;想要有一个对人物描述相当详细的 Prompt，由人来写就太繁琐了，可以提供一些人物的特征让大语言模型帮我们写，这里采用 Gemini 2.0 Flash Thinking 模型。给出的特征越详细越能生成符合自己想要的人物。&lt;/p&gt;
+&lt;p&gt;示范 Prompt：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;你是一名文生图prompt专家，请写一个英文prompt去生成一个人物，将prompt放入代码块中。
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;prompt要求：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;1. 无背景
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;2. 全身图
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;人物：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;1. 白色头发
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;2. 穿白里带红的和服
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;3. 20岁左右的女性
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;4. 日本动漫风格
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;注：不要想着生成loli什么的，生成图片时会被判定为“儿童”而无法生成！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;先用大语言模型写的 Prompt 生成一下，如果效果不错，把种子锁定下，最好把种子保存下，方便以后生成尽可能相似的人物。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://mumulhl.eu.org/p/imagen-3-tutorial/1.webp"
+width="1373"
+height="789"
+loading="lazy"
+alt="Example 1"
+class="gallery-image"
+data-flex-grow="174"
+data-flex-basis="417px"
+&gt;&lt;/p&gt;
+&lt;h2 id="根据人物创造详细的-prompt"&gt;根据人物创造详细的 Prompt
+&lt;/h2&gt;&lt;p&gt;下载一张图片，发给支持图像的大语言模型，并让它根据图像创造出详细的 Prompt。&lt;/p&gt;
+&lt;p&gt;示范 Prompt：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;你是一名文生图prompt专家，请写一个英文prompt去描述图像人物，将prompt放入代码块中。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="把人物嵌入图像中"&gt;把人物嵌入图像中
+&lt;/h2&gt;&lt;p&gt;首先先生成一个生成人物坐在桌前写作业的图片的Prompt。&lt;/p&gt;
+&lt;p&gt;示范 Prompt：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;你是一名文生图prompt专家，请写一个英文prompt去生成一张图片，将prompt放入代码块中。
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;要求：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;1. 用 [CHARACTER] 代替人物
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;2. 人物坐在一张桌子前写作业
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;3. 氛围温馨
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;我们将使用 &lt;code&gt;[CHARACTER]&lt;/code&gt; 代指人物，然后把上一个步骤生成的 Prompt 拼接进去，如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[CHARACTER] sitting at a wooden desk, writing homework in a softly lit room, warm atmosphere, cozy, desk lamp, books, study, home, peaceful, detailed, realistic.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[CHARACTER]: 1girl, full body, Tomoe Gozen, white hair, long hair, white kimono, red and gold floral pattern, standing, arms outstretched, black background
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://mumulhl.eu.org/p/imagen-3-tutorial/2.webp"
+width="1428"
+height="792"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="180"
+data-flex-basis="432px"
+&gt;&lt;/p&gt;
+&lt;p&gt;最终效果图：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://mumulhl.eu.org/p/imagen-3-tutorial/cover.webp"
+width="1372"
+height="720"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="190"
+data-flex-basis="457px"
+&gt;&lt;/p&gt;</description></item><item><title>存档 Youtube Music ID 批量下载音乐</title><link>https://mumulhl.eu.org/p/yt-music-archive-tutorial/</link><pubDate>Sat, 27 Jul 2024 22:02:28 +0800</pubDate><guid>https://mumulhl.eu.org/p/yt-music-archive-tutorial/</guid><description>&lt;p&gt;&lt;a class="link" href="https://github.com/mumu-lhl/yt-music-archive" target="_blank" rel="noopener"
+&gt;yt-music-archive&lt;/a&gt; 是我写的一个小脚本，用于将 Youtube Music 上的音乐下载到本地，并将其 ID 存入一个存档文件中，也可以从存档文件中还原出音乐。&lt;/p&gt;
+&lt;p&gt;（我在花了几个小时写完后，才想起用 yt-dlp 下载播放列表也可以做到同样的功能，算了，写了都写了，就&lt;del&gt;水&lt;/del&gt;写篇教程吧&amp;hellip;）&lt;/p&gt;
+&lt;h2 id="安装"&gt;安装
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/mumu-lhl/yt-music-archive
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; yt-music-archive
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo make
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;或者从 AUR 安装：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yay -S yt-music-archive
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# or&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;paru -S yt-music-archive
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="使用"&gt;使用
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-music-archive save &amp;lt;ID&amp;gt; &lt;span class="c1"&gt;# 下载音乐并将 ID 存入存档文件，默认音乐保存在 ~/Music&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-music-archive save &amp;lt;ID&amp;gt; -p &amp;lt;PATH&amp;gt; &lt;span class="c1"&gt;# 指定音乐保存到哪个路径下&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-music-archive fetch &lt;span class="c1"&gt;# 根据存档的 ID 拉取音乐，默认音乐保存在 ~/Music&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-music-archive fetch -p &amp;lt;PATH&amp;gt; &lt;span class="c1"&gt;# 指定音乐保存到哪个路径下&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="配置"&gt;配置
+&lt;/h2&gt;&lt;p&gt;目前可配置的选项不多，可以编辑 &lt;code&gt;/etc/yt-music-archive/yt-music-archive.conf&lt;/code&gt; 或 &lt;code&gt;~/.config/yt-music-archive/yt-music-archive.conf&lt;/code&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;archive_file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;~/.local/share/yt-music-archive/archive
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 存储 id 的存档文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#default_path=~/Music # 默认保存音乐的路径&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="结语"&gt;结语
+&lt;/h2&gt;&lt;p&gt;I&amp;rsquo;m a 🤡.&lt;/p&gt;</description></item><item><title>检测 Python 代码所需的最低版本</title><link>https://mumulhl.eu.org/p/detect-minimum-python-version/</link><pubDate>Mon, 22 Jul 2024 14:56:53 +0800</pubDate><guid>https://mumulhl.eu.org/p/detect-minimum-python-version/</guid><description>&lt;p&gt;以后也会写像这样的工具类文章，写得特快&amp;hellip;不会写得很啰唆，简单利落。&lt;/p&gt;
+&lt;h2 id="vermin"&gt;Vermin
+&lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://github.com/netromdk/vermin" target="_blank" rel="noopener"
+&gt;Vermin&lt;/a&gt; 是一个检测 Python 代码所需的最低版本的工具，在本文写时已经有一段时间没有更新了。&lt;/p&gt;
+&lt;h2 id="安装"&gt;安装
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# pip&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pip install vermin
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# pipx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pipx install vermin
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# AUR&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yay -S python-vermin
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# or&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;paru -S python-vermin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="使用"&gt;使用
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 检测目录下的所有 Python 代码，这条命令可以满足大部分需求，不需要怎样配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;vermin .
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description></item></channel></rss>

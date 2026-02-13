@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RSS on Mumulhl's Blog</title><link>https://mumulhl.eu.org/tags/rss/</link><description>Recent content in RSS on Mumulhl's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Mumulhl</copyright><lastBuildDate>Tue, 23 Jul 2024 09:57:30 +0800</lastBuildDate><atom:link href="https://mumulhl.eu.org/tags/rss/index.xml" rel="self" type="application/rss+xml"/><item><title>用 RSS 订阅本站的所有文章或按标签、分类订阅文章</title><link>https://mumulhl.eu.org/p/rss-for-my-website/</link><pubDate>Tue, 23 Jul 2024 09:57:30 +0800</pubDate><guid>https://mumulhl.eu.org/p/rss-for-my-website/</guid><description>&lt;p&gt;本站所用的主题没有直接把 RSS 链接显示在网页上，而是放在了 HTML &lt;code&gt;&amp;lt;link&amp;gt;&lt;/code&gt; 标签里，但是要怎么订阅本站的所有或部分文章呢？&lt;/p&gt;
+&lt;h2 id="howto"&gt;HowTo
+&lt;/h2&gt;&lt;p&gt;如果要订阅本站所有文章，在 RSS 阅读器里直接订阅 &lt;code&gt;https://mumulhl.eu.org&lt;/code&gt;。如果要根据标签、分类订阅，直接订阅相应的链接就可以了，如 &lt;code&gt;https://mumulhl.eu.org/categories/skill/&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;（RSS 还能这样订阅以前都不知道，最近才意外知道）&lt;/p&gt;
+&lt;h1 id="如何实现"&gt;如何实现？
+&lt;/h1&gt;&lt;p&gt;HTML &lt;code&gt;&amp;lt;link&amp;gt;&lt;/code&gt; 最常见的用法就是为网页引入 CSS 文件，它的作用是标志网页和外部资源的关系。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;link&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;main.css&amp;#34;&lt;/span&gt; &lt;span class="na"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;stylesheet&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;href&lt;/code&gt; 属性的值是文件路径，&lt;code&gt;rel&lt;/code&gt; 则是 &lt;em&gt;relationship&lt;/em&gt; 的缩写，表示网页和外部资源的关系。&lt;code&gt;rel&lt;/code&gt; 是 &lt;code&gt;stylesheet&lt;/code&gt;，就表示 main.css 是该网页的 CSS。&lt;/p&gt;
+&lt;p&gt;引入 RSS 的 &lt;code&gt;&amp;lt;link&amp;gt;&lt;/code&gt; 是长这样的：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;link&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;index.xml&amp;#34;&lt;/span&gt; &lt;span class="na"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;alternate&amp;#34;&lt;/span&gt; &lt;span class="na"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;application/rss+xml&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;type&lt;/code&gt; 的值为 &lt;code&gt;application/rss+xml&lt;/code&gt; 标志了 index.xml 的类型是 RSS，&lt;code&gt;rel&lt;/code&gt; 的值为 &lt;code&gt;alternate&lt;/code&gt; 根据 &lt;a class="link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel" target="_blank" rel="noopener"
+&gt;MDN&lt;/a&gt; 意思是当前网页的替代。&lt;/p&gt;
+&lt;p&gt;RSS 阅读器通常支持这种方式订阅，以前我只知道输入 RSS 文件的链接订阅&amp;hellip;&lt;/p&gt;</description></item></channel></rss>

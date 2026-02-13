@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>生活 on Mumulhl's Blog</title><link>https://mumulhl.eu.org/categories/life/</link><description>Recent content in 生活 on Mumulhl's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Mumulhl</copyright><lastBuildDate>Wed, 31 Dec 2025 09:47:25 +0000</lastBuildDate><atom:link href="https://mumulhl.eu.org/categories/life/index.xml" rel="self" type="application/rss+xml"/><item><title>2025年终总结：开始学了点3D</title><link>https://mumulhl.eu.org/p/2025-year-in-review/</link><pubDate>Wed, 31 Dec 2025 09:47:25 +0000</pubDate><guid>https://mumulhl.eu.org/p/2025-year-in-review/</guid><description>&lt;p&gt;距离上次的年终总结已经过去一年了（废话），谈谈这一年发生的事吧。&lt;/p&gt;
+&lt;p&gt;有技术、生活、3D 等等，跳到自己喜欢的地方看吧。（各部分占比严重失调，因为写了最感兴趣的部分后，就没动力了）&lt;/p&gt;
+&lt;h2 id="生活"&gt;生活
+&lt;/h2&gt;&lt;p&gt;今年啊，没写多少博文，比 2024 年少多了，今年好像没搞出些过什么名谈，一年就这样过去了。&lt;/p&gt;
+&lt;h3 id="收入"&gt;收入
+&lt;/h3&gt;&lt;p&gt;回应一下 2024 年终总结，赚到第一桶金了吗？不知道打赏算不算啊。爱发电加上微信打赏的收入大约一百多，感谢所有打赏的朋友们！&lt;/p&gt;
+&lt;h3 id="学习"&gt;学习
+&lt;/h3&gt;&lt;p&gt;学习更忙了，晚自习时间压根不够，总有一两门学科的作业是抄完的。&lt;/p&gt;
+&lt;p&gt;我原以为分班后我会好好学选科科目，但是我错了，时间不足以支撑啊。&lt;/p&gt;
+&lt;h3 id="当一名-up-主"&gt;当一名 up 主
+&lt;/h3&gt;&lt;p&gt;成为了一名 B 站 3D 动画区的 up 主，建模、动画、渲染都垃圾得要死，剧本更烂，poimiku 老师是我第一个想达到的目标，更高的目标是狄龙顾大佬（可以说是终极目标了）。&lt;/p&gt;
+&lt;p&gt;当 up 主其实不是预期之内的，我想这样可以督促我学习、练习 3D 全流程，提高自己的能力。&lt;/p&gt;
+&lt;p&gt;除了 3D 水平外，视频本身的内容也很影响视频的数据。这不是一两句话可以讲得清楚的。&lt;/p&gt;
+&lt;p&gt;至于我的 B 站号嘛，其实好找的，但我不想要通过博客来引流，而且我的博客除了 AI 本来就没几个人看。&lt;/p&gt;
+&lt;p&gt;尽管未来几年我是不打算开通什么收益的，但希望 2026 年可以突破 1k 粉丝！同时感谢现在所有粉丝们的陪伴！&lt;/p&gt;
+&lt;h2 id="3d"&gt;3D
+&lt;/h2&gt;&lt;p&gt;今年暑假的时候我开始学习 3D，使用开源软件 Blender。&lt;/p&gt;
+&lt;p&gt;以前我是计划学习编曲的，但发现现在所谓流行乐，其实编曲都差不多，听起来一首歌一样，那么 AI 想模仿是极为简单的，花费时间去学编曲实在价值不大，我也没啥天赋，最多只会拿个一两乐器演奏一下。&lt;/p&gt;
+&lt;h3 id="尝试过的教程"&gt;尝试过的教程
+&lt;/h3&gt;&lt;p&gt;对于入门教程，我先是学习了小狐狸教程，但我觉得这个教程专注于完成一个案例，学习周期太长。于是我学了 Blendergo 的教程，他的教程有很多案例，每个案例只需几个小时，成就感很强，做得也快。&lt;/p&gt;
+&lt;p&gt;接下来计划学习的教程都是些深入的教程，提升水平嘛，目前水平拉完了。&lt;/p&gt;
+&lt;h2 id="技术"&gt;技术
+&lt;/h2&gt;&lt;h3 id="比赛"&gt;比赛
+&lt;/h3&gt;&lt;p&gt;今年的一个信息素养比赛晋级到了市级，拿到了一等奖，可惜现场发挥不佳，没能晋级到省级。只有这种比赛能拿个奖，信奥就只能从头到尾摸头了。&lt;/p&gt;
+&lt;h3 id="减少维护词悦"&gt;减少维护词悦
+&lt;/h3&gt;&lt;p&gt;词悦是我在 2024 年使用 Flutter 开发的一款开源 mdict 词典，在 Android 上支持最佳，这也是我拿去比赛的项目。&lt;/p&gt;
+&lt;p&gt;这个项目目前陷入了这么一个状态：大部分的贡献都来自于我自己，PR 非常少，虽然有很多用户反馈 bug，提功能建议，这依然使得项目的状态很不健康。例如我现在，时间少了，就很难抽出时间去维护了，就会发生 &lt;a class="link" href="https://zh.wikipedia.org/wiki/%E5%8D%95%E7%82%B9%E6%95%85%E9%9A%9C" target="_blank" rel="noopener"
+&gt;单点故障&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;但是我觉得大部分应有的功能都已经有了，bug 也挺少了，近几个月来的 bug 汇报，其实都很难修复，或者不是这个项目的问题。这还反映出了 Flutter 的问题：Flutter 对系统的一些 API 调用很依赖于社区的包，官方基本没啥支持的，但社区的包又很少，例如 TTS 的包，能用的差不多就只有一个，但是 bug 多，会因为一些外部依赖的更新（如 LLVM），导致没法用。Flutter 不仅自身的向后兼容性不佳，而且极为依赖外部，稳定性就不行，使得维护成本比较高。&lt;/p&gt;
+&lt;p&gt;而且词悦需要 Webview，而且需要特殊的用法，Flutter 也就一个包能满足，&lt;code&gt;flutter_inappwebview&lt;/code&gt;，而且对桌面的支持很有限，不能发挥 Flutter 跨平台的优势，跨平台跨了个迪奥，基本也就 Android 上能跑。其实不如直接 Android 原生，然后桌面上 Electron 或 Qt，调研过 Tauri，不符合使用需求。&lt;/p&gt;
+&lt;p&gt;我还探寻了 &lt;a class="link" href="https://kotlinlang.org/docs/multiplatform.html" target="_blank" rel="noopener"
+&gt;KMP&lt;/a&gt; 这项跨平台技术，只有 IDEA 和 Android Studio 能开发，然而我的电脑性能有限，跑起 IDE 就很吃力，更别说把项目开发大一点了。试用的时候跟 Gradle 大战了 114514 回合。但是包依然不满足需求。并且这门技术其实正式发布的话还没有多久，还有很大的发展的空间。&lt;/p&gt;
+&lt;p&gt;Kotlin 是一门很好的语言，语法很优雅（语法糖比较多），写起来挺爽的，跟 Ruby 差不多，能力其实也很强，但是开发体验只有在 JetBrains 的 IDE 上最好。但 JetBrains 在今年开始开发 Kotlin 官方的 LSP，目前还处于 Alpha 状态，值得展望。&lt;/p&gt;
+&lt;h3 id="未来想开发的项目"&gt;未来想开发的项目
+&lt;/h3&gt;&lt;p&gt;其实我有一个梦，那就是开发出 Ae、Pr、Au 的开源替代品，这方面的开源软件都不是很好用。但，都说了是梦了，哈哈哈😂&lt;/p&gt;
+&lt;p&gt;但我真的思考了一下技术选型，和 AI 交流了下。我觉得 Web 技术首先要舍弃，性能不满足需求，对于这样的工业级软件，界面极为复杂，开发效率会很低下。&lt;/p&gt;
+&lt;p&gt;对于开源项目来说，没有拿工资的人来工作，本来全靠兴趣，想让软件开发效率更高，那么就要选效率高的技术栈，现代技术栈（差不多近 10-15 年）都不太行，因为这些应用的技术栈构建的界面的目的是，让人人都能会用，对于专业软件来说就很乏力了。&lt;/p&gt;
+&lt;p&gt;首先一定的界面要使用拖拽来构建，使用纯代码构建界面就是低效的，越复杂的界面，越难维护。Qt 就很满足需求。其次是使用高效的编程语言，Python 就很适合，可以用 PySide 构建 UI。&lt;/p&gt;
+&lt;p&gt;如果遇到需要很强性能的地方，最好要避免 C++，因为和 Python 可以契合得最方便、最好的，其实是用 Rust + PyO3。C++ 的复杂性太高，项目扩大时，在熵增，语言的复杂性是除了人的水平外影响熵增程度很大的因素。当项目很复杂的时候，复杂的语言就会使得性能提升、bug 修复、功能增加变得很困难，再 NB 的人和再好的架构也很难解决语言导致熵增的问题。&lt;/p&gt;
+&lt;p&gt;Rust 虽然复杂，但是复杂性要比 C++ 低得多，更何况是在 AI 如此强大的情况下，很多很难理解的东西变得简单了。Rust 的设计很严格，可以一定程度上减少人犯错，犯错是不可能避免的，但是是可以减少的。另外说一句，一门的语言的语法咋样其实没啥关系，更重要的是看重语言的特性，语法好不好看是个人审美，是可以改变的，讨论这个意义不大。&lt;/p&gt;
+&lt;p&gt;既然都说到 AI 了，那么为什么不直接 Vibe Coding C++ 呢？你不是说 AI 很强大吗？首先 C++ 是有头文件的，AI 对这样的编程语言的实力发挥就很拉了。没体验过，可以去体验一下，不要写那种很常见的应用。其次，AI 无法克服技术本身存在的固有成本，技术垃圾，AI 再 NB 也依然会像人一样撞坑，效率低会低，高会高，无法抹平差异，让所有技术搞起来都一样高的效率（效率只是讨论的一种因素而已），其中一个原因是 AI 基于人的数据训练，人会出的问题，AI 也会出。AI 并非万能，但正确使用依然可以让很多人在效率的提升下被优化掉。（指工作量有限，单人的效率提升，意味着就有人没活干了，被优化掉）。还有一个原因，但我很难用语言描述出来，就是解释为什么固有成本无法被抹平。&lt;/p&gt;
+&lt;h3 id="近期想开发的项目"&gt;近期想开发的项目
+&lt;/h3&gt;&lt;p&gt;一个开源的音频、BGM、音效管理搜索软件，使用 PySide6 + Rust。&lt;/p&gt;
+&lt;p&gt;我和 AI 讨论了很多技术细节，节省了我自己人工做技术调研的时间。&lt;/p&gt;
+&lt;p&gt;我现在比较重视开发前的调研，而不是莽撞地开始开发，避免词悦的困境重蹈覆辙。&lt;/p&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;太久没写博文了，水平也有点下降了，虽然没人看，但是遵循一个惯例吧。&lt;/p&gt;</description></item><item><title>番茄小说写作试水</title><link>https://mumulhl.eu.org/p/%E7%95%AA%E8%8C%84%E5%B0%8F%E8%AF%B4%E5%86%99%E4%BD%9C%E8%AF%95%E6%B0%B4/</link><pubDate>Mon, 09 Jun 2025 11:50:11 +0000</pubDate><guid>https://mumulhl.eu.org/p/%E7%95%AA%E8%8C%84%E5%B0%8F%E8%AF%B4%E5%86%99%E4%BD%9C%E8%AF%95%E6%B0%B4/</guid><description>&lt;p&gt;之前看见一名推友说自己用 AI 结对写小说，发表到番茄小说上，遇到了没有流量的问题，番茄小说的一些规则其实它都写了，但要细品，不然怎么让你在上面发小说呢？&lt;/p&gt;
+&lt;p&gt;这里我就来梳理一下番茄小说写作的一些规则，可能都是我比较在意的。&lt;/p&gt;
+&lt;h2 id="签约条件"&gt;签约条件
+&lt;/h2&gt;&lt;p&gt;年龄要求如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;16 岁以下不能签约&lt;/li&gt;
+&lt;li&gt;16-18 岁需要监护人的身份证和手机号码&lt;/li&gt;
+&lt;li&gt;18 岁以上不用说&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="为什么小说发表没有流量推荐要求"&gt;为什么小说发表没有流量：推荐要求
+&lt;/h2&gt;&lt;p&gt;番茄必须要签约后才会对小说进行推荐，在签约前想要有流量，只能自己想办法引流。&lt;/p&gt;
+&lt;h2 id="你有继续发小说吗"&gt;你有继续发小说吗？
+&lt;/h2&gt;&lt;p&gt;没有了，我被挡在了签约条件第二条，发表的小说在签约前没有流量，我不知道值不值得签约，要是签约后不通过或是流量很差，我也没脸啊！会很后悔的！&lt;/p&gt;
+&lt;h2 id="审核严格吗"&gt;审核严格吗？
+&lt;/h2&gt;&lt;p&gt;审核似乎不是编辑在审，过不过审跟作品质量无关。审核速度非常快，快的话几分钟就过了（可怜勤勤恳恳的审核员&amp;hellip;）。&lt;/p&gt;
+&lt;h2 id="能用-ai-写小说吗"&gt;能用 AI 写小说吗？
+&lt;/h2&gt;&lt;p&gt;番茄官方的作家助手 app 里是有 AI 助写的功能的，使用有限制，也应该是番茄的一种态度吧，大概能用，但是不要全用 AI 给写完了，即使过了审，如果被编辑或读者看出了，那就不好说会怎么样了。&lt;/p&gt;
+&lt;h2 id="结尾"&gt;结尾
+&lt;/h2&gt;&lt;p&gt;这篇文章很短，我猜你点了进来，可能对你有帮助吧。后续是我准备试试知乎的盐选小说的水，看了下规则，好像审核非常严，是编辑在审稿，每次投稿都会多次审核，不知道写出来能不能。但是现在，我得马上赶作业了&amp;hellip;&lt;/p&gt;</description></item><item><title>2024年度总结：AI原来能这么好用</title><link>https://mumulhl.eu.org/p/2024-year-in-review/</link><pubDate>Wed, 01 Jan 2025 02:07:26 +0000</pubDate><guid>https://mumulhl.eu.org/p/2024-year-in-review/</guid><description>&lt;img src="https://mumulhl.eu.org/p/2024-year-in-review/2024.jpg" alt="Featured image of post 2024年度总结：AI原来能这么好用" /&gt;&lt;p&gt;（封面来自 Unsplash，作者 BoliviaInteligente）&lt;/p&gt;
+&lt;p&gt;2024年结束了，2025年来了，转眼又是一年了。2024给我最大的震撼就是AI的辅助带来的便捷，过去稍有接触AI，但是没有太深入地使用，导致也用不好。&lt;/p&gt;
+&lt;h2 id="真正对-ai-的接触"&gt;真正对 AI 的接触
+&lt;/h2&gt;&lt;p&gt;看到 X 上有很多大佬用 Cursor 开发出了一些项目，就有点手痒痒了。过去我使用的编辑器是 Helix，一个全键盘编辑器，感觉效率会高一些。如果要用 Cursor 这样的 AI 编辑器就要脱离全键盘的操作了，但是 AI 能提高我的开发效率的话，没有了全键盘操作也不算亏。于是 Cursor 就取代 Helix 在我的电脑上的地位。&lt;/p&gt;
+&lt;p&gt;Cursor 让我震撼的是，在编辑一块代码的时候，居然可以按 Tab 键去补全其他部分相关的代码，以前我以为 AI 代码补全就只能像补全变量名、函数名那样补全，这完全打破了我的认知啊！&lt;/p&gt;
+&lt;p&gt;最早使用 AI 我都倾向于想用一句话让 AI 完成我想要做的有点复杂的事，但在理论上是不可行的，事实上也是不行的。只用一句话去表述一件较为复杂的事，信息量很少，难以去描述细节，AI 自然无法做到和自己所想的相符。和人说件事，说话只说一句，得让对方多疯狂，更别说是 AI 了。在我的使用体验来说，AI 更适合去做小任务，而非是复杂的大任务，如果要让 AI 去做大任务，将它分解为多个小任务效果会更好。&lt;/p&gt;
+&lt;p&gt;AI 的使用体验总结起来就是一个字——“爽”，每周最多一天的时间里我可以开发得更高效。&lt;/p&gt;
+&lt;h2 id="开源让我学到了很多"&gt;开源让我学到了很多
+&lt;/h2&gt;&lt;p&gt;2024年新开发的项目主要实在暑假里开发的，好几个我都觉得不太行，所以只挑出我最经常维护的词悦来说吧。&lt;/p&gt;
+&lt;p&gt;词悦是一个开源的支持 mdict 格式的词典，是我觉得 Android 上没有简洁、好用的开源的 mdict 词典而开发的。虽然最初发布的时候很简陋，不过现在经过几个月的开发，已经完善了许多了。&lt;/p&gt;
+&lt;p&gt;最初词悦用 git-cliff 生成版本发布时的更新日志，后来我才慢慢在词悦中把 Github 的 label、milestones 功能好好用上，现在词悦的版本更新日志是由 Github 生成的，这样可以把这个版本贡献者直接显示在更新日志中。&lt;/p&gt;
+&lt;p&gt;词悦还提交到了 F-Droid 上，我还提交过几个 MR，但是水平不太够，没办法，犯了很多低级错误，都由 linsui 大佬纠正了，感谢 linsui 大佬不知疲倦地修改我的 MR！&lt;/p&gt;
+&lt;p&gt;在开源中，我学会了许多以前不知道的技巧、技术，开源不仅利他，还能利己。&lt;/p&gt;
+&lt;h2 id="重启博客"&gt;重启博客
+&lt;/h2&gt;&lt;p&gt;2024，我重启了我的博客，&lt;del&gt;一年的文章就是2023的十几倍了（2023只有一篇文章）&lt;/del&gt;。2024我写了15篇博文，其中大部分都是在暑假写的。暑假闲来无事重启了博客，还把博客主题换成了 Stack。我还把博客提交到 V2EX VXNA、博友圈等平台上，&lt;del&gt;我的博客也终于不再是我自娱自乐的地方了&lt;/del&gt;。&lt;/p&gt;
+&lt;h2 id="对2025的展望"&gt;对2025的展望
+&lt;/h2&gt;&lt;p&gt;希望我可以在2025把 AI 使用得更加得心应手吧；希望我能在2025凭借自己的能力去赚到人生第一桶金，哪怕没几块也行哪。&lt;/p&gt;</description></item><item><title>上手美科2089电子琴</title><link>https://mumulhl.eu.org/p/new-electronic-keyboard/</link><pubDate>Mon, 05 Aug 2024 21:23:30 +0800</pubDate><guid>https://mumulhl.eu.org/p/new-electronic-keyboard/</guid><description>&lt;p&gt;最近趁着暑假学钢琴，但家里没有钢琴，于是舅舅送了我一台电子琴。&lt;/p&gt;
+&lt;p&gt;这台电子琴型号是 MK-2089，61 键，255 种音色，255 种伴奏，24 首示范曲。&lt;/p&gt;
+&lt;h2 id="小故事"&gt;小故事
+&lt;/h2&gt;&lt;h3 id="1"&gt;1
+&lt;/h3&gt;&lt;p&gt;收到的这台电子琴有两个白键翘起来，按照 B 站上的教程，拧了十几个螺丝放回去，又拧了十几个螺丝装好，还有两个拧不回去了，而且手都快拧成麻花了，肯定很香。&lt;/p&gt;
+&lt;h3 id="2"&gt;2
+&lt;/h3&gt;&lt;p&gt;看了电子琴架拼装示范图半天，都不知道怎么装电子琴架，毕竟我连劳动课上简单的小东西看说明书也做不出来。最后我对着孔的间距装好了，然后我发现电子琴可以直接放桌子上，把椅子升高一下就能弹了&amp;hellip;&lt;/p&gt;
+&lt;h2 id="图片"&gt;图片
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://mumulhl.eu.org/p/new-electronic-keyboard/1.webp"
+width="1920"
+height="1080"
+loading="lazy"
+alt="电子琴"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+&gt;
+&lt;img src="https://mumulhl.eu.org/p/new-electronic-keyboard/2.webp"
+width="1920"
+height="1080"
+loading="lazy"
+alt="其他东西"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+&gt;&lt;/p&gt;
+&lt;h2 id="评测"&gt;评测
+&lt;/h2&gt;&lt;p&gt;这些仅是我个人的看法，我不是专业的。&lt;/p&gt;
+&lt;p&gt;优点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;耳机看上去很高级，因为没有其他耳机，无法比较&lt;/li&gt;
+&lt;li&gt;修起来方便&lt;/li&gt;
+&lt;li&gt;有麦克风，改天我可以去做主播了（试了一下，插在电脑上没什么用）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;缺点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;音色听上去一般般&lt;/li&gt;
+&lt;li&gt;没有 MIDI 接口&lt;/li&gt;
+&lt;li&gt;没有触感检测，也就是弹出来的音没有轻重&lt;/li&gt;
+&lt;li&gt;示范曲听起来明显是一个人写的&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>过去一年</title><link>https://mumulhl.eu.org/p/first-post/</link><pubDate>Fri, 30 Jun 2023 20:17:32 +0800</pubDate><guid>https://mumulhl.eu.org/p/first-post/</guid><description>&lt;p&gt;这是新博客的第一篇文章， 是对过去一年的总结。&lt;/p&gt;
+&lt;h2 id="这篇文章的缘由"&gt;这篇文章的缘由
+&lt;/h2&gt;&lt;p&gt;各位看官可能感到奇怪， 对过去一年的总结应该写在年初或者年末才对啊， 这篇怎么写在年中呢？&lt;/p&gt;
+&lt;p&gt;去年年初时我写过一篇《年记》， 里边承诺今年按时再写一篇《年记》， 好巧不巧的是， 我把生成博客的文件夹删了， 以至于我无法发那篇文章。 实际上这些都是借口， 博客可以花时间在搞， 但是那篇文章我写都没写。 年初过去了， 接下来要等年末发， 但是我是在有些等不及了， 于是选择现在发这篇文章。&lt;/p&gt;
+&lt;p&gt;好， 接下来正式开始回忆过去一年。&lt;/p&gt;
+&lt;h2 id="使用的软件"&gt;使用的软件
+&lt;/h2&gt;&lt;h3 id="操作系统"&gt;操作系统
+&lt;/h3&gt;&lt;p&gt;刚好一年前， 我装了 Arch Linux， 这时还是双系统， 我保留了 Windows。 前几天我用 Manjaro Linux 替代了 Windows 的位置， 装 Manjaro Linux 的原因是 Arch Linux 出了点问题， 启动速度很慢， 但找不到问题在哪， 想去重装， 不过 Arch Linux 装起来了有点麻烦， 有些东西还得自己手动配置， 于是我选择了 Manjaro Linux。 Manjaro Linux 装起来就是简单， 鼠标点几下就装好了。&lt;/p&gt;
+&lt;h3 id="桌面环境"&gt;桌面环境
+&lt;/h3&gt;&lt;p&gt;换成 Arch Linux 后就有了桌面环境一说。 最开始按照看的教程安装了 KDE， 用起来还行。&lt;/p&gt;
+&lt;p&gt;直到今天一月份， 我感觉 KDE 有许多功能我都用不上， 于是想要去找一个非常简单的桌面环境， 在看 B 站的时候看到了 Hyprland， 我就去找了个配置去用。 Hyprland 需要自己去装很多需要的软件， 例如通知、 软件启动器等等， 给用户极大的自定义空间。&lt;/p&gt;
+&lt;p&gt;之后我用上了 EAF， 我给 EAF 提交了很多优化 Hyprland 上的体验的补丁， 但是还不能用得顺手， 于是我换用了 Gnome， 现在我使用的桌面环境就是它。 在 Gnome 上， EAF 用得顺手多了。&lt;/p&gt;
+&lt;h3 id="编辑器"&gt;编辑器
+&lt;/h3&gt;&lt;p&gt;我试过不少的编辑器， 比如 VSCodium、 Neovim、 Emacs 等等， 最终使用了 Emacs + Helix， Emacs 是主力， Helix 很少用， 只在终端下使用。&lt;/p&gt;
+&lt;p&gt;选择 Emacs 也有个来由， 我觉得编码的时候， 把手在键盘和鼠标之间换来换去， 严重干扰了编码时的思维， 所以我尝试取用全键盘的编辑器。&lt;/p&gt;
+&lt;p&gt;最开始用的是 VSCodeium 配上 Neovim 插件， 但是一装好就感觉极大的不适应（原因记不清了， 随便编一个 ）， 故此放弃。&lt;/p&gt;
+&lt;p&gt;之后我又尝试了 Neovim， 我抄配置抄得很厉害， 整个配置几百行代码， 没几行出自自己之手。&lt;/p&gt;
+&lt;p&gt;后来我看了陈斌大佬的&lt;a class="link" href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide" target="_blank" rel="noopener"
+&gt;一年成为 Emacs 高手 (像神一样使用编辑器)&lt;/a&gt;后， 了解 Emacs 的一些优势， 决心去用用 Emacs， 开始去安装不同大佬的配置来用， 最终尝试失败， 换回了 Neovim。 今年年初不知咋的， 我又想去试试 Emacs， 这次我不去抄配置了， 开始自己动手去写， 这次成功用上了 Emacs， 现在用着很顺手， 想抛弃都做不到。 现在我用的配置是经过多次大规模改写后的， 最开始用 straight + use-package 管理插件， 在参考了懒猫大佬的配置后， 改用了 submodule 管理插件。&lt;/p&gt;
+&lt;p&gt;我现在的配置用 lsp-bridge 作为补全插件， 最初我是在看 B 站的时候， 看到了一个关于 lsp-bridge 的视频， 想着试一试没想到上了瘾， 又用上了 EAF、 blink-search、 popweb 等插件， 懒猫大佬开发的插件实在是太好用了， 真是爱不释手， 平时大部分操作依赖他开发的插件。&lt;/p&gt;
+&lt;h2 id="开源贡献"&gt;开源贡献
+&lt;/h2&gt;&lt;p&gt;在过去一年（2022）我可以肯定的说， 我没有贡献任何代码， 但我从今年（2023）的一月份在 GitHub 上开始开源贡献。 最初我是在用 lsp-bridge 的时候发了一个 =fix typo= 的 PR， 自此开启了每周开源贡献之旅。&lt;/p&gt;
+&lt;p&gt;我发的 PR 都是对软件的改进， 例如修复 bug、 拓展功能等等， 这既方便了我的使用， 也方便了其他人的使用。 虽然有些 PR 我已经不用了， 但我仍觉得它依旧有价值。&lt;/p&gt;
+&lt;p&gt;开源贡献加强了我的能力， 尤其是代码阅读能力， 最开始给 EAF 添加 Hyprland 的支持时， 代码读起来很不顺， 现在看一个陌生项目， 读得很快。&lt;/p&gt;
+&lt;p&gt;开源贡献中有着许多大佬的帮助， 让我知道了代码该怎样写可读性高， 维护成本低。 我主要发 PR 给懒猫大佬的项目， 他对我的 PR 处理很仔细， review 有时处理起来比较麻烦， 但是让我也学到了一些东西。 懒猫大佬还有其他的大佬对我的代码进行过改良， 我都看了那些改进的 commit， 学到了不少。&lt;/p&gt;
+&lt;p&gt;我开发了 &lt;a class="link" href="https://github.com/mumu-lhl/eaf-pyqterminal" target="_blank" rel="noopener"
+&gt;EAF PyQterminal&lt;/a&gt;， 这是一个基于 &lt;a class="link" href="https://github.com/emacs-eaf/emacs-application-framework" target="_blank" rel="noopener"
+&gt;EAF&lt;/a&gt; 开发的终端模拟器， 我原本想要自己去宣传宣传， 但是懒猫大佬抢先我一步， 不仅在 Emacs China 论坛上发了， 还在他的推特上发了， 懒猫大佬人是真的好！ 这个软件开发出来还是有许多问题的， 懒猫大佬不断给我提 issue、 PR， 处理起来要费一点时间， 但是真的好开心， 以前的项目都是无人问津（已经被我删了）， 现在有人来关注我的项目， 多好啊。 这些 issue 和 PR 使得它更加完善， 感谢懒猫大佬！！！&lt;/p&gt;
+&lt;h2 id="新博客"&gt;新博客
+&lt;/h2&gt;&lt;p&gt;新博客与原来的旧博客不同， 换用 &lt;a class="link" href="https://gohugo.io" target="_blank" rel="noopener"
+&gt;Hugo&lt;/a&gt; 作为静态网站生成器， 如果以后文章多了， 速度不会像 Hexo 那样慢， 现在还不知道以后文章会不会多起来。&lt;/p&gt;
+&lt;p&gt;新博客采用 &lt;a class="link" href="https://github.com/janraasch/hugo-bearblog" target="_blank" rel="noopener"
+&gt;Hugo BearBlog&lt;/a&gt; 作为主题， 我很喜欢这种极简风格的主题， 以前用的主题现在看来有些花哨。&lt;/p&gt;</description></item></channel></rss>

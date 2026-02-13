@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jujutsu on Mumulhl's Blog</title><link>https://mumulhl.eu.org/tags/jujutsu/</link><description>Recent content in Jujutsu on Mumulhl's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Mumulhl</copyright><lastBuildDate>Thu, 10 Jul 2025 21:59:21 +0800</lastBuildDate><atom:link href="https://mumulhl.eu.org/tags/jujutsu/index.xml" rel="self" type="application/rss+xml"/><item><title>Jujutsu入门教程：比Git更好用的VCS</title><link>https://mumulhl.eu.org/p/jujutsu-1/</link><pubDate>Thu, 10 Jul 2025 21:59:21 +0800</pubDate><guid>https://mumulhl.eu.org/p/jujutsu-1/</guid><description>&lt;h2 id="jujutsu-是啥"&gt;Jujutsu 是啥？
+&lt;/h2&gt;&lt;p&gt;Jujutsu（简称 jj）是一款功能强大的软件项目版本控制系统。你可以用它来获取代码副本，跟踪代码变更，最后发布这些变更供他人查看和使用。无论你是新手还是老手，无论你是独自开发全新的项目，还是拥有庞大历史和团队的大型软件项目，它都能让你轻松上手。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;与 Git 兼容&lt;/li&gt;
+&lt;li&gt;匿名分支&lt;/li&gt;
+&lt;li&gt;高度自动化的操作（如自动提交）&lt;/li&gt;
+&lt;li&gt;使用中会有很多友好的提示和指引&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Jujutsu 目前基本可用，还缺乏少量功能，如 git submodule 的兼容、tag 的创建。&lt;/p&gt;
+&lt;p&gt;我会写一个系列的 Jujutsu 教程，这篇教程是本系列教程的第一篇，只讲一些满足日常操作的东西，学了本篇教程，日常就可以正常使用 Jujutsu 了。在使用 Jujutsu 的过程中，如果出了什么问题，优先看 Jujutsu 自己给的解决方案。&lt;/p&gt;
+&lt;h2 id="安装"&gt;安装
+&lt;/h2&gt;&lt;p&gt;安装教程见 &lt;a class="link" href="https://jj-vcs.github.io/jj/latest/install-and-setup/" target="_blank" rel="noopener"
+&gt;Jujutsu docs - Installation and setup&lt;/a&gt;，我用 Fedora，只能用 carogo-binstall 安装，用这个工具安装不需要从源码编译一遍，会直接从 GitHub 上下载已经编译好的二进制文件，并且 cargo-install-update 也支持通过这个工具更新安装的二进制文件。&lt;/p&gt;
+&lt;h2 id="初始化仓库"&gt;初始化仓库
+&lt;/h2&gt;&lt;p&gt;无论你是从零开始，还是在现有 Git 仓库的基础上进行初始化，都推荐用下面这个命令：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;jj git init --colocate .
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;该命令可以从 &lt;code&gt;.git&lt;/code&gt; 初始化 &lt;code&gt;.jj&lt;/code&gt; 或者同时初始化 &lt;code&gt;.jj&lt;/code&gt; 和 &lt;code&gt;.git&lt;/code&gt;。如果用 &lt;code&gt;jj init&lt;/code&gt; 初始化，会只有 &lt;code&gt;.jj&lt;/code&gt;，但 Jujutsu 目前又无法从 &lt;code&gt;.jj&lt;/code&gt; 初始化 &lt;code&gt;.git&lt;/code&gt;，用 &lt;code&gt;git init&lt;/code&gt; 自己手动初始化一个也没用，会没法从 &lt;code&gt;.jj&lt;/code&gt; 同步。Jujutsu 目前不支持创建 tag，如果要创建 tag，就要用到 Git，如果没有 &lt;code&gt;.git&lt;/code&gt;，就会很抓狂，虽然可以解决，但要麻烦一点，别问，问就是踩坑了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="配置名称和邮箱"&gt;配置名称和邮箱
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;$jj&lt;/span&gt; config &lt;span class="nb"&gt;set&lt;/span&gt; --user user.name &lt;span class="s2"&gt;&amp;#34;Example&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj config &lt;span class="nb"&gt;set&lt;/span&gt; --user user.email &lt;span class="s2"&gt;&amp;#34;example@example.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="第一个提交"&gt;第一个提交
+&lt;/h2&gt;&lt;p&gt;Jujutsu 中你不需要 &lt;strong&gt;提交（commit）&lt;/strong&gt; ，但是需要 &lt;strong&gt;describe&lt;/strong&gt; ，在仓库下做了一些改动后，或改动之前，或改动中，都可以用 describe 命令来解释改动，这个命令的简写是 desc：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj desc -m &lt;span class="s2"&gt;&amp;#34;First commit&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Working copy &lt;span class="o"&gt;(&lt;/span&gt;@&lt;span class="o"&gt;)&lt;/span&gt; now at: pwquumlq ae3142c8 First commit
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Parent commit &lt;span class="o"&gt;(&lt;/span&gt;@-&lt;span class="o"&gt;)&lt;/span&gt; : zzzzzzzz &lt;span class="m"&gt;00000000&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;empty&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;no description &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Working copy&lt;/strong&gt; 指的是当前正在工作的 copy，可以任意更改，如果是 Git 的话，如果要修改一个 commit，就要手动操作下，这就体现了 Jujutsu 的自动化。&lt;code&gt;pwquumlq&lt;/code&gt; 是 Jujutsu 的 id，&lt;code&gt;ae3142c8&lt;/code&gt; 是对应的 Git 的 id。在之后的操作中可以用 &lt;code&gt;@&lt;/code&gt; 指代。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Parent commit&lt;/strong&gt; 指的是上一个提交（父提交）。这里的 &lt;code&gt;zzzzzzzz 00000000&lt;/code&gt; 说明父提交是 &lt;strong&gt;根（root）&lt;/strong&gt; 。&lt;code&gt;(empty)&lt;/code&gt; 表示这个 commit 是空的。&lt;code&gt;(no description set)&lt;/code&gt; 表示这个 commit 没有 description。在之后的操作中可以用 &lt;code&gt;@-&lt;/code&gt; 指代（多了一个减号）。&lt;/p&gt;
+&lt;p&gt;在终端中你会看到 &lt;code&gt;zzzzzzzz&lt;/code&gt; 中的第一个 &lt;code&gt;z&lt;/code&gt; 是高亮的，working copy 的 id 的第一个字母也是高亮的，&lt;strong&gt;高亮的字母&lt;/strong&gt; 是 commit id 的简写，可以用来指代该 commit。直接高亮出来，方便很多，用终端操作的要比 GUI 快。&lt;/p&gt;
+&lt;h2 id="移动到新的-working-copy"&gt;移动到新的 working copy
+&lt;/h2&gt;&lt;p&gt;一个 commit 已经完成了，然后我们要移动到新的 working copy 进行接下来的工作：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj new
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Working copy &lt;span class="o"&gt;(&lt;/span&gt;@&lt;span class="o"&gt;)&lt;/span&gt; now at: qzmssurw 17a91560 &lt;span class="o"&gt;(&lt;/span&gt;empty&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;no description &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Parent commit &lt;span class="o"&gt;(&lt;/span&gt;@-&lt;span class="o"&gt;)&lt;/span&gt; : pwquumlq ae3142c8 First commit
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;或者你可以在改动完后把 &lt;code&gt;describe&lt;/code&gt; 和 &lt;code&gt;new&lt;/code&gt; 操作用 &lt;code&gt;commit&lt;/code&gt; 命令一起完成，有多种方案，很灵活：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj commit -m &lt;span class="s2"&gt;&amp;#34;First commit&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="分叉"&gt;分叉
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;new&lt;/code&gt; 命令还可以从一个提交 &lt;strong&gt;分叉&lt;/strong&gt; 出去，在用下面讲到的查看历史提交中就会看到分成了两条链：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj new &lt;span class="o"&gt;[&lt;/span&gt;jj id&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="查看历史提交"&gt;查看历史提交
+&lt;/h2&gt;&lt;p&gt;可以直接运行 &lt;code&gt;jj&lt;/code&gt; 来查看历史提交，相当于 &lt;code&gt;jj log&lt;/code&gt;，输出的结果会省略一部分提交，这里提交数量太少了，Jujutsu 不会省略：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;@ qzmssurw mumulhl.666@gmail.com 2025-07-10 21:04:39 17a91560
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ &lt;span class="o"&gt;(&lt;/span&gt;empty&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;no description &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;○ pwquumlq mumulhl.666@gmail.com 2025-07-10 20:56:41 git_head&lt;span class="o"&gt;()&lt;/span&gt; ae3142c8
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ First commit
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;◆ zzzzzzzz root&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="m"&gt;00000000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这是省略的样子，&lt;code&gt;(elided revisions)&lt;/code&gt; 会替代掉一部分提交：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;@ ovqtlklr mumulhl.666@gmail.com 2025-07-09 21:07:36 030cb30c
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ &lt;span class="o"&gt;(&lt;/span&gt;empty&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;no description &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;◆ ruvroqot mumulhl.666@gmail.com 2025-07-09 21:07:26 main git_head&lt;span class="o"&gt;()&lt;/span&gt; 59603f61
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ Sync vibe coding rules
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;~ &lt;span class="o"&gt;(&lt;/span&gt;elided revisions&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ○ zsxqkykv mumulhl.666@gmail.com 2025-06-28 16:38:36 edf292f1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;╭─┤ &lt;span class="o"&gt;(&lt;/span&gt;empty&lt;span class="o"&gt;)&lt;/span&gt; Merge pull request &lt;span class="c1"&gt;#413 from mumu-lhl/push-xpztozvsopvq&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;◆ │ xpztozvs mumulhl.666@gmail.com 2025-06-28 16:30:59 9fcc6e8e
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ Add changelog button to about page
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;~ │ &lt;span class="o"&gt;(&lt;/span&gt;elided revisions&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ○ uvknsurt mumulhl.666@gmail.com 2025-06-28 15:48:48 &lt;span class="m"&gt;70913779&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ├─╮ &lt;span class="o"&gt;(&lt;/span&gt;empty&lt;span class="o"&gt;)&lt;/span&gt; Merge pull request &lt;span class="c1"&gt;#411 from weblate/weblate-ciyue-app&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;......
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;查看完整的历史提交也是没问题的：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj log -r &lt;span class="s1"&gt;&amp;#39;all()&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;@ ovqtlklr mumulhl.666@gmail.com 2025-07-09 21:07:36 030cb30c
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ &lt;span class="o"&gt;(&lt;/span&gt;empty&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;no description &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;◆ ruvroqot mumulhl.666@gmail.com 2025-07-09 21:07:26 main git_head&lt;span class="o"&gt;()&lt;/span&gt; 59603f61
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ Sync vibe coding rules
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;◆ smoxoopp mumulhl.666@gmail.com 2025-07-08 21:56:35 4403614c
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├─╮ &lt;span class="o"&gt;(&lt;/span&gt;empty&lt;span class="o"&gt;)&lt;/span&gt; Merge pull request &lt;span class="c1"&gt;#431 from mumu-lhl/push-xmlopqwnzwuo&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ◆ xmlopqwn mumulhl.666@gmail.com 2025-07-08 21:52:31 261fa48b
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ Refactor Consumer to Selector on wordbook page
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ◆ tmklvsky mumulhl.666@gmail.com 2025-07-08 21:31:40 af9826b7
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├─╯ Add multiselectmode on wordbook page
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;◆ wlprsvrq mumulhl.666@gmail.com 2025-07-08 13:44:04 d31b7cf5
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├─╮ &lt;span class="o"&gt;(&lt;/span&gt;empty&lt;span class="o"&gt;)&lt;/span&gt; Merge pull request &lt;span class="c1"&gt;#430 from mumu-lhl/push-kkmymxosqwvr&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ◆ kkmymxos mumulhl.666@gmail.com 2025-07-08 11:17:33 0245d789
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├─╯ Add storage management
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;◆ unquwrst mumulhl.666@gmail.com 2025-07-08 08:42:11 7e6a3a76
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├─╮ &lt;span class="o"&gt;(&lt;/span&gt;empty&lt;span class="o"&gt;)&lt;/span&gt; Merge pull request &lt;span class="c1"&gt;#428 from mumu-lhl/dependabot/pub/gpt_markdown-1.1.2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ◆ svqpznzp 49699333+dependabot&lt;span class="o"&gt;[&lt;/span&gt;bot&lt;span class="o"&gt;]&lt;/span&gt;@users.noreply.github.com 2025-07-08 08:28:35 e70cca3f
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ chore&lt;span class="o"&gt;(&lt;/span&gt;deps&lt;span class="o"&gt;)&lt;/span&gt;: bump gpt_markdown from 1.1.1 to 1.1.2
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;......
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="编辑提交"&gt;编辑提交
+&lt;/h2&gt;&lt;p&gt;Jujutsu 中提交可以被轻松的编辑：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj edit @- &lt;span class="c1"&gt;# 编辑父提交&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;编辑完后回去：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj next --edit
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;是不是要比 Git 简单得多？&lt;/p&gt;
+&lt;h3 id="squash"&gt;Squash
+&lt;/h3&gt;&lt;p&gt;我们想要编辑的提交，往往都是父提交，例如忘了 format 或写错了一小点东西的时候，我们可以用 &lt;code&gt;squash&lt;/code&gt; 更快的完成这步操作，这个命令是把当前 workng copy 的更改合并到父提交上：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj squash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;运行完这行命令后，当前 working copy 就会变成空的，因为合并到了父提交中。&lt;/p&gt;
+&lt;h2 id="推送提交"&gt;推送提交
+&lt;/h2&gt;&lt;p&gt;先加 remote，因为 Jujutsu 是与 Git 兼容的，所以可以直接推送到 Github 上，&lt;del&gt;不需要 JJhub&lt;/del&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj git remote add origin &lt;span class="o"&gt;[&lt;/span&gt;远程仓库地址&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Jujutsu 中有 &lt;strong&gt;分支（Branch）&lt;/strong&gt; 的平替概念—— &lt;strong&gt;书签（Bookmark）&lt;/strong&gt;，但是书签一旦被 set，不会跟随当前的 working copy 的变动而改变，需要手动再次 set，才会变。&lt;/p&gt;
+&lt;p&gt;现在我们的仓库连 main 书签都没有，这个命令可以把书签 set 到当前 commit 上，如果不存在会自动创建。确保当前的 working copy 不是空的，如果是的话可以用 &lt;code&gt;jj edit @-&lt;/code&gt; 编辑父提交，使当前的 working copy 变成父提交：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj b s main &lt;span class="c1"&gt;# b 是 bookmark 的缩写，s 是 set 的缩写&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;推送到远程仓库：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj git push
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;当对某个过去的提交更改后，推送是不需要加 &amp;ndash;force 之类的参数的，爽了很多。&lt;/p&gt;
+&lt;h2 id="抛弃一个提交"&gt;抛弃一个提交
+&lt;/h2&gt;&lt;p&gt;如果你不想要当前 working copy 的更改或最新的提交，可以抛弃掉：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj abandon &lt;span class="o"&gt;[&lt;/span&gt;jj id&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;注意：不要随意抛弃过去的提交，会导致冲突，很难处理，如果要合并过去的提交，可以用 &lt;code&gt;squash&lt;/code&gt; 命令，这个命令更强大的用法将在下一篇教程中讲到。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="撤销"&gt;撤销
+&lt;/h2&gt;&lt;p&gt;当你后悔了一个操作的时候，就需要撤销，撤销操作也是非常的简单：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj undo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="推送到额外的分支上"&gt;推送到额外的分支上
+&lt;/h3&gt;&lt;p&gt;不是所有项目我们都会一律把提交 &lt;strong&gt;直接&lt;/strong&gt; 推送到 main 分支上，按照 Github flow，至少要推送到其他分支上，然后发一个 PR 合并到 main 上。&lt;/p&gt;
+&lt;p&gt;只需要在推送到远程仓库的命令上多加几个字符就可以了：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj git push -c@ &lt;span class="c1"&gt;# -c 后跟随要推送到仓库的提交，比该提交旧的提交也会一起推送上去，这里用 @ 指代当前 working copy&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这种方法推送上去的分支名是 &lt;code&gt;push-[jj id]&lt;/code&gt;，当然可以自己在本地先 set 了书签，然后再用 &lt;code&gt;jj git push&lt;/code&gt; 推送。我比较懒不太喜欢给分支命名，因为 PR 名称就可以诠释一堆的提交是干什么的了，减少心智负担。&lt;/p&gt;
+&lt;p&gt;在同一个仓库里（多个维护者），如果每个人提交的都是默认的那种 &lt;code&gt;push-[jj id]&lt;/code&gt;，完全会乱套，我们可以把默认的分支名变成 &lt;code&gt;yourname/push-[jj id]&lt;/code&gt; 这样去稍微做一点区分。编辑配置文件 &lt;code&gt;.config/jj/config.toml&lt;/code&gt;（用 &lt;code&gt;jj config p&lt;/code&gt; 查看配置文件路径），加入以下内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;templates&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;git_push_bookmark&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#34;example/push-&amp;#34; ++ change_id.short()&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="拉取"&gt;拉取
+&lt;/h2&gt;&lt;p&gt;远程仓库做了一些更改，需要把提交都拉取到本地仓库：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj git fetch
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;main 书签 set 的提交也自动变化了，但是通过运行 &lt;code&gt;jj&lt;/code&gt; 你会看到当前 working copy 并不在 main 的那条链上，所以需要我们自己手动一下去移动到 main 那条链上：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ jj new main
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="结语"&gt;结语
+&lt;/h2&gt;&lt;p&gt;用了一段时间的 Jujutsu 后，Jujutsu 基本已经平替了 Git，只能用一个字来说用的体验——爽。&lt;/p&gt;
+&lt;p&gt;虽然没有多少有价值的学习资料，边用边学的过程中，基本也用个会了，因为操作起来真的很简单。&lt;/p&gt;
+&lt;p&gt;下一篇教程会深入讲解 Jujutsu 的使用，敬请期待 :)&lt;/p&gt;</description></item></channel></rss>

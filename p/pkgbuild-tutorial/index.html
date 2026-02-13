@@ -1,0 +1,205 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="简易 PKGBUILD 编写、发布、自动更新教程"><meta name=keywords content="Archlinux,PKGBUILD,教程"><title>PKGBUILD 编写、发布、自动更新教程</title><link rel=canonical href=https://mumulhl.eu.org/p/pkgbuild-tutorial/><link rel=stylesheet href=/scss/style.min.833d6eed45de56f48306bf57268d5b8cdfc8a60e8e7bdc99810464fcd033f7c6.css><meta property='og:title' content="PKGBUILD 编写、发布、自动更新教程"><meta property='og:description' content="简易 PKGBUILD 编写、发布、自动更新教程"><meta property='og:url' content='https://mumulhl.eu.org/p/pkgbuild-tutorial/'><meta property='og:site_name' content="Mumulhl's Blog"><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Archlinux'><meta property='article:tag' content='PKGBUILD'><meta property='article:tag' content='教程'><meta property='article:published_time' content='2024-07-25T19:54:02+08:00'><meta property='article:modified_time' content='2024-07-25T19:54:02+08:00'><meta name=twitter:site content="@https://mumulhl.eu.org"><meta name=twitter:creator content="@https://mumulhl.eu.org"><meta name=twitter:title content="PKGBUILD 编写、发布、自动更新教程"><meta name=twitter:description content="简易 PKGBUILD 编写、发布、自动更新教程"><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-12L3BFXW69"></script><script>var doNotTrack=!1,dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes";if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-12L3BFXW69")}</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaiscreen.min.css><style>:root{--article-font-family:"LXGW WenKai Screen", sans-serif}</style></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_db03a0d02ab83943.webp width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/>Mumulhl's Blog</a></h1><h2 class=site-description>Developer✨ | Blogger🖊️</h2></div></header><ol class=menu-social><li><a href=mailto:mumulhl.666@gmail.com target=_blank title=Email rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/><path d="M3 7l9 6 9-6"/></svg></a></li><li><a href=https://github.com/mumu-lhl target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=/p/rss-for-my-website/ target=_blank title=RSS rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-rss"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 19m-1 0a1 1 0 102 0 1 1 0 10-2 0"/><path d="M4 4a16 16 0 0116 16"/><path d="M4 11a9 9 0 019 9"/></svg></a></li><li><a href=https://x.com/mumulhl target=_blank title=X rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>主页</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span></a></li><li><a href=/links/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>友链</span></a></li><li><a href=/projects/><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-git"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M16 12m-1 0a1 1 0 102 0 1 1 0 10-2 0"/><path d="M12 8m-1 0a1 1 0 102 0 1 1 0 10-2 0"/><path d="M12 16m-1 0a1 1 0 102 0 1 1 0 10-2 0"/><path d="M12 15V9"/><path d="M15 11l-2-2"/><path d="M11 7 9.1 5.1"/><path d="M13.446 2.6l7.955 7.954a2.045 2.045.0 010 2.892l-7.955 7.955a2.045 2.045.0 01-2.892.0l-7.955-7.955a2.045 2.045.0 010-2.892l7.955-7.955a2.045 2.045.0 012.892.0z"/></svg>
+<span>项目</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#概念>概念</a><ol><li><a href=#pkgbuild>PKGBUILD</a></li><li><a href=#makepkg>makepkg</a></li></ol></li><li><a href=#辅助工具>辅助工具</a></li><li><a href=#基本格式>基本格式</a></li><li><a href=#自动填写-hash>自动填写 hash</a></li><li><a href=#示例>示例</a><ol><li><a href=#二进制>二进制</a></li><li><a href=#git-从仓库拉取构建>git 从仓库拉取构建</a></li><li><a href=#其他>其他</a></li></ol></li><li><a href=#测试>测试</a><ol><li><a href=#构建>构建</a></li><li><a href=#安装>安装</a></li></ol></li><li><a href=#发布>发布</a><ol><li><a href=#验证>验证</a></li><li><a href=#生成-srcinfo-文件>生成 <code>.SRCINFO</code> 文件</a></li><li><a href=#创建包仓库>创建包仓库</a></li><li><a href=#推送>推送</a></li></ol></li><li><a href=#自动更新>自动更新</a></li><li><a href=#日常维护>日常维护</a></li><li><a href=#结语>结语</a></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/tech/>技术</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/pkgbuild-tutorial/>PKGBUILD 编写、发布、自动更新教程</a></h2><h3 class=article-subtitle>简易 PKGBUILD 编写、发布、自动更新教程</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2024-07-25T19:54:02+08:00>Jul 25, 2024</time></div></footer></div></header><section class=article-content><h2 id=概念>概念</h2><h3 id=pkgbuild>PKGBUILD</h3><p>PKGBUILD 文件采用 Bash 语法，用于 Archlinux 及其衍生发行版构建软件包，用户可以将自己编写的 PKGBUILD 发布到 <a class=link href=https://aur.archlinux.org target=_blank rel=noopener>AUR(Arch User Repository)</a>，让其他用户构建并安装软件包（通常由工具完成，如 yay、paru）。</p><p>编写 PKGBUILD 只需要 Bash 的 <strong>创建变量</strong>、<strong>读取变量</strong>、<strong>声明函数</strong>、<strong>创建数组</strong> 等少量知识即可，可以到 <a class=link href=https://wangdoc.com/bash/ target=_blank rel=noopener>网道 WangDoc</a> 学习。</p><h3 id=makepkg>makepkg</h3><p>读取 PKGBUILD 构建软件包的工具。</p><h2 id=辅助工具>辅助工具</h2><p>这些工具在后文会介绍具体，请先用 pacman 安装，可以简化 PKGBUILD 的维护：</p><ul><li>devtools - 包含的 pkgctl</li><li>nvchecker - 为 pkgctl 提供版本检测</li><li>namcap - 检测 PKGBUILD 常见的错误</li><li>updpkgsums - 自动下载软件来源，计算 hash 填入 PKGBUILD（不用另外安装）</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo pacman -S devtools nvchecker namcap
+</span></span></code></pre></td></tr></table></div></div><p>这些工具你可能需要（不要的话关系也不大），使用自行看其文档：</p><ul><li><a class=link href=https://github.com/termux/termux-language-server target=_blank rel=noopener>termux-language-server</a> - 为 PKGBUILD 提供语言服务器（Language Server）</li></ul><h2 id=基本格式>基本格式</h2><p>你可以在 <code>/usr/share/pacman</code> 目录下找到三个没有注释的 PKGBUILD 示例文件，其中 PKGBUILD.pro 应该是最有用的。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># https://wiki.archlinux.org/title/Arch_package_guidelines</span>
+</span></span><span class=line><span class=cl><span class=c1># Maintainer: Your Name &lt;youremail@domain.com&gt;</span>
+</span></span><span class=line><span class=cl><span class=nv>pkgname</span><span class=o>=</span>NAME    <span class=c1># 名称</span>
+</span></span><span class=line><span class=cl><span class=nv>pkgver</span><span class=o>=</span>VERSION  <span class=c1># 版本</span>
+</span></span><span class=line><span class=cl><span class=nv>pkgrel</span><span class=o>=</span><span class=m>1</span>        <span class=c1># 通常为 1，不需要更改，当版本不变需要让用户重新安装软件包时</span>
+</span></span><span class=line><span class=cl>                <span class=c1>#（如 PKGBUILD 增加补丁、修复 bug），需要加 1。</span>
+</span></span><span class=line><span class=cl><span class=nv>pkgdesc</span><span class=o>=</span><span class=s2>&#34;&#34;</span>      <span class=c1># 介绍</span>
+</span></span><span class=line><span class=cl><span class=nv>arch</span><span class=o>=()</span>         <span class=c1># 适用的架构，如 x86_64、aarch64、i386，也可以是 any，表示软件不受架构限制</span>
+</span></span><span class=line><span class=cl><span class=nv>url</span><span class=o>=</span><span class=s2>&#34;&#34;</span>          <span class=c1># 软件主页链接</span>
+</span></span><span class=line><span class=cl><span class=nv>license</span><span class=o>=(</span><span class=s2>&#34;GPL&#34;</span><span class=o>)</span> <span class=c1># 许可证</span>
+</span></span><span class=line><span class=cl><span class=nv>groups</span><span class=o>=()</span>       <span class=c1># 归属的软件包组，基本用不到</span>
+</span></span><span class=line><span class=cl><span class=nv>depends</span><span class=o>=()</span>      <span class=c1># 软件运行所需的依赖</span>
+</span></span><span class=line><span class=cl><span class=nv>makedepends</span><span class=o>=()</span>  <span class=c1># 构建软件所需的依赖</span>
+</span></span><span class=line><span class=cl><span class=nv>optdepends</span><span class=o>=(</span><span class=s2>&#34;package_name: description&#34;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>                <span class=c1># 软件运行可选的依赖</span>
+</span></span><span class=line><span class=cl><span class=nv>provides</span><span class=o>=()</span>     <span class=c1># 提供的功能</span>
+</span></span><span class=line><span class=cl><span class=nv>conflicts</span><span class=o>=()</span>    <span class=c1># 与什么功能冲突，通常与 provides 的值相同</span>
+</span></span><span class=line><span class=cl><span class=nv>replaces</span><span class=o>=()</span>     <span class=c1># 该包安装时替换什么包，基本用不到</span>
+</span></span><span class=line><span class=cl><span class=nv>backup</span><span class=o>=()</span>       <span class=c1># 该包安装或卸载时，要备份的文件的路径，</span>
+</span></span><span class=line><span class=cl>                <span class=c1># 使用相对路径（如 etc/pacman.conf），通常是配置文件。</span>
+</span></span><span class=line><span class=cl>                <span class=c1># 小知识：</span>
+</span></span><span class=line><span class=cl>                <span class=c1># 升级时包自带的要备份的文件将会以 .pacnew 后缀保存，不覆盖本地的；</span>
+</span></span><span class=line><span class=cl>                <span class=c1># 卸载时本地的要备份的文件会以 .pacsave 后缀重新命名</span>
+</span></span><span class=line><span class=cl><span class=nv>options</span><span class=o>=()</span>      <span class=c1># makepkg 选项，具体参数在</span>
+</span></span><span class=line><span class=cl>                <span class=c1># https://man.archlinux.org/man/PKGBUILD.5#OPTIONS_AND_DIRECTIVES</span>
+</span></span><span class=line><span class=cl><span class=nv>changelog</span><span class=o>=</span>      <span class=c1># 软件更新日志，基本都不写的</span>
+</span></span><span class=line><span class=cl><span class=nv>source</span><span class=o>=(</span>FILENAME::URL<span class=o>)</span>
+</span></span><span class=line><span class=cl>                <span class=c1># 不定构架，软件来源（可以是压缩文件，也可以是 git 仓库地址，写法见下面的 git 示例），</span>
+</span></span><span class=line><span class=cl>                <span class=c1># FILENAME 用于将下载到的文件命名为它，</span>
+</span></span><span class=line><span class=cl>                <span class=c1># 可以用上面定义的变量组成，如 $pkgname-$pkgver.tar.gz</span>
+</span></span><span class=line><span class=cl>                <span class=c1># makepkg 会自动解压，解压后的目录存于变量 srcdir</span>
+</span></span><span class=line><span class=cl>                <span class=c1># URL 则是指向文件的链接</span>
+</span></span><span class=line><span class=cl><span class=c1>#source=(URL)   # FILENAME 也可以省略</span>
+</span></span><span class=line><span class=cl><span class=c1>#source_x86_64  # 相应架构的软件来源</span>
+</span></span><span class=line><span class=cl><span class=nv>noextract</span><span class=o>=()</span>    <span class=c1># 需要其他解压工具时，不解压的软件来源，填写这一项需要在 prepare 函数中解压文件</span>
+</span></span><span class=line><span class=cl>                <span class=c1># 还要在 makedepends 填写解压工具</span>
+</span></span><span class=line><span class=cl><span class=nv>sha256sums</span><span class=o>=()</span>   <span class=c1># 不定架构的软件来源的 hash，下文将介绍用 updpkgsums 自动填写，也可以用其他的 hash，如 sha512</span>
+</span></span><span class=line><span class=cl><span class=c1>#sha256sums_x86_64</span>
+</span></span><span class=line><span class=cl>                <span class=c1># 特定架构的软件来源的 hash</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># pkgver 函数用于获取软件版本，替代 pkgver 变量，通常用于打包直接用 git 拉取仓库进行构建的软件包</span>
+</span></span><span class=line><span class=cl><span class=c1>#pkgver() {}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># prepare 函数准备软件构建，在 build 函数前执行</span>
+</span></span><span class=line><span class=cl><span class=c1>#prepare() {}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># build 函数构建软件，在 package 函数前执行</span>
+</span></span><span class=line><span class=cl><span class=c1>#build() {}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># package 函数安装软件</span>
+</span></span><span class=line><span class=cl>package<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1># 安装二进制文件</span>
+</span></span><span class=line><span class=cl>  <span class=c1># 工作步骤：</span>
+</span></span><span class=line><span class=cl>  <span class=c1># 1. 将一个文件复制到另一个文件</span>
+</span></span><span class=line><span class=cl>  <span class=c1># 2. 赋予复制后的文件可执行权限</span>
+</span></span><span class=line><span class=cl>  install -Dm755 <span class=si>${</span><span class=nv>srcdir</span><span class=si>}</span>/binary <span class=si>${</span><span class=nv>pkgdir</span><span class=si>}</span>/usr/bin/binary <span class=c1># srcdir 变量是软件来源解压后的目录</span>
+</span></span><span class=line><span class=cl>                                                           <span class=c1># pkgdir 变量是一个存放被打包的文件的目录</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=自动填写-hash>自动填写 hash</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>updpkgsums
+</span></span></code></pre></td></tr></table></div></div><h2 id=示例>示例</h2><p>请根据自己要打包的软件选择示例，也可以直接跳到 <a class=link href=#%e5%8f%91%e5%b8%83>如何发布</a>。</p><h3 id=二进制>二进制</h3><p>见 <a class=link href=#%e5%9f%ba%e6%9c%ac%e6%a0%bc%e5%bc%8f>基本格式</a></p><h3 id=git-从仓库拉取构建>git 从仓库拉取构建</h3><p>只写出一些与打包二进制的不同的地方。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=nv>pkgname</span><span class=o>=</span>NAME-git    <span class=c1># 名称应该以 -git 结尾</span>
+</span></span><span class=line><span class=cl><span class=nv>pkgver</span><span class=o>=</span><span class=m>1</span>            <span class=c1># 先随便填个版本进去，等下构建时 makepkg 会自动填写 pkgver 函数生成的版本</span>
+</span></span><span class=line><span class=cl><span class=nv>sha256sums</span><span class=o>=(</span><span class=s2>&#34;SKIP&#34;</span><span class=o>)</span> <span class=c1># 因为拉取最新的仓库所以无法指定 hash，直接跳过检查 hash</span>
+</span></span><span class=line><span class=cl><span class=nv>source</span><span class=o>=(</span><span class=s2>&#34;git+https://URL&#34;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>pkgver <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1># 从 git 仓库生成软件版本</span>
+</span></span><span class=line><span class=cl>  <span class=c1># 其他实现见: https://wiki.archlinux.org/title/VCS_package_guidelines#Git</span>
+</span></span><span class=line><span class=cl>  <span class=nb>cd</span> <span class=s2>&#34;</span><span class=nv>$pkgname</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=o>(</span> <span class=nb>set</span> -o pipefail
+</span></span><span class=line><span class=cl>    git describe --long --abbrev<span class=o>=</span><span class=m>7</span> 2&gt;/dev/null <span class=p>|</span> sed <span class=s1>&#39;s/\([^-]*-g\)/r\1/;s/-/./g&#39;</span> <span class=o>||</span>
+</span></span><span class=line><span class=cl>    <span class=nb>printf</span> <span class=s2>&#34;r%s.%s&#34;</span> <span class=s2>&#34;</span><span class=k>$(</span>git rev-list --count HEAD<span class=k>)</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=k>$(</span>git rev-parse --short<span class=o>=</span><span class=m>7</span> HEAD<span class=k>)</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=其他>其他</h3><p>如 pip、npm、cargo 等编程语言的软件包的打包是不需要手写 PKGBUILD 的，用脚本生成就可以了，见 <a class=link href=https://wiki.archlinux.org/title/Creating_packages#PKGBUILD_generators target=_blank rel=noopener>Arch Wiki</a>。</p><h2 id=测试>测试</h2><h3 id=构建>构建</h3><p>写完 PKGBUILD 最好测试一下能否正常构建软件。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>makepkg
+</span></span></code></pre></td></tr></table></div></div><p>这是最简单的测试方法，但有个问题，因为安装了很多包，系统是不“干净”的，如果 PKGBUILD 中有依赖没写上去，也会正常构建，为了避免这种情况，可以用 pkgctl 构建。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>pkgctl build
+</span></span></code></pre></td></tr></table></div></div><p>pkgctl 会自动在一个“干净”的 chroot 里下载安装依赖并构建软件。而且还会生成 <code>.SRCINFO</code> 文件，这是发布至 AUR 必须要有的文件。</p><h3 id=安装>安装</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>makepkg --install
+</span></span></code></pre></td></tr></table></div></div><h2 id=发布>发布</h2><p>如果测试没问题的话就可以发布了。首先的首先，你需要一个 AUR 账号，这个步骤很简单，就不写了。</p><h3 id=验证>验证</h3><p>创建 AUR 专用的 SSH 密钥。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>ssh-keygen -f ~/.ssh/aur
+</span></span></code></pre></td></tr></table></div></div><p>在 <code>~/.ssh/config</code> 中加入这些内容：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Host aur.archlinux.org
+</span></span><span class=line><span class=cl>  IdentityFile ~/.ssh/aur
+</span></span><span class=line><span class=cl>  User aur
+</span></span></code></pre></td></tr></table></div></div><p>最后在 AUR 账号的设置页面加入 <code>~/.ssh/aur.pub</code> 里的公钥就好了。</p><h3 id=生成-srcinfo-文件>生成 <code>.SRCINFO</code> 文件</h3><p>如果不是用 pkgctl 测试构建软件包，那么需要这条命令生成 <code>.SRCINFO</code> 文件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>makepkg --printsrcinfo &gt; .SRCINFO
+</span></span></code></pre></td></tr></table></div></div><h3 id=创建包仓库>创建包仓库</h3><p>AUR 只接受 master 分支的推送。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># 如果还没有 git 仓库</span>
+</span></span><span class=line><span class=cl>git -c init.defaultbranch<span class=o>=</span>master clone ssh://aur@aur.archlinux.org/pkgbase.git
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 如果已有 git 仓库</span>
+</span></span><span class=line><span class=cl>git switch -c master
+</span></span><span class=line><span class=cl><span class=c1>## 如果有了提交</span>
+</span></span><span class=line><span class=cl>git branch -d 
+</span></span></code></pre></td></tr></table></div></div><h3 id=推送>推送</h3><p>这一步不用我多说吧 :)</p><h2 id=自动更新>自动更新</h2><p>根据 PKGBUILD 生成自动更新的配置 <code>.nvchecker.toml</code>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>pkgctl version setup
+</span></span></code></pre></td></tr></table></div></div><p>更新 PKGBUILD 中的 pkgver：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>pkgctl version upgrade
+</span></span></code></pre></td></tr></table></div></div><p>再用 updpkgsums 自动填写 hash，非常的完美！</p><h2 id=日常维护>日常维护</h2><p>当你维护一大堆包的时候，显然一个个去更新太慢了。可以把所有包的仓库放在一个目录下，再在这个目录下执行这条命令一次性更新所有包：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>pkgctl version <span class=k>$(</span>ls<span class=k>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果哪个包被更新了，要手动去构建一下，然后提交推送，避免出问题。这个任务不算很难，毕竟一下子也不会有很多包更新。</p><h2 id=结语>结语</h2><p>这篇文章写起来超费时间，比写三篇小短文的总时间还要多 :(</p><p>因为找不到 PKGBUILD 编写、发布、自动更新一体化的教程，所以就自己写啰。</p><p>这篇文章介绍编写的 PKGBUILD 比较简单，不是很完整，剩下就是下一篇文章的事了 :)</p></section><footer class=article-footer><section class=article-tags><a href=/tags/archlinux/>Archlinux</a>
+<a href=/tags/pkgbuild/>PKGBUILD</a>
+<a href=/tags/%E6%95%99%E7%A8%8B/>教程</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/jujutsu-1/><div class=article-details><h2 class=article-title>Jujutsu入门教程：比Git更好用的VCS</h2></div></a></article><article><a href=/p/%E6%B2%A1%E9%BA%A6%E6%80%8E%E4%B9%88%E5%8A%9E%E6%8A%8A%E6%89%8B%E6%9C%BA%E5%BD%93%E4%BD%9C%E9%BA%A6%E5%85%8B%E9%A3%8Escrcpy-%E7%AF%87/><div class=article-details><h2 class=article-title>没麦怎么办，把手机当作麦克风！（Scrcpy 篇）</h2></div></a></article><article><a href=/p/%E7%BB%99flutter-android-app%E6%94%AF%E6%8C%81%E5%85%A8%E5%B1%80%E4%B8%8A%E4%B8%8B%E6%96%87%E8%8F%9C%E5%8D%95/><div class=article-details><h2 class=article-title>给Flutter Android App支持全局上下文菜单</h2></div></a></article><article><a href=/p/nginx-live-service/><div class=article-details><h2 class=article-title>nginx 搭建极简直播服务</h2></div></a></article><article><a href=/p/dict-reader-tutorial/><div class=article-details><h2 class=article-title>Dart 中读取 mdict 词典教程</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=mumu-lhl/mumu-lhl.github.io data-repo-id=R_kgDOMZPV_A data-category=Announcements data-category-id=DIC_kwDOMZPV_M4ChDaT data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=zh-CN data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2023 -
+2026 Mumulhl</section><section class=powerby><a href=https://www.boyouquan.com/home>博友圈</a><br>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.33.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
