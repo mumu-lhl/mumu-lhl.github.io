@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>记录 on Mumulhl's Blog</title><link>https://mumulhl.eu.org/tags/%E8%AE%B0%E5%BD%95/</link><description>Recent content in 记录 on Mumulhl's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Mumulhl</copyright><lastBuildDate>Sat, 01 Jul 2023 20:04:47 +0800</lastBuildDate><atom:link href="https://mumulhl.eu.org/tags/%E8%AE%B0%E5%BD%95/index.xml" rel="self" type="application/rss+xml"/><item><title>过去一年</title><link>https://mumulhl.eu.org/p/first-post/</link><pubDate>Fri, 30 Jun 2023 20:17:32 +0800</pubDate><guid>https://mumulhl.eu.org/p/first-post/</guid><description>&lt;p&gt;这是新博客的第一篇文章， 是对过去一年的总结。&lt;/p&gt;
+&lt;h2 id="这篇文章的缘由"&gt;这篇文章的缘由
+&lt;/h2&gt;&lt;p&gt;各位看官可能感到奇怪， 对过去一年的总结应该写在年初或者年末才对啊， 这篇怎么写在年中呢？&lt;/p&gt;
+&lt;p&gt;去年年初时我写过一篇《年记》， 里边承诺今年按时再写一篇《年记》， 好巧不巧的是， 我把生成博客的文件夹删了， 以至于我无法发那篇文章。 实际上这些都是借口， 博客可以花时间在搞， 但是那篇文章我写都没写。 年初过去了， 接下来要等年末发， 但是我是在有些等不及了， 于是选择现在发这篇文章。&lt;/p&gt;
+&lt;p&gt;好， 接下来正式开始回忆过去一年。&lt;/p&gt;
+&lt;h2 id="使用的软件"&gt;使用的软件
+&lt;/h2&gt;&lt;h3 id="操作系统"&gt;操作系统
+&lt;/h3&gt;&lt;p&gt;刚好一年前， 我装了 Arch Linux， 这时还是双系统， 我保留了 Windows。 前几天我用 Manjaro Linux 替代了 Windows 的位置， 装 Manjaro Linux 的原因是 Arch Linux 出了点问题， 启动速度很慢， 但找不到问题在哪， 想去重装， 不过 Arch Linux 装起来了有点麻烦， 有些东西还得自己手动配置， 于是我选择了 Manjaro Linux。 Manjaro Linux 装起来就是简单， 鼠标点几下就装好了。&lt;/p&gt;
+&lt;h3 id="桌面环境"&gt;桌面环境
+&lt;/h3&gt;&lt;p&gt;换成 Arch Linux 后就有了桌面环境一说。 最开始按照看的教程安装了 KDE， 用起来还行。&lt;/p&gt;
+&lt;p&gt;直到今天一月份， 我感觉 KDE 有许多功能我都用不上， 于是想要去找一个非常简单的桌面环境， 在看 B 站的时候看到了 Hyprland， 我就去找了个配置去用。 Hyprland 需要自己去装很多需要的软件， 例如通知、 软件启动器等等， 给用户极大的自定义空间。&lt;/p&gt;
+&lt;p&gt;之后我用上了 EAF， 我给 EAF 提交了很多优化 Hyprland 上的体验的补丁， 但是还不能用得顺手， 于是我换用了 Gnome， 现在我使用的桌面环境就是它。 在 Gnome 上， EAF 用得顺手多了。&lt;/p&gt;
+&lt;h3 id="编辑器"&gt;编辑器
+&lt;/h3&gt;&lt;p&gt;我试过不少的编辑器， 比如 VSCodium、 Neovim、 Emacs 等等， 最终使用了 Emacs + Helix， Emacs 是主力， Helix 很少用， 只在终端下使用。&lt;/p&gt;
+&lt;p&gt;选择 Emacs 也有个来由， 我觉得编码的时候， 把手在键盘和鼠标之间换来换去， 严重干扰了编码时的思维， 所以我尝试取用全键盘的编辑器。&lt;/p&gt;
+&lt;p&gt;最开始用的是 VSCodeium 配上 Neovim 插件， 但是一装好就感觉极大的不适应（原因记不清了， 随便编一个 ）， 故此放弃。&lt;/p&gt;
+&lt;p&gt;之后我又尝试了 Neovim， 我抄配置抄得很厉害， 整个配置几百行代码， 没几行出自自己之手。&lt;/p&gt;
+&lt;p&gt;后来我看了陈斌大佬的&lt;a class="link" href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide" target="_blank" rel="noopener"
+&gt;一年成为 Emacs 高手 (像神一样使用编辑器)&lt;/a&gt;后， 了解 Emacs 的一些优势， 决心去用用 Emacs， 开始去安装不同大佬的配置来用， 最终尝试失败， 换回了 Neovim。 今年年初不知咋的， 我又想去试试 Emacs， 这次我不去抄配置了， 开始自己动手去写， 这次成功用上了 Emacs， 现在用着很顺手， 想抛弃都做不到。 现在我用的配置是经过多次大规模改写后的， 最开始用 straight + use-package 管理插件， 在参考了懒猫大佬的配置后， 改用了 submodule 管理插件。&lt;/p&gt;
+&lt;p&gt;我现在的配置用 lsp-bridge 作为补全插件， 最初我是在看 B 站的时候， 看到了一个关于 lsp-bridge 的视频， 想着试一试没想到上了瘾， 又用上了 EAF、 blink-search、 popweb 等插件， 懒猫大佬开发的插件实在是太好用了， 真是爱不释手， 平时大部分操作依赖他开发的插件。&lt;/p&gt;
+&lt;h2 id="开源贡献"&gt;开源贡献
+&lt;/h2&gt;&lt;p&gt;在过去一年（2022）我可以肯定的说， 我没有贡献任何代码， 但我从今年（2023）的一月份在 GitHub 上开始开源贡献。 最初我是在用 lsp-bridge 的时候发了一个 =fix typo= 的 PR， 自此开启了每周开源贡献之旅。&lt;/p&gt;
+&lt;p&gt;我发的 PR 都是对软件的改进， 例如修复 bug、 拓展功能等等， 这既方便了我的使用， 也方便了其他人的使用。 虽然有些 PR 我已经不用了， 但我仍觉得它依旧有价值。&lt;/p&gt;
+&lt;p&gt;开源贡献加强了我的能力， 尤其是代码阅读能力， 最开始给 EAF 添加 Hyprland 的支持时， 代码读起来很不顺， 现在看一个陌生项目， 读得很快。&lt;/p&gt;
+&lt;p&gt;开源贡献中有着许多大佬的帮助， 让我知道了代码该怎样写可读性高， 维护成本低。 我主要发 PR 给懒猫大佬的项目， 他对我的 PR 处理很仔细， review 有时处理起来比较麻烦， 但是让我也学到了一些东西。 懒猫大佬还有其他的大佬对我的代码进行过改良， 我都看了那些改进的 commit， 学到了不少。&lt;/p&gt;
+&lt;p&gt;我开发了 &lt;a class="link" href="https://github.com/mumu-lhl/eaf-pyqterminal" target="_blank" rel="noopener"
+&gt;EAF PyQterminal&lt;/a&gt;， 这是一个基于 &lt;a class="link" href="https://github.com/emacs-eaf/emacs-application-framework" target="_blank" rel="noopener"
+&gt;EAF&lt;/a&gt; 开发的终端模拟器， 我原本想要自己去宣传宣传， 但是懒猫大佬抢先我一步， 不仅在 Emacs China 论坛上发了， 还在他的推特上发了， 懒猫大佬人是真的好！ 这个软件开发出来还是有许多问题的， 懒猫大佬不断给我提 issue、 PR， 处理起来要费一点时间， 但是真的好开心， 以前的项目都是无人问津（已经被我删了）， 现在有人来关注我的项目， 多好啊。 这些 issue 和 PR 使得它更加完善， 感谢懒猫大佬！！！&lt;/p&gt;
+&lt;h2 id="新博客"&gt;新博客
+&lt;/h2&gt;&lt;p&gt;新博客与原来的旧博客不同， 换用 &lt;a class="link" href="https://gohugo.io" target="_blank" rel="noopener"
+&gt;Hugo&lt;/a&gt; 作为静态网站生成器， 如果以后文章多了， 速度不会像 Hexo 那样慢， 现在还不知道以后文章会不会多起来。&lt;/p&gt;
+&lt;p&gt;新博客采用 &lt;a class="link" href="https://github.com/janraasch/hugo-bearblog" target="_blank" rel="noopener"
+&gt;Hugo BearBlog&lt;/a&gt; 作为主题， 我很喜欢这种极简风格的主题， 以前用的主题现在看来有些花哨。&lt;/p&gt;</description></item></channel></rss>

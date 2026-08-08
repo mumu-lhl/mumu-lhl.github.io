@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>年度总结 on Mumulhl's Blog</title><link>https://mumulhl.eu.org/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/</link><description>Recent content in 年度总结 on Mumulhl's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Mumulhl</copyright><lastBuildDate>Wed, 31 Dec 2025 09:47:25 +0000</lastBuildDate><atom:link href="https://mumulhl.eu.org/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/index.xml" rel="self" type="application/rss+xml"/><item><title>2025年终总结：开始学了点3D</title><link>https://mumulhl.eu.org/p/2025-year-in-review/</link><pubDate>Wed, 31 Dec 2025 09:47:25 +0000</pubDate><guid>https://mumulhl.eu.org/p/2025-year-in-review/</guid><description>&lt;p&gt;距离上次的年终总结已经过去一年了（废话），谈谈这一年发生的事吧。&lt;/p&gt;
+&lt;p&gt;有技术、生活、3D 等等，跳到自己喜欢的地方看吧。（各部分占比严重失调，因为写了最感兴趣的部分后，就没动力了）&lt;/p&gt;
+&lt;h2 id="生活"&gt;生活
+&lt;/h2&gt;&lt;p&gt;今年啊，没写多少博文，比 2024 年少多了，今年好像没搞出些过什么名谈，一年就这样过去了。&lt;/p&gt;
+&lt;h3 id="收入"&gt;收入
+&lt;/h3&gt;&lt;p&gt;回应一下 2024 年终总结，赚到第一桶金了吗？不知道打赏算不算啊。爱发电加上微信打赏的收入大约一百多，感谢所有打赏的朋友们！&lt;/p&gt;
+&lt;h3 id="学习"&gt;学习
+&lt;/h3&gt;&lt;p&gt;学习更忙了，晚自习时间压根不够，总有一两门学科的作业是抄完的。&lt;/p&gt;
+&lt;p&gt;我原以为分班后我会好好学选科科目，但是我错了，时间不足以支撑啊。&lt;/p&gt;
+&lt;h3 id="当一名-up-主"&gt;当一名 up 主
+&lt;/h3&gt;&lt;p&gt;成为了一名 B 站 3D 动画区的 up 主，建模、动画、渲染都垃圾得要死，剧本更烂，poimiku 老师是我第一个想达到的目标，更高的目标是狄龙顾大佬（可以说是终极目标了）。&lt;/p&gt;
+&lt;p&gt;当 up 主其实不是预期之内的，我想这样可以督促我学习、练习 3D 全流程，提高自己的能力。&lt;/p&gt;
+&lt;p&gt;除了 3D 水平外，视频本身的内容也很影响视频的数据。这不是一两句话可以讲得清楚的。&lt;/p&gt;
+&lt;p&gt;至于我的 B 站号嘛，其实好找的，但我不想要通过博客来引流，而且我的博客除了 AI 本来就没几个人看。&lt;/p&gt;
+&lt;p&gt;尽管未来几年我是不打算开通什么收益的，但希望 2026 年可以突破 1k 粉丝！同时感谢现在所有粉丝们的陪伴！&lt;/p&gt;
+&lt;h2 id="3d"&gt;3D
+&lt;/h2&gt;&lt;p&gt;今年暑假的时候我开始学习 3D，使用开源软件 Blender。&lt;/p&gt;
+&lt;p&gt;以前我是计划学习编曲的，但发现现在所谓流行乐，其实编曲都差不多，听起来一首歌一样，那么 AI 想模仿是极为简单的，花费时间去学编曲实在价值不大，我也没啥天赋，最多只会拿个一两乐器演奏一下。&lt;/p&gt;
+&lt;h3 id="尝试过的教程"&gt;尝试过的教程
+&lt;/h3&gt;&lt;p&gt;对于入门教程，我先是学习了小狐狸教程，但我觉得这个教程专注于完成一个案例，学习周期太长。于是我学了 Blendergo 的教程，他的教程有很多案例，每个案例只需几个小时，成就感很强，做得也快。&lt;/p&gt;
+&lt;p&gt;接下来计划学习的教程都是些深入的教程，提升水平嘛，目前水平拉完了。&lt;/p&gt;
+&lt;h2 id="技术"&gt;技术
+&lt;/h2&gt;&lt;h3 id="比赛"&gt;比赛
+&lt;/h3&gt;&lt;p&gt;今年的一个信息素养比赛晋级到了市级，拿到了一等奖，可惜现场发挥不佳，没能晋级到省级。只有这种比赛能拿个奖，信奥就只能从头到尾摸头了。&lt;/p&gt;
+&lt;h3 id="减少维护词悦"&gt;减少维护词悦
+&lt;/h3&gt;&lt;p&gt;词悦是我在 2024 年使用 Flutter 开发的一款开源 mdict 词典，在 Android 上支持最佳，这也是我拿去比赛的项目。&lt;/p&gt;
+&lt;p&gt;这个项目目前陷入了这么一个状态：大部分的贡献都来自于我自己，PR 非常少，虽然有很多用户反馈 bug，提功能建议，这依然使得项目的状态很不健康。例如我现在，时间少了，就很难抽出时间去维护了，就会发生 &lt;a class="link" href="https://zh.wikipedia.org/wiki/%E5%8D%95%E7%82%B9%E6%95%85%E9%9A%9C" target="_blank" rel="noopener"
+&gt;单点故障&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;但是我觉得大部分应有的功能都已经有了，bug 也挺少了，近几个月来的 bug 汇报，其实都很难修复，或者不是这个项目的问题。这还反映出了 Flutter 的问题：Flutter 对系统的一些 API 调用很依赖于社区的包，官方基本没啥支持的，但社区的包又很少，例如 TTS 的包，能用的差不多就只有一个，但是 bug 多，会因为一些外部依赖的更新（如 LLVM），导致没法用。Flutter 不仅自身的向后兼容性不佳，而且极为依赖外部，稳定性就不行，使得维护成本比较高。&lt;/p&gt;
+&lt;p&gt;而且词悦需要 Webview，而且需要特殊的用法，Flutter 也就一个包能满足，&lt;code&gt;flutter_inappwebview&lt;/code&gt;，而且对桌面的支持很有限，不能发挥 Flutter 跨平台的优势，跨平台跨了个迪奥，基本也就 Android 上能跑。其实不如直接 Android 原生，然后桌面上 Electron 或 Qt，调研过 Tauri，不符合使用需求。&lt;/p&gt;
+&lt;p&gt;我还探寻了 &lt;a class="link" href="https://kotlinlang.org/docs/multiplatform.html" target="_blank" rel="noopener"
+&gt;KMP&lt;/a&gt; 这项跨平台技术，只有 IDEA 和 Android Studio 能开发，然而我的电脑性能有限，跑起 IDE 就很吃力，更别说把项目开发大一点了。试用的时候跟 Gradle 大战了 114514 回合。但是包依然不满足需求。并且这门技术其实正式发布的话还没有多久，还有很大的发展的空间。&lt;/p&gt;
+&lt;p&gt;Kotlin 是一门很好的语言，语法很优雅（语法糖比较多），写起来挺爽的，跟 Ruby 差不多，能力其实也很强，但是开发体验只有在 JetBrains 的 IDE 上最好。但 JetBrains 在今年开始开发 Kotlin 官方的 LSP，目前还处于 Alpha 状态，值得展望。&lt;/p&gt;
+&lt;h3 id="未来想开发的项目"&gt;未来想开发的项目
+&lt;/h3&gt;&lt;p&gt;其实我有一个梦，那就是开发出 Ae、Pr、Au 的开源替代品，这方面的开源软件都不是很好用。但，都说了是梦了，哈哈哈😂&lt;/p&gt;
+&lt;p&gt;但我真的思考了一下技术选型，和 AI 交流了下。我觉得 Web 技术首先要舍弃，性能不满足需求，对于这样的工业级软件，界面极为复杂，开发效率会很低下。&lt;/p&gt;
+&lt;p&gt;对于开源项目来说，没有拿工资的人来工作，本来全靠兴趣，想让软件开发效率更高，那么就要选效率高的技术栈，现代技术栈（差不多近 10-15 年）都不太行，因为这些应用的技术栈构建的界面的目的是，让人人都能会用，对于专业软件来说就很乏力了。&lt;/p&gt;
+&lt;p&gt;首先一定的界面要使用拖拽来构建，使用纯代码构建界面就是低效的，越复杂的界面，越难维护。Qt 就很满足需求。其次是使用高效的编程语言，Python 就很适合，可以用 PySide 构建 UI。&lt;/p&gt;
+&lt;p&gt;如果遇到需要很强性能的地方，最好要避免 C++，因为和 Python 可以契合得最方便、最好的，其实是用 Rust + PyO3。C++ 的复杂性太高，项目扩大时，在熵增，语言的复杂性是除了人的水平外影响熵增程度很大的因素。当项目很复杂的时候，复杂的语言就会使得性能提升、bug 修复、功能增加变得很困难，再 NB 的人和再好的架构也很难解决语言导致熵增的问题。&lt;/p&gt;
+&lt;p&gt;Rust 虽然复杂，但是复杂性要比 C++ 低得多，更何况是在 AI 如此强大的情况下，很多很难理解的东西变得简单了。Rust 的设计很严格，可以一定程度上减少人犯错，犯错是不可能避免的，但是是可以减少的。另外说一句，一门的语言的语法咋样其实没啥关系，更重要的是看重语言的特性，语法好不好看是个人审美，是可以改变的，讨论这个意义不大。&lt;/p&gt;
+&lt;p&gt;既然都说到 AI 了，那么为什么不直接 Vibe Coding C++ 呢？你不是说 AI 很强大吗？首先 C++ 是有头文件的，AI 对这样的编程语言的实力发挥就很拉了。没体验过，可以去体验一下，不要写那种很常见的应用。其次，AI 无法克服技术本身存在的固有成本，技术垃圾，AI 再 NB 也依然会像人一样撞坑，效率低会低，高会高，无法抹平差异，让所有技术搞起来都一样高的效率（效率只是讨论的一种因素而已），其中一个原因是 AI 基于人的数据训练，人会出的问题，AI 也会出。AI 并非万能，但正确使用依然可以让很多人在效率的提升下被优化掉。（指工作量有限，单人的效率提升，意味着就有人没活干了，被优化掉）。还有一个原因，但我很难用语言描述出来，就是解释为什么固有成本无法被抹平。&lt;/p&gt;
+&lt;h3 id="近期想开发的项目"&gt;近期想开发的项目
+&lt;/h3&gt;&lt;p&gt;一个开源的音频、BGM、音效管理搜索软件，使用 PySide6 + Rust。&lt;/p&gt;
+&lt;p&gt;我和 AI 讨论了很多技术细节，节省了我自己人工做技术调研的时间。&lt;/p&gt;
+&lt;p&gt;我现在比较重视开发前的调研，而不是莽撞地开始开发，避免词悦的困境重蹈覆辙。&lt;/p&gt;
+&lt;h2 id="总结"&gt;总结
+&lt;/h2&gt;&lt;p&gt;太久没写博文了，水平也有点下降了，虽然没人看，但是遵循一个惯例吧。&lt;/p&gt;</description></item><item><title>2024年度总结：AI原来能这么好用</title><link>https://mumulhl.eu.org/p/2024-year-in-review/</link><pubDate>Wed, 01 Jan 2025 02:07:26 +0000</pubDate><guid>https://mumulhl.eu.org/p/2024-year-in-review/</guid><description>&lt;img src="https://mumulhl.eu.org/p/2024-year-in-review/2024.jpg" alt="Featured image of post 2024年度总结：AI原来能这么好用" /&gt;&lt;p&gt;（封面来自 Unsplash，作者 BoliviaInteligente）&lt;/p&gt;
+&lt;p&gt;2024年结束了，2025年来了，转眼又是一年了。2024给我最大的震撼就是AI的辅助带来的便捷，过去稍有接触AI，但是没有太深入地使用，导致也用不好。&lt;/p&gt;
+&lt;h2 id="真正对-ai-的接触"&gt;真正对 AI 的接触
+&lt;/h2&gt;&lt;p&gt;看到 X 上有很多大佬用 Cursor 开发出了一些项目，就有点手痒痒了。过去我使用的编辑器是 Helix，一个全键盘编辑器，感觉效率会高一些。如果要用 Cursor 这样的 AI 编辑器就要脱离全键盘的操作了，但是 AI 能提高我的开发效率的话，没有了全键盘操作也不算亏。于是 Cursor 就取代 Helix 在我的电脑上的地位。&lt;/p&gt;
+&lt;p&gt;Cursor 让我震撼的是，在编辑一块代码的时候，居然可以按 Tab 键去补全其他部分相关的代码，以前我以为 AI 代码补全就只能像补全变量名、函数名那样补全，这完全打破了我的认知啊！&lt;/p&gt;
+&lt;p&gt;最早使用 AI 我都倾向于想用一句话让 AI 完成我想要做的有点复杂的事，但在理论上是不可行的，事实上也是不行的。只用一句话去表述一件较为复杂的事，信息量很少，难以去描述细节，AI 自然无法做到和自己所想的相符。和人说件事，说话只说一句，得让对方多疯狂，更别说是 AI 了。在我的使用体验来说，AI 更适合去做小任务，而非是复杂的大任务，如果要让 AI 去做大任务，将它分解为多个小任务效果会更好。&lt;/p&gt;
+&lt;p&gt;AI 的使用体验总结起来就是一个字——“爽”，每周最多一天的时间里我可以开发得更高效。&lt;/p&gt;
+&lt;h2 id="开源让我学到了很多"&gt;开源让我学到了很多
+&lt;/h2&gt;&lt;p&gt;2024年新开发的项目主要实在暑假里开发的，好几个我都觉得不太行，所以只挑出我最经常维护的词悦来说吧。&lt;/p&gt;
+&lt;p&gt;词悦是一个开源的支持 mdict 格式的词典，是我觉得 Android 上没有简洁、好用的开源的 mdict 词典而开发的。虽然最初发布的时候很简陋，不过现在经过几个月的开发，已经完善了许多了。&lt;/p&gt;
+&lt;p&gt;最初词悦用 git-cliff 生成版本发布时的更新日志，后来我才慢慢在词悦中把 Github 的 label、milestones 功能好好用上，现在词悦的版本更新日志是由 Github 生成的，这样可以把这个版本贡献者直接显示在更新日志中。&lt;/p&gt;
+&lt;p&gt;词悦还提交到了 F-Droid 上，我还提交过几个 MR，但是水平不太够，没办法，犯了很多低级错误，都由 linsui 大佬纠正了，感谢 linsui 大佬不知疲倦地修改我的 MR！&lt;/p&gt;
+&lt;p&gt;在开源中，我学会了许多以前不知道的技巧、技术，开源不仅利他，还能利己。&lt;/p&gt;
+&lt;h2 id="重启博客"&gt;重启博客
+&lt;/h2&gt;&lt;p&gt;2024，我重启了我的博客，&lt;del&gt;一年的文章就是2023的十几倍了（2023只有一篇文章）&lt;/del&gt;。2024我写了15篇博文，其中大部分都是在暑假写的。暑假闲来无事重启了博客，还把博客主题换成了 Stack。我还把博客提交到 V2EX VXNA、博友圈等平台上，&lt;del&gt;我的博客也终于不再是我自娱自乐的地方了&lt;/del&gt;。&lt;/p&gt;
+&lt;h2 id="对2025的展望"&gt;对2025的展望
+&lt;/h2&gt;&lt;p&gt;希望我可以在2025把 AI 使用得更加得心应手吧；希望我能在2025凭借自己的能力去赚到人生第一桶金，哪怕没几块也行哪。&lt;/p&gt;</description></item></channel></rss>
