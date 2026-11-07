@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on Mumulhl's Blog</title><link>https://mumulhl.eu.org/page/</link><description>Recent content in Pages on Mumulhl's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Mumulhl</copyright><atom:link href="https://mumulhl.eu.org/page/index.xml" rel="self" type="application/rss+xml"/><item><title>友链</title><link>https://mumulhl.eu.org/links/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mumulhl.eu.org/links/</guid><description>&lt;p&gt;你可以 email/comment 我加友链，也可以等我 email/comment 你加友链 :)&lt;/p&gt;</description></item><item><title>归档</title><link>https://mumulhl.eu.org/archives/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mumulhl.eu.org/archives/</guid><description/></item><item><title>搜索</title><link>https://mumulhl.eu.org/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mumulhl.eu.org/search/</guid><description/></item><item><title>项目</title><link>https://mumulhl.eu.org/projects/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://mumulhl.eu.org/projects/</guid><description>&lt;h2 id="app"&gt;App
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/mumu-lhl/Ciyue" target="_blank" rel="noopener"
+&gt;词悦&lt;/a&gt; - 支持 Android 的简洁 mdict 词典。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="库-cool"&gt;库 Cool
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/mumu-lhl/dict_reader" target="_blank" rel="noopener"
+&gt;dict_reader&lt;/a&gt; - 用于读取 mdict 文件的 Dart 库，支持 MDX/MDD 格式。&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/mumu-lhl/duckduckgo-ai-chat" target="_blank" rel="noopener"
+&gt;duckduckgo-ai-chat&lt;/a&gt; - 为 JavaScript/TypeScript 提供 Duckduckgo AI Chat API，可以免费使用 gpt-4o-mini。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="自部署"&gt;自部署
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/mumu-lhl/duckduckgo-ai-chat-service" target="_blank" rel="noopener"
+&gt;duckduckgo-ai-chat-service&lt;/a&gt; - 为 Duckduckgo AI Chat 提供兼容 OpenAI 的 API，可以免费使用 gpt-4o-mini。&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/Simple-Friend-Circle/simple-friend-circle" target="_blank" rel="noopener"
+&gt;simple-friend-circle&lt;/a&gt; - 简易友链朋友圈&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="emacs"&gt;Emacs
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/mumu-lhl/eaf-pyqterminal" target="_blank" rel="noopener"
+&gt;EAF PyQterminal&lt;/a&gt; - 基于 EAF 框架运行于 Emacs 内的终端&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="heading"&gt;🤡
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/mumu-lhl/yt-music-archive?tab=readme-ov-file" target="_blank" rel="noopener"
+&gt;Youtube Music 存档 (yt-music-archive)&lt;/a&gt; - 将 Youtube Music 上的音乐下载到本地，并将其 ID 存入一个存档文件中。也可以从存档文件中还原出音乐。&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

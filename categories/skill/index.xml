@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>技巧 on Mumulhl's Blog</title><link>https://mumulhl.eu.org/categories/skill/</link><description>Recent content in 技巧 on Mumulhl's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Mumulhl</copyright><lastBuildDate>Sun, 16 Feb 2025 03:08:28 +0000</lastBuildDate><atom:link href="https://mumulhl.eu.org/categories/skill/index.xml" rel="self" type="application/rss+xml"/><item><title>Imagen 3: 免费文生图工具保持人物一致性</title><link>https://mumulhl.eu.org/p/imagen-3-tutorial/</link><pubDate>Sun, 16 Feb 2025 03:08:28 +0000</pubDate><guid>https://mumulhl.eu.org/p/imagen-3-tutorial/</guid><description>&lt;img src="https://mumulhl.eu.org/p/imagen-3-tutorial/cover.webp" alt="Featured image of post Imagen 3: 免费文生图工具保持人物一致性" /&gt;&lt;h2 id="imagen-3"&gt;Imagen 3
+&lt;/h2&gt;&lt;p&gt;Imagen 3 是 Google DeepMind 最新的文生图模型，可以在 &lt;a class="link" href="https://labs.google/fx/tools/image-fx" target="_blank" rel="noopener"
+&gt;ImageFx&lt;/a&gt; 免费使用。Imagen 3 在 Gemini 内也是可以使用的，Gemini 生成图片有时会不听话，不生成图片，所以本文采用 ImageFx。&lt;/p&gt;
+&lt;h2 id="如何实现人物一致性"&gt;如何实现人物一致性？
+&lt;/h2&gt;&lt;p&gt;主要有两种方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对现有的人物图像进行“引用”，如 Midjourney&lt;/li&gt;
+&lt;li&gt;对人物描述相当详细的 Prompt，基本适用于各种文生图模型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;第一种方式 Imagen 3 不支持，本文就采用第二种。&lt;/p&gt;
+&lt;h2 id="创造人物形象"&gt;创造人物形象
+&lt;/h2&gt;&lt;p&gt;想要有一个对人物描述相当详细的 Prompt，由人来写就太繁琐了，可以提供一些人物的特征让大语言模型帮我们写，这里采用 Gemini 2.0 Flash Thinking 模型。给出的特征越详细越能生成符合自己想要的人物。&lt;/p&gt;
+&lt;p&gt;示范 Prompt：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;你是一名文生图prompt专家，请写一个英文prompt去生成一个人物，将prompt放入代码块中。
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;prompt要求：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;1. 无背景
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;2. 全身图
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;人物：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;1. 白色头发
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;2. 穿白里带红的和服
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;3. 20岁左右的女性
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;4. 日本动漫风格
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;注：不要想着生成loli什么的，生成图片时会被判定为“儿童”而无法生成！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;先用大语言模型写的 Prompt 生成一下，如果效果不错，把种子锁定下，最好把种子保存下，方便以后生成尽可能相似的人物。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://mumulhl.eu.org/p/imagen-3-tutorial/1.webp"
+width="1373"
+height="789"
+loading="lazy"
+alt="Example 1"
+class="gallery-image"
+data-flex-grow="174"
+data-flex-basis="417px"
+&gt;&lt;/p&gt;
+&lt;h2 id="根据人物创造详细的-prompt"&gt;根据人物创造详细的 Prompt
+&lt;/h2&gt;&lt;p&gt;下载一张图片，发给支持图像的大语言模型，并让它根据图像创造出详细的 Prompt。&lt;/p&gt;
+&lt;p&gt;示范 Prompt：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;你是一名文生图prompt专家，请写一个英文prompt去描述图像人物，将prompt放入代码块中。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="把人物嵌入图像中"&gt;把人物嵌入图像中
+&lt;/h2&gt;&lt;p&gt;首先先生成一个生成人物坐在桌前写作业的图片的Prompt。&lt;/p&gt;
+&lt;p&gt;示范 Prompt：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;你是一名文生图prompt专家，请写一个英文prompt去生成一张图片，将prompt放入代码块中。
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;要求：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;1. 用 [CHARACTER] 代替人物
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;2. 人物坐在一张桌子前写作业
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;3. 氛围温馨
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;我们将使用 &lt;code&gt;[CHARACTER]&lt;/code&gt; 代指人物，然后把上一个步骤生成的 Prompt 拼接进去，如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[CHARACTER] sitting at a wooden desk, writing homework in a softly lit room, warm atmosphere, cozy, desk lamp, books, study, home, peaceful, detailed, realistic.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[CHARACTER]: 1girl, full body, Tomoe Gozen, white hair, long hair, white kimono, red and gold floral pattern, standing, arms outstretched, black background
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src="https://mumulhl.eu.org/p/imagen-3-tutorial/2.webp"
+width="1428"
+height="792"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="180"
+data-flex-basis="432px"
+&gt;&lt;/p&gt;
+&lt;p&gt;最终效果图：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://mumulhl.eu.org/p/imagen-3-tutorial/cover.webp"
+width="1372"
+height="720"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="190"
+data-flex-basis="457px"
+&gt;&lt;/p&gt;</description></item><item><title>给 Android 换个配色</title><link>https://mumulhl.eu.org/p/android-dynamic-color-tutorial/</link><pubDate>Thu, 15 Aug 2024 15:25:12 +0800</pubDate><guid>https://mumulhl.eu.org/p/android-dynamic-color-tutorial/</guid><description>&lt;h2 id="介绍"&gt;介绍
+&lt;/h2&gt;&lt;p&gt;Material You 加入到 Android 12 中，其中包括了动态配色。&lt;/p&gt;
+&lt;p&gt;用户可以直接在系统层面上很方便地改变系统配色和支持动态配色的软件的配色。开发者也不需要再开发配色功能。&lt;/p&gt;
+&lt;h2 id="设置"&gt;设置
+&lt;/h2&gt;&lt;p&gt;（因为不同厂商把选项名改得不一样，所以很难明确写出选项的名称）&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;打开设置&lt;/li&gt;
+&lt;li&gt;点击一个名称大致包含了 &lt;strong&gt;桌面&lt;/strong&gt;、&lt;strong&gt;壁纸&lt;/strong&gt; 的选项&lt;/li&gt;
+&lt;li&gt;点击名称像 &lt;strong&gt;系统风格&lt;/strong&gt; 的选项，就可以选择颜色了。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;可以单独选择配色，也可以从壁纸上提取出颜色。&lt;/p&gt;
+&lt;h2 id="结语"&gt;结语
+&lt;/h2&gt;&lt;p&gt;用了 Android 13 一整年了，都不知道有这个功能 😂 最近用 Flutter 开发词典的时候才了解到。&lt;/p&gt;</description></item><item><title>将 Android 作为 Linux 的麦克风</title><link>https://mumulhl.eu.org/p/audio-android-to-linux/</link><pubDate>Sun, 11 Aug 2024 12:40:00 +0800</pubDate><guid>https://mumulhl.eu.org/p/audio-android-to-linux/</guid><description>&lt;p&gt;你的电脑可能没有麦克风，需要的时候，又不想买一个麦克风，这时候就可以把你的 Android 当作麦克风来用。&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://github.com/gdzx/audiosource" target="_blank" rel="noopener"
+&gt;Audio Source&lt;/a&gt; 是一个用 ADB 将 Android 麦克风的输入转发到 PulseAudio 进程的工具。&lt;/p&gt;
+&lt;h2 id="准备"&gt;准备
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;一只手&lt;/li&gt;
+&lt;li&gt;Android 4.0 及以上&lt;/li&gt;
+&lt;li&gt;一条 USB 数据线，充电线也没问题&lt;/li&gt;
+&lt;li&gt;PATH 中包含 python3、pactl、adb（Archlinux 如果没有 adb，用 &lt;code&gt;sudo pacman -S android-tools&lt;/code&gt; 安装，安装后需重启）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="使用"&gt;使用
+&lt;/h2&gt;&lt;h3 id="android-端"&gt;Android 端
+&lt;/h3&gt;&lt;p&gt;可在 &lt;a class="link" href="https://github.com/gdzx/audiosource/releases" target="_blank" rel="noopener"
+&gt;Releases&lt;/a&gt; 页面下载，或在 &lt;a class="link" href="https://apt.izzysoft.de/fdroid/index/apk/fr.dzx.audiosource" target="_blank" rel="noopener"
+&gt;IzzyOnDroid F-Droid Repository&lt;/a&gt; 下载。&lt;/p&gt;
+&lt;p&gt;安装后，点开软件，如果没看到 UI 很正常，这个软件就是没有 UI 的&amp;hellip; 然后要授权软件麦克风和通知权限，如果授权权限的弹窗闪退，可以在 &lt;em&gt;设置&lt;/em&gt; 里面授权软件权限。&lt;/p&gt;
+&lt;h3 id="linux-端"&gt;Linux 端
+&lt;/h3&gt;&lt;p&gt;下载 audiosource 脚本并授权可执行权限。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -O https://raw.githubusercontent.com/gdzx/audiosource/master/audiosource &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod +x audiosource
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;用 USB 数据线连接手机和电脑，在 &lt;em&gt;开发者选项&lt;/em&gt; 里开启 &lt;strong&gt;USB 调试模式&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;用 adb 查看一下连接的 Android 设备，这时手机会弹出授权窗口，点授权就完事了。授权完再运行一下这个命令，看看是否正常。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;adb devices
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;运行 audiosource 脚本，你的 Linux 就有麦克风啦 :)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;./audiosource run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="结语"&gt;结语
+&lt;/h2&gt;&lt;p&gt;Audio Source 是我意外在 F-Droid 找到的，F-Droid 上的宝藏很多 :)&lt;/p&gt;</description></item><item><title>yt-dlp 教程</title><link>https://mumulhl.eu.org/p/yt-dlp-tutorial/</link><pubDate>Sat, 10 Aug 2024 20:59:35 +0800</pubDate><guid>https://mumulhl.eu.org/p/yt-dlp-tutorial/</guid><description>&lt;p&gt;&lt;a class="link" href="https://github.com/yt-dlp/yt-dlp" target="_blank" rel="noopener"
+&gt;yt-dlp&lt;/a&gt; 是一个功能强大的命令行音频、视频下载器。yt-dlp fork 自基于 &lt;a class="link" href="https://github.com/ytdl-org/youtube-dl" target="_blank" rel="noopener"
+&gt;youtube-dl&lt;/a&gt; 的已不维护的 &lt;a class="link" href="https://github.com/blackjack4494/yt-dlc" target="_blank" rel="noopener"
+&gt;youtube-dlc&lt;/a&gt;，具有额外的功能和问题修复。&lt;/p&gt;
+&lt;p&gt;yt-dlp 不仅支持 YouTube，还支持&lt;a class="link" href="https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md" target="_blank" rel="noopener"
+&gt;一千多个网站&lt;/a&gt;。除了下载音频、视频，还能下载封面。&lt;/p&gt;
+&lt;h2 id="安装"&gt;安装
+&lt;/h2&gt;&lt;p&gt;可以通过 pip 安装，也可以通过你所用的系统的包管理器安装，还可以到 &lt;a class="link" href="https://github.com/yt-dlp/yt-dlp/releases" target="_blank" rel="noopener"
+&gt;release&lt;/a&gt; 页面下载可执行文件。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pip install yt-dlp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# or&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pipx install yt-dlp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="使用"&gt;使用
+&lt;/h2&gt;&lt;h3 id="视频"&gt;视频
+&lt;/h3&gt;&lt;p&gt;直接加链接即可。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp &lt;span class="s2"&gt;&amp;#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;可以下载一整个播放列表的视频。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp &lt;span class="s2"&gt;&amp;#34;https://www.youtube.com/playlist?list=PLp8YAQVH95dwCMvzkxUhFy4KWRAtp_awf&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;还可以下载 m3u8。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp &lt;span class="s2"&gt;&amp;#34;https://example.com/index.m3u8&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;列出视频可以下载的格式，也列出了传输协议、格式、分辨率、帧率、大小等信息。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp -F &lt;span class="s2"&gt;&amp;#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 与下面的命令等价&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp --list-formats &lt;span class="s2"&gt;&amp;#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;yt-dlp 默认会下载分辨率、帧率等最好的视频，如果要指定相应的分辨率、帧率，要用 &lt;code&gt;--format-sort&lt;/code&gt;/&lt;code&gt;-S&lt;/code&gt; 参数。&lt;/p&gt;
+&lt;p&gt;下载分辨率不优于 720p 的视频，也就是下载 720p 的视频。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp -S &lt;span class="s2"&gt;&amp;#34;res:720&amp;#34;&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;指定视频的容器格式。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp -S &lt;span class="s2"&gt;&amp;#34;ext:webm&amp;#34;&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;用 &lt;code&gt;,&lt;/code&gt; 连接多个限制条件。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp -S &lt;span class="s2"&gt;&amp;#34;ext:webm,res:720&amp;#34;&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;嵌入元数据，默认不嵌入。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp --embed-metadata &lt;span class="s2"&gt;&amp;#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;嵌入封面，默认不嵌入。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp --embed-thumbnail &lt;span class="s2"&gt;&amp;#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;嵌入字幕，默认不嵌入。仅支持 &lt;strong&gt;mp4&lt;/strong&gt;、&lt;strong&gt;mkv&lt;/strong&gt;、&lt;strong&gt;webm&lt;/strong&gt; 容器的视频&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp --embed-subs &lt;span class="s2"&gt;&amp;#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="音频"&gt;音频
+&lt;/h3&gt;&lt;p&gt;分离出视频中的音频。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp -x &lt;span class="s2"&gt;&amp;#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 与下面的命令等价&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp --extract-audio &lt;span class="s2"&gt;&amp;#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;指定音频的格式和品质，品质取值 0-10，0 最佳，10 最差，默认为 5。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp -x --audio-format opus --audio-quality &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;嵌入元数据。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp -x --embed-metadata &lt;span class="s2"&gt;&amp;#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="封面"&gt;封面
+&lt;/h3&gt;&lt;p&gt;列出所有封面。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp --list-thumbnails &lt;span class="s2"&gt;&amp;#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;下载封面，同时会下载视频。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp --write-thumbnail &lt;span class="s2"&gt;&amp;#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;下载所有封面，不会下载视频。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-dlp --write-all-thumbnails &lt;span class="s2"&gt;&amp;#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="结语"&gt;结语
+&lt;/h2&gt;&lt;p&gt;写不出什么结语了(liao) :(&lt;/p&gt;</description></item><item><title>dig 的现代替代品 doggo</title><link>https://mumulhl.eu.org/p/doggo-tutorial/</link><pubDate>Sun, 04 Aug 2024 15:36:46 +0800</pubDate><guid>https://mumulhl.eu.org/p/doggo-tutorial/</guid><description>&lt;p&gt;dig 是用来查询 DNS 的工具，&lt;a class="link" href="https://github.com/mr-karan/doggo" target="_blank" rel="noopener"
+&gt;doggo&lt;/a&gt; 则是它现代的增强品。&lt;/p&gt;
+&lt;p&gt;有个叫作 &lt;a class="link" href="https://github.com/ogham/dog/" target="_blank" rel="noopener"
+&gt;dog&lt;/a&gt; 的 dig 替代品，但是已经多年没更新了，doggo 的灵感就是来自 dog。写这篇文章时，doggo 依然保持更新。&lt;/p&gt;
+&lt;p&gt;doggo 不仅是一个命令行工具，还有个&lt;a class="link" href="https://doggo.mrkaran.dev" target="_blank" rel="noopener"
+&gt;网页版&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id="特点"&gt;特点
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;采用彩色编码和表格格式的人类可读输出&lt;/li&gt;
+&lt;li&gt;支持 JSON 输出，便于脚本编写和解析&lt;/li&gt;
+&lt;li&gt;多种传输协议： DoH、DoT、DoQ、TCP、UDP、DNSCrypt&lt;/li&gt;
+&lt;li&gt;支持 &lt;code&gt;ndots&lt;/code&gt; 和 &lt;code&gt;search&lt;/code&gt; 配置&lt;/li&gt;
+&lt;li&gt;支持多个解析器，可自定义查询策略&lt;/li&gt;
+&lt;li&gt;支持 IPv4 和 IPv6&lt;/li&gt;
+&lt;li&gt;提供网络接口&lt;/li&gt;
+&lt;li&gt;提供 &lt;code&gt;zsh&lt;/code&gt; 和 &lt;code&gt;fish&lt;/code&gt; 的补全&lt;/li&gt;
+&lt;li&gt;反向 DNS 查询&lt;/li&gt;
+&lt;li&gt;灵活的查询选项，包括各种 DNS 标志&lt;/li&gt;
+&lt;li&gt;用于故障排除的调试模式&lt;/li&gt;
+&lt;li&gt;响应时间测量&lt;/li&gt;
+&lt;li&gt;支持跨平台&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="安装"&gt;安装
+&lt;/h2&gt;&lt;h3 id="脚本"&gt;脚本
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -sS https://raw.githubusercontent.com/mr-karan/doggo/main/install.sh &lt;span class="p"&gt;|&lt;/span&gt; sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="包管理"&gt;包管理
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Homebrew: &lt;code&gt;brew install doggo&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Arch Linux: &lt;code&gt;yay -S doggo-bin&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Scoop (Windows): &lt;code&gt;scoop install doggo&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Eget: &lt;code&gt;eget mr-karan/doggo&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="二进制文件"&gt;二进制文件
+&lt;/h3&gt;&lt;p&gt;&lt;a class="link" href="https://github.com/mr-karan/doggo/releases" target="_blank" rel="noopener"
+&gt;https://github.com/mr-karan/doggo/releases&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="go-install"&gt;Go Install
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go install github.com/mr-karan/doggo/cmd/doggo@latest
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="快速上手"&gt;快速上手
+&lt;/h2&gt;&lt;p&gt;不想打五个字的话，可以 &lt;code&gt;alias dig=&amp;quot;doggo&amp;quot;&lt;/code&gt;，把 dig 设置为 doggo 的别名，这样就只用打三个字了。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;doggo example.com &lt;span class="c1"&gt;# 查询 A 记录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;doggo example.com AAAA &lt;span class="c1"&gt;# 查询 AAAA 记录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;doggo example.com A NS &lt;span class="c1"&gt;# 查询多个记录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;输出结果非常简洁，而且带有颜色。&lt;/p&gt;
+&lt;h2 id="结语"&gt;结语
+&lt;/h2&gt;&lt;p&gt;文本所介绍的内容已经可以满足大部分需求了，想要更深入使用，可以观光下文档 &lt;a class="link" href="https://doggo.mrkaran.dev/docs/" target="_blank" rel="noopener"
+&gt;https://doggo.mrkaran.dev/docs/&lt;/a&gt;。&lt;/p&gt;</description></item><item><title>存档 Youtube Music ID 批量下载音乐</title><link>https://mumulhl.eu.org/p/yt-music-archive-tutorial/</link><pubDate>Sat, 27 Jul 2024 22:02:28 +0800</pubDate><guid>https://mumulhl.eu.org/p/yt-music-archive-tutorial/</guid><description>&lt;p&gt;&lt;a class="link" href="https://github.com/mumu-lhl/yt-music-archive" target="_blank" rel="noopener"
+&gt;yt-music-archive&lt;/a&gt; 是我写的一个小脚本，用于将 Youtube Music 上的音乐下载到本地，并将其 ID 存入一个存档文件中，也可以从存档文件中还原出音乐。&lt;/p&gt;
+&lt;p&gt;（我在花了几个小时写完后，才想起用 yt-dlp 下载播放列表也可以做到同样的功能，算了，写了都写了，就&lt;del&gt;水&lt;/del&gt;写篇教程吧&amp;hellip;）&lt;/p&gt;
+&lt;h2 id="安装"&gt;安装
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/mumu-lhl/yt-music-archive
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; yt-music-archive
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo make
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;或者从 AUR 安装：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yay -S yt-music-archive
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# or&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;paru -S yt-music-archive
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="使用"&gt;使用
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-music-archive save &amp;lt;ID&amp;gt; &lt;span class="c1"&gt;# 下载音乐并将 ID 存入存档文件，默认音乐保存在 ~/Music&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-music-archive save &amp;lt;ID&amp;gt; -p &amp;lt;PATH&amp;gt; &lt;span class="c1"&gt;# 指定音乐保存到哪个路径下&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-music-archive fetch &lt;span class="c1"&gt;# 根据存档的 ID 拉取音乐，默认音乐保存在 ~/Music&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yt-music-archive fetch -p &amp;lt;PATH&amp;gt; &lt;span class="c1"&gt;# 指定音乐保存到哪个路径下&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="配置"&gt;配置
+&lt;/h2&gt;&lt;p&gt;目前可配置的选项不多，可以编辑 &lt;code&gt;/etc/yt-music-archive/yt-music-archive.conf&lt;/code&gt; 或 &lt;code&gt;~/.config/yt-music-archive/yt-music-archive.conf&lt;/code&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;archive_file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;~/.local/share/yt-music-archive/archive
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 存储 id 的存档文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#default_path=~/Music # 默认保存音乐的路径&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="结语"&gt;结语
+&lt;/h2&gt;&lt;p&gt;I&amp;rsquo;m a 🤡.&lt;/p&gt;</description></item><item><title>用 RSS 订阅本站的所有文章或按标签、分类订阅文章</title><link>https://mumulhl.eu.org/p/rss-for-my-website/</link><pubDate>Tue, 23 Jul 2024 09:57:30 +0800</pubDate><guid>https://mumulhl.eu.org/p/rss-for-my-website/</guid><description>&lt;p&gt;本站所用的主题没有直接把 RSS 链接显示在网页上，而是放在了 HTML &lt;code&gt;&amp;lt;link&amp;gt;&lt;/code&gt; 标签里，但是要怎么订阅本站的所有或部分文章呢？&lt;/p&gt;
+&lt;h2 id="howto"&gt;HowTo
+&lt;/h2&gt;&lt;p&gt;如果要订阅本站所有文章，在 RSS 阅读器里直接订阅 &lt;code&gt;https://mumulhl.eu.org&lt;/code&gt;。如果要根据标签、分类订阅，直接订阅相应的链接就可以了，如 &lt;code&gt;https://mumulhl.eu.org/categories/skill/&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;（RSS 还能这样订阅以前都不知道，最近才意外知道）&lt;/p&gt;
+&lt;h1 id="如何实现"&gt;如何实现？
+&lt;/h1&gt;&lt;p&gt;HTML &lt;code&gt;&amp;lt;link&amp;gt;&lt;/code&gt; 最常见的用法就是为网页引入 CSS 文件，它的作用是标志网页和外部资源的关系。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;link&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;main.css&amp;#34;&lt;/span&gt; &lt;span class="na"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;stylesheet&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;href&lt;/code&gt; 属性的值是文件路径，&lt;code&gt;rel&lt;/code&gt; 则是 &lt;em&gt;relationship&lt;/em&gt; 的缩写，表示网页和外部资源的关系。&lt;code&gt;rel&lt;/code&gt; 是 &lt;code&gt;stylesheet&lt;/code&gt;，就表示 main.css 是该网页的 CSS。&lt;/p&gt;
+&lt;p&gt;引入 RSS 的 &lt;code&gt;&amp;lt;link&amp;gt;&lt;/code&gt; 是长这样的：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;link&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;index.xml&amp;#34;&lt;/span&gt; &lt;span class="na"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;alternate&amp;#34;&lt;/span&gt; &lt;span class="na"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;application/rss+xml&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;type&lt;/code&gt; 的值为 &lt;code&gt;application/rss+xml&lt;/code&gt; 标志了 index.xml 的类型是 RSS，&lt;code&gt;rel&lt;/code&gt; 的值为 &lt;code&gt;alternate&lt;/code&gt; 根据 &lt;a class="link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel" target="_blank" rel="noopener"
+&gt;MDN&lt;/a&gt; 意思是当前网页的替代。&lt;/p&gt;
+&lt;p&gt;RSS 阅读器通常支持这种方式订阅，以前我只知道输入 RSS 文件的链接订阅&amp;hellip;&lt;/p&gt;</description></item><item><title>追踪音乐播放记录</title><link>https://mumulhl.eu.org/p/music-track-tutorial/</link><pubDate>Sun, 21 Jul 2024 21:57:29 +0800</pubDate><guid>https://mumulhl.eu.org/p/music-track-tutorial/</guid><description>&lt;p&gt;&lt;del&gt;上次写博客还是在上次&lt;/del&gt;呸，上次写博客在一年前了&amp;hellip;&lt;/p&gt;
+&lt;h2 id="概念"&gt;概念
+&lt;/h2&gt;&lt;h3 id="scrobbler"&gt;Scrobbler
+&lt;/h3&gt;&lt;p&gt;Scrobbler 的意思是是向音乐社区平台提交音乐播放记录的程序。&lt;/p&gt;
+&lt;h3 id="音乐社区平台"&gt;音乐社区平台
+&lt;/h3&gt;&lt;p&gt;音乐社区平台，往往不直接提供音乐，允许用户&lt;strong&gt;评论音乐&lt;/strong&gt;，记录 Scrobbler 向其提交的 &lt;strong&gt;不同音乐播放器&lt;/strong&gt; 上音乐播放记录，根据记录的数据&lt;strong&gt;推荐音乐&lt;/strong&gt;， &lt;strong&gt;总结听歌报告&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id="选择音乐社区平台"&gt;选择音乐社区平台
+&lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://last.fm" target="_blank" rel="noopener"
+&gt;Last.fm&lt;/a&gt; 是一个音乐社区平台用户量应该是最多的，部分功能收费。&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://listenbrainz.org" target="_blank" rel="noopener"
+&gt;ListenBrainz&lt;/a&gt; 是我目前正在使用的音乐社区平台，是开源项目，可以自行部署，完全免费。&lt;/p&gt;
+&lt;p&gt;为了节省打字时间，还有一些可以自行部署的音乐社区平台就自行去找啦~&lt;/p&gt;
+&lt;h2 id="选择-scrobbler"&gt;选择 Scrobbler
+&lt;/h2&gt;&lt;p&gt;搜一下一大把的。&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://github.com/kawaiiDango/pano-scrobbler?tab=readme-ov-file" target="_blank" rel="noopener"
+&gt;Pano Scrobbler&lt;/a&gt; 是自由软件，支持多种音乐社区平台，界面采用 Material You。鉴于我只在 Android 上听歌，所以只能推荐在 Android 上的 Scrobbler 了。&lt;/p&gt;
+&lt;h2 id="下一步"&gt;下一步
+&lt;/h2&gt;&lt;p&gt;搞好音乐社区平台和 Scrobbler，然后正常听音乐就可以了。&lt;/p&gt;</description></item></channel></rss>

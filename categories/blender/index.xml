@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blender on Mumulhl's Blog</title><link>https://mumulhl.eu.org/categories/blender/</link><description>Recent content in Blender on Mumulhl's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Mumulhl</copyright><lastBuildDate>Thu, 06 Aug 2026 17:20:52 +0800</lastBuildDate><atom:link href="https://mumulhl.eu.org/categories/blender/index.xml" rel="self" type="application/rss+xml"/><item><title>「Blender」最简单的三渲二受光源影响</title><link>https://mumulhl.eu.org/p/blender-toon-shader-light/</link><pubDate>Thu, 06 Aug 2026 17:20:52 +0800</pubDate><guid>https://mumulhl.eu.org/p/blender-toon-shader-light/</guid><description>&lt;img src="https://mumulhl.eu.org/p/blender-toon-shader-light/%E5%8F%97%E5%85%89%E6%BA%90%E5%BD%B1%E5%93%8D.webp" alt="Featured image of post 「Blender」最简单的三渲二受光源影响" /&gt;&lt;p&gt;Blender 中，基本的三渲二很简单，加一盏日光，一个「漫射 BSDF」（颜色为纯白色），一个「着色器 转 RGB」，一个「颜色渐变」，就能实现最基础的硬/软阴影的三渲二。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://mumulhl.eu.org/p/blender-toon-shader-light/%E8%BD%AF%E9%98%B4%E5%BD%B1.webp"
+width="1245"
+height="910"
+loading="lazy"
+alt="软阴影"
+class="gallery-image"
+data-flex-grow="136"
+data-flex-basis="328px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://mumulhl.eu.org/p/blender-toon-shader-light/%E7%A1%AC%E9%98%B4%E5%BD%B1.webp"
+width="1245"
+height="910"
+loading="lazy"
+alt="硬阴影"
+class="gallery-image"
+data-flex-grow="136"
+data-flex-basis="328px"
+&gt;&lt;/p&gt;
+&lt;p&gt;但是是不是看着太单调了呢？对吧，在 PBR 中，物体都是受光的影响的，这样物体表现出的颜色才不会单调。那么在 Blender 中三渲二可以实现吗？&lt;/p&gt;
+&lt;p&gt;可以的，包可以的兄弟。&lt;/p&gt;
+&lt;h2 id="加一个节点就能实现"&gt;加一个节点就能实现
+&lt;/h2&gt;&lt;p&gt;最简单的实现受光源影响的方法，只用在我们刚刚的节点上再加一个节点就可以了：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://mumulhl.eu.org/p/blender-toon-shader-light/%E5%8F%97%E5%85%89%E6%BA%90%E5%BD%B1%E5%93%8D.webp"
+width="1245"
+height="910"
+loading="lazy"
+alt="受光源影响"
+class="gallery-image"
+data-flex-grow="136"
+data-flex-basis="328px"
+&gt;&lt;/p&gt;
+&lt;p&gt;然后改变一下日光的颜色，就可以看到光源的颜色已经反应在了材质上了。&lt;/p&gt;
+&lt;p&gt;当然添加更多的光源，像点光、面光、聚光，材质也是可以正常受到影响的。&lt;/p&gt;
+&lt;p&gt;既然可以受到光源影响，接下来怎么让渲染更好看，全靠你的自由发挥啦！&lt;/p&gt;
+&lt;h2 id="那么原理呢"&gt;那么原理呢？
+&lt;/h2&gt;&lt;p&gt;先来讲讲最基本的三渲二的实现原理。&lt;/p&gt;
+&lt;p&gt;「漫射 BSDF」是拿来干什么的呢？如果直接把它接到输出上，就会发现它反应了物体受到光照时的 &lt;strong&gt;阴影&lt;/strong&gt; 和 &lt;strong&gt;光色&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://mumulhl.eu.org/p/blender-toon-shader-light/%E6%BC%AB%E5%B0%84BSDF.webp"
+width="1245"
+height="910"
+loading="lazy"
+alt="漫射BSDF"
+class="gallery-image"
+data-flex-grow="136"
+data-flex-basis="328px"
+&gt;&lt;/p&gt;
+&lt;p&gt;「着色器 转 RGB」就不用讲啦，就是让我们可以去操作「漫射 BSDF」的结果的。&lt;/p&gt;
+&lt;p&gt;「颜色渐变」就相当于把「漫射 BSDF」的输出重新转换到我们在颜色渐变条上设定的颜色，这里设定了黑色和白色，方便用「混合」去给材质上亮部和暗部颜色。因为我们指定了亮部和暗部颜色，所以 &lt;strong&gt;光色&lt;/strong&gt; 自然就丢失了，如果没有添加那个「正片叠底」节点，去改变光色的，你会发现物体是不可能有 &lt;strong&gt;光色&lt;/strong&gt; 的，只会有阴影分界发生了位移。&lt;/p&gt;
+&lt;p&gt;既然「漫射 BSDF」可以获得 &lt;strong&gt;光色&lt;/strong&gt;，为什么不直接去利用它呢？&lt;/p&gt;
+&lt;p&gt;如果我们想给一种颜色叠加上一种作为「光」的颜色，那么应该使用 &lt;strong&gt;乘法&lt;/strong&gt;，也就是 &lt;strong&gt;正片叠底&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;「漫射 BSDF」的颜色已经被我们设为纯白色，纯白色（没有受到光源影响的部分）就是 1，乘了不会有影响，但是那些有「光色」的部分乘上了颜色，就让那部分的颜色受到了光源的影响了。&lt;/p&gt;
+&lt;p&gt;所以我们把「着色器 转 RGB」的输出直接作为「正片叠底」的输入，给原本没有受光源影响的颜色，添加上了光色。&lt;/p&gt;
+&lt;h2 id="局限"&gt;局限
+&lt;/h2&gt;&lt;p&gt;看下刚才的图片，你会发现不仅物体表面受到了光源影响，而且暗部居然更暗了，这是为什么呢？&lt;/p&gt;
+&lt;p&gt;因为「漫射 BSDF」还包含了 &lt;strong&gt;阴影&lt;/strong&gt; 了啊，在我们乘上 &lt;strong&gt;光色&lt;/strong&gt; 的时候，把原本的阴影给乘上去了，所以就黑了。&lt;/p&gt;
+&lt;p&gt;怎么解决呢？打点背光，照亮一下吧。&lt;/p&gt;
+&lt;p&gt;而且你会发现，物体表面受到的光源影响是 PBR 风格（软边缘，颜色存在渐变）的，目前通过这种方法无法实现 NPR 风格的光源影响（如硬边缘、颜色固定）。&lt;/p&gt;
+&lt;h2 id="其他的"&gt;其他的
+&lt;/h2&gt;&lt;p&gt;如果你想给你的三渲二人物打点光，但是又不希望把光影响到了其他物体怎么办呢？&lt;/p&gt;
+&lt;p&gt;Blender 中有「灯光链接」和「阴影链接」。你要把包含了你想要包含或排除的物体的集合指定给灯光的「灯光链接」和「阴影链接」，这俩才能正常工作。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://mumulhl.eu.org/%e7%81%af%e5%85%89%e9%93%be%e6%8e%a5%e5%92%8c%e9%98%b4%e5%bd%b1%e9%93%be%e6%8e%a5.webp"
+loading="lazy"
+alt="灯光链接和阴影链接"
+&gt;&lt;/p&gt;
+&lt;p&gt;「灯光链接」决定物体是否受到灯光光色的影响，「阴影链接」决定物体是否对灯光的光线进行遮挡。&lt;/p&gt;
+&lt;p&gt;Blender 原生的操作有两种，首先要在灯光上创建「灯光链接」或「阴影链接」的集合，然后：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;从视图大纲中将物体拖入列表中&lt;/li&gt;
+&lt;li&gt;将一个或多个物体选中，最后选择灯光，然后点旁边的「+」进行添加&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;物体勾选表示包括，不勾选表示排除。&lt;/p&gt;
+&lt;p&gt;推荐使用 &lt;a class="link" href="https://extensions.blender.org/add-ons/lighthepler/" target="_blank" rel="noopener"
+&gt;Light Helper&lt;/a&gt; 插件管理「灯光链接」和「阴影链接」，比 Blender 原生的操作更人性化。&lt;/p&gt;
+&lt;h2 id="未来将有更好的方法"&gt;未来将有更好的方法
+&lt;/h2&gt;&lt;p&gt;截止这篇文章写出的时候，Blender 正在开发 &lt;strong&gt;灯光材质节点（Material Lighting Nodes）&lt;/strong&gt;，这是 Blender Project 上的 &lt;a class="link" href="https://projects.blender.org/blender/blender/issues/139341" target="_blank" rel="noopener"
+&gt;issue&lt;/a&gt; 和 &lt;a class="link" href="https://projects.blender.org/blender/blender/pulls/161429" target="_blank" rel="noopener"
+&gt;PR&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;这个功能包含了四个节点：&lt;em&gt;Light Info&lt;/em&gt;， &lt;em&gt;Light Evaluation&lt;/em&gt;， &lt;em&gt;Shadow Raycast&lt;/em&gt; 和 &lt;em&gt;Light Accumulation&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;这些节点可以完美的替代这篇文章的方法，并且可以解决光源影响不够 NPR 风格的问题。&lt;/p&gt;
+&lt;p&gt;这些节点正在开发，还尚且存在着 bug，根据开发进度，推测可能在 Blender 5.3 或者 5.4 发布。期待在正式版中的上线吧。&lt;/p&gt;
+&lt;h2 id="写后感悟"&gt;写后感悟
+&lt;/h2&gt;&lt;p&gt;看了 B 站和 YouTube 上面很多的三渲二教程，鲜有教程提及这样的方法，明明是很简单的方法，为什么没人去讲呢？太简单了吗？那为什么讲最基础的三渲二的教程又如此之多呢？&lt;/p&gt;
+&lt;p&gt;2026 年了，大家有问题都在问 AI，有多少人会点进一篇文章去看呢？这篇教程可能最终没几个人能看到，但可能会被 AI 反复爬一遍又一遍，如果能让 AI 学到这种简单的方法，再教会提问的人类，那这篇文章也算是有价值了吧。&lt;/p&gt;
+&lt;h2 id="更新"&gt;更新
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;2026-8-8 补充该方法的局限性，增加未来将有的方法&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>
