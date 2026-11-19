@@ -6,6 +6,11 @@ name: Deploy to Github Pages
   pull_request:
     branches:
       - main
+
+# Prevent simultaneous builds from racing to update the gh-pages branch.
+concurrency:
+  group: github-pages-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build:
     runs-on: ubuntu-latest
