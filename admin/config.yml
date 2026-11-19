@@ -1,0 +1,36 @@
+# Sveltia CMS for https://mumulhl.eu.org
+# Sign in with a fine-grained GitHub personal access token.
+# Never commit a token to the repository.
+backend:
+  name: github
+  repo: mumu-lhl/mumu-lhl.github.io
+  branch: main
+  auth_methods: [token]
+
+site_url: https://mumulhl.eu.org
+
+media_folder: static/images
+public_folder: /images
+
+collections:
+  - name: posts
+    label: 文章
+    folder: content/post
+    path: "{{slug}}/index"
+    create: true
+    format: frontmatter
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: title, label: 标题, widget: string }
+      - { name: slug, label: URL 别名, widget: string, required: false }
+      - { name: date, label: 发布日期, widget: datetime, default: "{{now}}" }
+      - { name: lastmod, label: 最后修改日期, widget: datetime, required: false }
+      - { name: description, label: 摘要, widget: text, required: false }
+      - { name: keywords, label: 关键词, widget: list, required: false }
+      - { name: tags, label: 标签, widget: list, required: false }
+      - { name: categories, label: 分类, widget: list, required: false }
+      - { name: image, label: 封面图片, widget: image, required: false }
+      - { name: preview, label: 预览图片, widget: image, required: false }
+      - { name: draft, label: 草稿, widget: boolean, required: false, default: true }
+      - { name: body, label: 正文, widget: markdown }
