@@ -19,7 +19,7 @@ jobs:
 
     env:
       DART_SASS_VERSION: 1.97.3
-      HUGO_VERSION: 0.155.3
+      HUGO_VERSION: 0.169.0
 
     steps:
       - uses: actions/checkout@v6
@@ -61,6 +61,7 @@ jobs:
         run: hugo --minify --gc
 
       - name: Deploy 🚀
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages

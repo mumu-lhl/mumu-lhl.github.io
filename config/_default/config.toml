@@ -1,5 +1,5 @@
 baseurl = "https://mumulhl.eu.org"
-languageCode = "zh-cn"
+languageCode = "zh"
 title = "Mumulhl's Blog"
 copyright = "Mumulhl"
 
@@ -7,10 +7,10 @@ copyright = "Mumulhl"
 pagerSize = 5
 
 # Theme i18n support
-# Available values: en, fr, id, ja, ko, pt-br, zh-cn, zh-tw, es, de, nl, it, th, el, uk, ar
-defaultContentLanguage = "zh-cn"
+# Available values: en, fr, id, ja, ko, pt-br, zh, zh-hant-tw, es, de, nl, it, th, el, uk, ar
+defaultContentLanguage = "zh"
 
-# Set hasCJKLanguage to true if DefaultContentLanguage is in [zh-cn ja ko]
+# Set hasCJKLanguage to true if DefaultContentLanguage is in [zh ja ko]
 # This will make .Summary and .WordCount behave correctly for CJK languages.
 hasCJKLanguage = true
 
